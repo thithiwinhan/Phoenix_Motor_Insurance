@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+  <title>Login Page</title>
+	<meta charset="UTF-8"></meta>
+	<!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,600,600i,700,700i" rel="stylesheet"/>
+
+  <!-- Vendor CSS Files -->
+  <link href="/templates/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="/templates/assets/vendor/icofont/icofont.min.css" rel="stylesheet" />
+	<link rel="stylesheet" type="text/css" href="/templates/vendor/bootstrap/css/bootstrap.min.css"></link>
+	<link rel="stylesheet" type="text/css" href="/templates/css/util.css"></link>
+	<link rel="stylesheet" type="text/css" href="/templates/css/main.css"></link>
+	<link href="assets/css/style.css" rel="stylesheet" />
+</h:head>
+<h:body>
+<!-- ======= Header ======= -->
+	<div class="fixed-top" id="header">
+    <div class="container d-flex">
+      <div class="logo mr-auto">
+        <h1 class="text-light"><a href="index.html"><span>Ninestars</span></a></h1>
+      </div>
+
+         <h:form>
+  <!-- .nav-menu -->
+     <div class="nav-menu d-none d-lg-block">
+        <ul>
+          <li class="active"><h:commandLink action="home.xhtml" >Home</h:commandLink> </li>
+          <li class="drop-down"><h:commandLink >Proposal</h:commandLink>
+            <ul>
+           		 <li><h:commandLink action="#{proposalController.getProposalForm()}" >Online Proposal Form</h:commandLink></li>
+             	 <li><h:commandLink action="#{proposalController.proposalList()}">Proposal Status Checking</h:commandLink></li>
+            </ul>
+          </li>
+           <li class="drop-down"><h:commandLink >Claim</h:commandLink>
+            <ul>
+            	<li><h:commandLink action="#{cliamController.claimList()}">Online Claim Form</h:commandLink></li>
+             	<li><h:commandLink action="#{cliamController.getClaimStatusCheckingForm}">Claim Status Checking</h:commandLink></li>
+            </ul>
+          </li>
+           <li class="drop-down"><h:commandLink >Payment</h:commandLink>
+            <ul>
+            	<li><h:commandLink action="#{paymentController.paymentList()}">Online Payment Form</h:commandLink></li>
+            	<li><h:commandLink action="#{paymentController.getPaymentListingForm() }">Payment Listing</h:commandLink></li>
+            </ul>
+          </li>
+          <li class="drop-down"><h:commandLink >Policy</h:commandLink>
+            <ul>
+            	<li><h:commandLink action="#{policyController.policyList()}">Policy List</h:commandLink></li>
+            </ul>
+          </li>
+              <li><h:commandLink action="#{userController.getProfile()}" >Profile</h:commandLink></li>
+          	 <li class="get-started"><h:commandLink action="#{userController.logout()}" onclick="if (!(confirm('Are you sure you want to logout your account?'))) return false">Logout</h:commandLink></li>
+        </ul>
+      </div><!-- .nav-menu -->
+      </h:form> 
+
+    </div>
+  </div><!-- End header -->
+  
+  
+ 	 <div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-50">
+				<form class="login100-form validate-form">
+					<span class="login100-form-title p-b-33">
+						Logout Your Account!!!!!
+					</span>
+					
+				</form>
+			</div>
+		</div>
+	</div>
+	
+	<script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="assets/js/main.js"></script>
+</h:body>
+</html>

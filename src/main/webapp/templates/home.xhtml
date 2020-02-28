@@ -1,0 +1,294 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+  <title>Phoenix Motor Insurance</title>
+
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+
+  <!-- css -->
+  <link rel="stylesheet" href="/templates/afterlogin-css/bootstrap.css" />
+  <link rel="stylesheet" href="/templates/afterlogin-css/bootstrap-responsive.css" />
+  <link rel="stylesheet" href="/templates/afterlogin-css/prettyPhoto.css" />
+  <link rel="stylesheet" href="/templates/afterlogin-css/sequence.css" />
+  <link rel="stylesheet" href="/templates/afterlogin-css/style.css" />
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="/templates/afterlogin-img/favicon.ico"/>
+
+
+
+  
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></link>
+
+   <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,600,600i,700,700i" rel="stylesheet"/>
+
+  <!-- Vendor CSS Files -->
+  <link href="/templates/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="/templates/assets/vendor/icofont/icofont.min.css" rel="stylesheet" />
+ 
+  <!-- Template Main CSS File -->
+  <link href="/templates/assets/css/style.css" rel="stylesheet" />
+
+<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet"/>
+
+    <link rel="stylesheet" href="/templates/beforelogin_css/open-iconic-bootstrap.min.css"/>
+    <link rel="stylesheet" href="/templates/beforelogin_css/animate.css"/>
+    
+    <link rel="stylesheet" href="/templates/beforelogin_css/owl.carousel.min.css"/>
+    <link rel="stylesheet" href="/templates/beforelogin_css/owl.theme.default.min.css"/>
+    <link rel="stylesheet" href="/templates/beforelogin_css/magnific-popup.css"/>
+
+    <link rel="stylesheet" href="/templates/beforelogin_css/aos.css"/>
+
+    <link rel="stylesheet" href="/templates/beforelogin_css/ionicons.min.css"/>
+    
+    <link rel="stylesheet" href="/templates/beforelogin_css/flaticon.css"/>
+    <link rel="stylesheet" href="/templates/beforelogin_css/icomoon.css"/>
+    <link rel="stylesheet" href="/templates/beforelogin_css/style.css"/>
+       <style>
+      .yellow{
+        background-color:#033c73;
+      }
+      #color{
+      color:#ffffff}
+      
+      .navbar-brand {
+    font-weight: 700;
+    font-size: 20px;
+    font-family: "Poppins", Arial, sans-serif;
+    line-height: 1;
+    text-transform: uppercase;
+    color:#fff;
+}
+
+
+    </style>
+
+
+</h:head>
+<h:body>
+	<!-- ======= Header ======= -->
+	<div class="fixed-top" id="header">
+    <div class="container d-flex">
+      <div class="logo mr-auto">
+        <a class="navbar-brand" href="home.xhtml">Phoenix<span>Motor Insurance </span></a>
+      </div>
+
+       <h:form>
+  <!-- .nav-menu -->
+     <div class="nav-menu d-none d-lg-block">
+        <ul>
+          <li class="active"><p:commandLink action="home.xhtml"  >Home</p:commandLink> </li>
+          <li class="drop-down"><p:commandLink >Proposal</p:commandLink>
+            <ul>
+           		 <li><p:commandLink action="#{proposalController.getProposalForm()}" ajax="false">Online Proposal Form</p:commandLink></li>
+             	 <li><p:commandLink action="#{proposalController.getProposalListForm()}"  ajax="false">Proposal Status Checking</p:commandLink></li>
+            </ul>
+          </li>
+           <li class="drop-down"><p:commandLink >Claim</p:commandLink>
+            <ul>
+            	<li><p:commandLink action="#{cliamController.getClaimForm()}">Online Claim Form</p:commandLink></li>
+             	<li><p:commandLink action="#{cliamController.getClaimStatusCheckingForm()}">Claim Status Checking</p:commandLink></li>
+            </ul>
+          </li>
+           <li class="drop-down"><p:commandLink >Payment</p:commandLink>
+            <ul>
+            	<li><p:commandLink action="#{paymentController. getPaymentForm()}">Online Payment Form</p:commandLink></li>
+            	<li><p:commandLink action="#{paymentController.getPaymentListForm()}">Payment Listing</p:commandLink></li>
+            </ul>
+          </li>
+          <li class="drop-down"><p:commandLink >Policy</p:commandLink>
+            <ul>
+            	<li><p:commandLink action="#{policyController.getPolicyListForm()}">Policy List</p:commandLink></li>
+            </ul>
+          </li>
+              <li><p:commandLink action="#{userController.getProfile()}" >Profile</p:commandLink></li>
+          	 <li class="get-started"><p:commandLink action="#{userController.logout()}" onclick="if (!(confirm('Are you sure you want to logout your account?'))) return false">Logout</p:commandLink></li>
+        </ul>
+      </div><!-- .nav-menu -->
+      </h:form> 
+
+    </div>
+   
+  </div><!-- End header -->
+  
+  
+  <div class="main-wrap">   
+    <!-- end section intro -->
+    <!-- Javascript Libraries -->
+  <script src="/templates/afterlogin-js/jquery.min.js"></script>
+  <script src="/templates/afterlogin-js/bootstrap.js"></script>
+  <script src="/templates/afterlogin-js/jquery.prettyPhoto.js"></script>
+  <script src="/templates/afterlogin-js/sequence.jquery.js"></script>
+  <script src="/templates/afterlogin-js/jquery-hover-effect.js"></script>
+
+  <!-- Contact Form JavaScript File -->
+  <!-- Template Custom Javascript File -->
+  <script src="/templates/afterlogin-js/custom.js"></script>
+
+    <!-- section main content -->
+    
+   
+    <section id="main-content">
+    <div class="hero-wrap js-fullheight" style="background-image: url('/templates/afterlogin-img/slides/home.jpg');" data-stellar-background-ratio="0.5"/>
+ <h2 style="line-height: 1.5; color: #000000; font-weight: 700; text-align: center; padding-top:10px;">Our Products</h2>
+      <div class="content-wrap">
+		
+        <!-- wrapper -->
+        <div class="wrapper">
+          <!-- boxes -->
+           
+          <div class="boxes">
+           
+            <div class="row-fluid">
+            
+              <!-- box 1 -->
+              <div class="span4">
+                <div class="box">
+                  <div class="icon">
+                    <img src="/templates/afterlogin-img/slides/car2.jpg" class="" alt="" />
+                  </div>
+                  <h4>Third Party </h4>
+                  <p>  Third-party offers coverage against claims of damages and losses incurred by a driver who is not the insured, the principal, and is therefore not covered under the insurance policy. The driver who caused damages is the third party. </p>
+                  
+                </div>
+              </div>
+
+              <!-- box 2 -->
+              <div class="span4">
+                <div class="box">
+                  <div class="icon">
+                    <img src="/templates/afterlogin-img/slides/comprehensive.png" class="" alt="" />
+                  </div>
+                  <h4>Comprehensive </h4>
+                  <p> Comprehensive Motor Insurance policy covers losses by own damages and third party liability. Comprehensive Motor Insurance package provides you with all the necessary coverage for you and your vehicle. </p>
+                  
+                </div>
+              </div>
+
+              <!-- box 3 -->
+              <div class="span4">
+                <div class="box">
+                  <div class="icon">
+                    <img src="/templates/afterlogin-img/slides/car-fired.png" class="" alt="" />
+                  </div>
+                  <h4> Fired </h4>
+                  <p>  Comprehensive motor insurance coverage will cover fire damage to your vehicle regardless of what causes the fire, but it's important that you purchase the coverage for your car insurance policy before the loss occurs. </p>
+                  
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+         
+          <!-- end boxes -->
+          </div>
+          </div>
+          </section>
+
+
+          <!-- for footer -->
+    <footer class="ftco-footer ftco-bg-dark ftco-section">
+      <div class="container">
+        <div class="row mb-5">
+          <div class="col-md">
+            <div class="ftco-footer-widget mb-4">
+              <h2 class="logo"><a href="#">Phoenix <span>Motor Insurance</span></a></h2>
+              <!-- <p>Provide protection against vehicle losses caused by unforeseen accident.</p> -->
+              <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-5">
+                <li class="ftco-animate"><a href="https://twitter.com/"><span class="icon-twitter"></span></a></li>
+                <li class="ftco-animate"><a href="https://www.facebook.com/"><span class="icon-facebook"></span></a></li>
+                <li class="ftco-animate"><a href="https://www.instagram.com/"><span class="icon-instagram"></span></a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-md">
+            <div class="ftco-footer-widget mb-4 ml-md-5">
+              <h2 class="ftco-heading-2">Practice Areas</h2>
+              <ul class="list-unstyled">
+                <li><a href="#" class="py-1 d-block"><span class="ion-ios-arrow-forward mr-3"></span>Comprehensive</a></li>
+                <li><a href="#" class="py-1 d-block"><span class="ion-ios-arrow-forward mr-3"></span>Third party</a></li>
+                <li><a href="#" class="py-1 d-block"><span class="ion-ios-arrow-forward mr-3"></span>fired</a></li>
+                <li><a href="#" class="py-1 d-block"><span class="ion-ios-arrow-forward mr-3"></span>flood</a></li>
+                <li><a href="#" class="py-1 d-block"><span class="ion-ios-arrow-forward mr-3"></span>theft</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-md">
+            <div class="ftco-footer-widget mb-4">
+              <h2 class="ftco-heading-2">Have a Questions?</h2>
+              <div class="block-23 mb-3">
+                <ul>
+                  <li><span class="icon icon-map-marker"></span><span class="text">5, Inn Sein St. MICT Park, Hlaing Township, Yangon, Myanmar</span></li>
+                  <li><a href="#"><span class="icon icon-phone"></span><span class="text">+959 689182178</span></a></li>
+                  <li><a href="#"><span class="icon icon-envelope"></span><span class="text">info@phoenix.com</span></a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="col-md">
+             <div class="ftco-footer-widget mb-4">
+              <h2 class="ftco-heading-2">Business Hours</h2>
+              <div class="opening-hours">
+                <h4>Opening Days:</h4>
+                <p class="pl-3">
+                  <p><span>Monday – Friday : 9am to 5 pm</span></p>
+                  <!-- <span>Saturday : 9am to 17 pm</span> -->
+                </p>
+                <h4>Vacations:</h4>
+                <p class="pl-3">
+                  <p><span>All Sunday and  Saturday</span></p>
+                  <p><span>Public Holidays</span></p>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+    </footer>
+    <!-- end of footer -->
+  </div>
+  
+   <!-- Vendor JS Files -->
+   <script src="assets/vendor/jquery/jquery.min.js"></script>
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="/templates/assets/js/main.js"></script>
+
+  
+
+  <!-- loader -->
+  <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
+
+
+  <script src="/templates/beforelogin_js/jquery.min.js"></script>
+  <script src="/templates/beforelogin_js/jquery-migrate-3.0.1.min.js"></script>
+  <script src="/templates/beforelogin_js/popper.min.js"></script>
+  <script src="/templates/beforelogin_js/bootstrap.min.js"></script>
+  <script src="/templates/beforelogin_js/jquery.easing.1.3.js"></script>
+  <script src="/templates/beforelogin_js/jquery.waypoints.min.js"></script>
+  <script src="/templates/beforelogin_js/jquery.stellar.min.js"></script>
+  <script src="/templates/beforelogin_js/owl.carousel.min.js"></script>
+  <script src="/templates/beforelogin_js/jquery.magnific-popup.min.js"></script>
+  <script src="/templates/beforelogin_js/aos.js"></script>
+  <script src="/templates/beforelogin_js/jquery.animateNumber.min.js"></script>
+  <script src="/templates/beforelogin_js/scrollax.min.js"></script>
+   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor;=false"></script>
+  <script src="/templates/beforelogin_js/google-map.js"></script>
+  <script src="/templates/beforelogin_js/main.js"></script>
+
+  
+</h:body>
+</html>

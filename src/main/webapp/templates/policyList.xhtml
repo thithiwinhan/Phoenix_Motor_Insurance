@@ -1,0 +1,318 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Claim Status Checking</title>
+	<!-- Google Fonts -->
+	<link
+		href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,600,600i,700,700i"
+		rel="stylesheet" />
+
+	<!-- Vendor CSS Files -->
+	<link href="/templates/assets/vendor/bootstrap/css/bootstrap.min.css"
+		rel="stylesheet" />
+	<link href="/templates/assets/vendor/icofont/icofont.min.css"
+		rel="stylesheet" />
+
+	<link rel="stylesheet"
+		href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
+	<link rel="stylesheet" type="text/css" href="/templates/css/claimStatusChecking.css"></link>
+	<link href="/templates/assets/css/style.css" rel="stylesheet" />
+	<style>
+.ui-datatable.ui-corner-all table {
+	border-collapse: separate;
+	border-spacing: 0;
+}
+
+.ui-datatable.ui-corner-all table tr:first-child th:first-child {
+	-moz-border-radius: 10px 0 0 0;
+	-webkit-border-radius: 10px 0 0 0;
+	border-radius: 10px 0 0 0;
+}
+
+.ui-datatable.ui-corner-all table tr:first-child th:last-child {
+	-moz-border-radius: 0 10px 0 0;
+	-webkit-border-radius: 0 10px 0 0;
+	border-radius: 0 10px 0 0;
+}
+
+.ui-datatable.ui-corner-all table tr:first-child th:only-child {
+	-moz-border-radius: 10px 10px 0 0;
+	-webkit-border-radius: 10px 10px 0 0;
+	border-radius: 10px 10px 0 0;
+}
+
+.ui-datatable.ui-corner-all table tbody td {
+	border-top: 0;
+}
+
+.ui-datatable.ui-corner-all table tr:last-child td:first-child {
+	-moz-border-radius: 0 0 0 10px;
+	-webkit-border-radius: 0 0 0 10px;
+	border-radius: 0 0 0 10px;
+}
+
+.ui-datatable.ui-corner-all table tr:last-child td:last-child {
+	-moz-border-radius: 0 0 10px 0;
+	-webkit-border-radius: 0 0 10px 0;
+	border-radius: 0 0 10px 0;
+}
+
+.ui-datatable.ui-corner-all table tr:last-child td:only-child {
+	-moz-border-radius: 0 0 10px 10px;
+	-webkit-border-radius: 0 0 10px 10px;
+	border-radius: 0 0 10px 10px;
+}
+
+th {
+	background-color: #6c7ae0 !important;
+	color: #fff !important;
+	height: 35px !important;
+}
+
+.navbar-brand {
+	font-weight: 750;
+	font-size: 20px;
+	font-family: "Poppins", Arial, sans-serif;
+	line-height: 1;
+	text-transform: uppercase;
+	color: #fff;
+	padding-left: 1px;
+	padding-top: 2px;
+}
+</style>
+</h:head>
+<h:body>
+		<!-- ======= Header ======= -->
+		<div class="fixed-top" id="header">
+			<div class="container d-flex">
+				<div class="logo mr-auto">
+					<a class="navbar-brand" href="home.xhtml">Phoenix<br></br>
+					<span style="display: block; font-size: 11px; font-weight: 750;">Motor
+							Insurance</span></a>
+				</div>
+
+			      <h:form>
+  <!-- .nav-menu -->
+     <div class="nav-menu d-none d-lg-block">
+        <ul>
+          <li class="active"><h:commandLink action="home.xhtml" >Home</h:commandLink> </li>
+          <li class="drop-down"><h:commandLink >Proposal</h:commandLink>
+            <ul>
+           		 <li><h:commandLink action="#{proposalController.getProposalForm()}" >Online Proposal Form</h:commandLink></li>
+             	 <li><h:commandLink action="#{proposalController.getProposalListForm()}">Proposal Status Checking</h:commandLink></li>
+            </ul>
+          </li>
+           <li class="drop-down"><h:commandLink >Claim</h:commandLink>
+            <ul>
+            	<li><h:commandLink action="#{cliamController.getClaimForm()}">Online Claim Form</h:commandLink></li>
+             	<li><h:commandLink action="#{cliamController.getClaimStatusCheckingForm()}">Claim Status Checking</h:commandLink></li>
+            </ul>
+          </li>
+           <li class="drop-down"><h:commandLink >Payment</h:commandLink>
+            <ul>
+            	<li><h:commandLink action="#{paymentController. getPaymentForm()}">Online Payment Form</h:commandLink></li>
+            	<li><h:commandLink action="#{paymentController.getPaymentListForm()}">Payment Listing</h:commandLink></li>
+            </ul>
+          </li>
+          <li class="drop-down"><h:commandLink >Policy</h:commandLink>
+            <ul>
+            	<li><h:commandLink action="#{policyController.getPolicyListForm()}">Policy List</h:commandLink></li>
+            </ul>
+          </li>
+              <li><h:commandLink action="#{userController.getProfile()}" >Profile</h:commandLink></li>
+          	 <li class="get-started"><h:commandLink action="#{userController.logout()}" onclick="if (!(confirm('Are you sure you want to logout your account?'))) return false">Logout</h:commandLink></li>
+        </ul>
+      </div><!-- .nav-menu -->
+      </h:form> 
+
+			</div>
+		</div>
+		<!-- End Header -->
+
+	<!-- Start Main Body -->
+	<div class="container">
+		<div class="table-wrapper" style="margin: 130px auto; width: 100%;">
+			<h3 style="color: #0e36ca;font-weight:bold;">Policy List</h3>
+			<br></br>
+			<h:form id="master">
+
+				<p:dataTable var="plist" value="#{policyController.policyList}" styleClass="ui-corner-all">
+
+					<p:column headerText="Policy No" style="width: 3%;text-align: left;">
+						<h:outputText value="#{plist.pID}" />
+					</p:column>
+
+					<p:column headerText="Holder Name" style="width: 8%;text-align: left;">
+						<h:outputText value="#{plist.pHolderName}" />
+					</p:column>
+
+					<p:column headerText="Holder NRC No" style="width: 12%;text-align: left;">
+						<h:outputText value="#{plist.pHolderNrc}" />
+					</p:column>
+
+					<p:column headerText="Vehicle Model" style="width: 5%;text-align: left;">
+						<h:outputText value="#{plist.model}" />
+					</p:column>
+
+					<p:column headerText="Coverage Type" style="width: 7%;text-align: left;">
+						<h:outputText value="#{plist.coverageType}" />
+					</p:column>
+
+
+					<p:column headerText="Sum Insure" style="width: 7%;text-align: left;">
+						<h:outputText value="#{plist.sumInsure}" >
+						<f:convertNumber pattern="#0.00" /></h:outputText>
+						
+					</p:column>
+
+					<p:column headerText="Premium" style="width: 5%;text-align: left;">
+						<h:outputText value="#{plist.premium}" >
+						<f:convertNumber pattern="#0.00" /></h:outputText>
+						
+					</p:column>
+
+					<p:column headerText="Start Date" style="width: 6%;text-align: left;">
+						<h:outputText value="#{plist.startDate}" />
+					</p:column>
+					<p:column headerText="End Date" style="width: 5%;text-align: left;">
+						<h:outputText value="#{plist.endDate}" />
+					</p:column>
+
+					<p:column headerText="Options" style="width: 5%;text-align: left;">
+						<p:commandButton global="true" value="View"
+							action="#{policyController.setPolicyModel(plist)}"
+							update=":detail" oncomplete="PF('detail').show()" />
+					</p:column>
+				</p:dataTable>
+			</h:form>
+
+			<p:dialog id="detail" widgetVar="detail" resizable="true" width="35%">
+				<f:facet name="header">
+					<h:outputLabel style="color:blue;">Phoneix Car Insurance Company</h:outputLabel>
+				</f:facet>
+				<h:form>
+					<p:scrollPanel mode="native" style="max-height:600px">
+						<p:panelGrid id="output" columns="2" style="margin:0 0 20px 0;"
+							columnClasses="text, value">
+
+							<f:facet name="header" >
+								<h:outputLabel>Policy ID</h:outputLabel>
+								<h:outputText value="#{policyController.policyModel.pID}" />
+							</f:facet>
+							<h:outputLabel value="Name :" />
+							<h:outputText value="#{policyController.policyModel.pHolderName}" />
+
+							<h:outputLabel value="NRC :" />
+							<h:outputText value="#{policyController.policyModel.pHolderNrc}" />
+
+							<h:outputLabel value="Phone No :" />
+							<h:outputText value="#{policyController.policyModel.pHolderPh}" />
+
+							<h:outputLabel value="Address		:" />
+							<h:outputText
+								value="#{policyController.policyModel.pholderAddress}" />
+
+							<h:outputLabel value="Coverage Type" />
+							<h:outputText
+								value="#{policyController.policyModel.coverageType}" />
+
+							<h:outputLabel value="Sum Insurance		:" />
+							<h:outputText value="#{policyController.policyModel.sumInsure}" >
+							<f:convertNumber pattern="#0.00" /></h:outputText>
+
+							<h:outputLabel value="Premium		:" />
+							<h:outputText value="#{policyController.policyModel.premium}" >
+							<f:convertNumber pattern="#0.00" /></h:outputText>
+
+							<h:outputLabel value="Model		:" />
+							<h:outputText value="#{policyController.policyModel.model}" />
+
+							<h:outputLabel value="Make		:" />
+							<h:outputText value="#{policyController.policyModel.vehicleMake}" />
+
+							<h:outputLabel value="Color		:" />
+							<h:outputText value="#{policyController.policyModel.color}" />
+
+							<h:outputLabel value="Chassis Number		:" />
+							<h:outputText value="#{policyController.policyModel.chassisNo}" />
+
+							<h:outputLabel value="Engin Type		:" />
+							<h:outputText value="#{policyController.policyModel.engineType}" />
+
+							<h:outputLabel value="Engine CC		:" />
+							<h:outputText value="#{policyController.policyModel.engineCC}" />
+
+							<h:outputLabel value="Engine No		:" />
+							<h:outputText value="#{policyController.policyModel.engineNo}" />
+
+							<h:outputLabel value="Body Type		:" />
+							<h:outputText value="#{policyController.policyModel.bodyType}" />
+
+							<h:outputLabel value="Vehicle Expired Date		:" />
+							<h:outputText
+								value="#{policyController.policyModel.vehicleExpiredDate}" />
+
+							<h:outputLabel value="Driver Name		:" />
+							<h:outputText value="#{policyController.policyModel.dName}" />
+
+							<h:outputLabel value="Driver Phone No		:" />
+							<h:outputText
+								value="#{policyController.policyModel.dPhno}" />
+
+							<h:outputLabel value="Driver Address		:" />
+							<h:outputText value="#{policyController.policyModel.dAddress}" />
+
+							<h:outputLabel value="Driving Lience		:" />
+							<h:outputText
+								value="#{policyController.policyModel.dDrivingLicene}" />
+
+							<h:outputLabel value="Lience Expired Date		:" />
+							<h:outputText
+								value="#{policyController.policyModel.dLiceneExpiredDate}" />
+
+							<h:outputLabel value="Beneficial Name		:" />
+							<h:outputText value="#{policyController.policyModel.bName}" />
+
+							<h:outputLabel value="Beneficial NRC No		:" />
+							<h:outputText value="#{policyController.policyModel.bNrc}" />
+
+							<h:outputLabel value="Beneficial Phone No		:" />
+							<h:outputText value="#{policyController.policyModel.bPhone}" />
+
+							<h:outputLabel value="Beneficial Address		:" />
+							<h:outputText value="#{policyController.policyModel.bAddress}" />
+
+							<h:outputLabel value="Policy Effective Date		:" />
+							<h:outputText value="#{policyController.policyModel.startDate}" />
+
+							<h:outputLabel value="Policy End Date		:" />
+							<h:outputText value="#{policyController.policyModel.endDate}" />
+
+
+						</p:panelGrid>
+						<p:commandButton value="Print" type="button" icon="pi pi-print"
+							style="display:block;margin-bottom: 20px">
+							<p:printer target="output" />
+						</p:commandButton>
+					</p:scrollPanel>
+				</h:form>
+			</p:dialog>
+
+		</div>
+	</div>
+	<!-- End Main Body -->
+	<!-- Vendor JS Files -->
+	<script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+	<!-- Template Main JS File -->
+	<script src="/templates/assets/js/main.js"></script>
+
+</h:body>
+</html>

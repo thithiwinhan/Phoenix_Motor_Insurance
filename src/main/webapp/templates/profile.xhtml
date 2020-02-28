@@ -1,0 +1,191 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Claim Form</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></link>
+
+   <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,600,600i,700,700i" rel="stylesheet"/>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" 
+integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous"></link>
+
+  <!-- Vendor CSS Files -->
+  <link href="/templates/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="/templates/assets/vendor/icofont/icofont.min.css" rel="stylesheet" />
+ 
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
+	<link href="assets/css/style.css" rel="stylesheet" />
+	<style>
+	body{
+       background: rgba(0, 0, 0, 0) linear-gradient(to right, rgb(28, 146, 210), rgb(242, 252, 254)) repeat scroll 0% 0%;
+      padding-top: 15px;
+}
+.main-section{
+  border:1px solid #138496;
+  background-color: #fff;
+}
+.profile-header{
+  background-color: #17a2b8;
+  height:150px;
+}
+.user-detail{
+  margin:-50px 0px 30px 0px;
+}
+.user-detail img{
+  height:100px;
+  width:100px;
+}
+.user-detail h5{
+  margin:15px 0px 5px 0px;
+}
+	.navbar-brand {
+    font-weight: 750;
+    font-size: 20px;
+    font-family: "Poppins", Arial, sans-serif;
+    line-height: 1;
+    text-transform: uppercase;
+    color:#fff;
+    padding-left: 1px;
+        padding-top: 2px;
+	}
+	
+	</style>
+</h:head>
+<h:body>
+<!-- ======= Header ======= -->
+
+<div class="fixed-top" id="header">
+    <div class="container d-flex">
+      <div class="logo mr-auto">
+        <a class="navbar-brand" href="home.xhtml">Phoenix<br></br><span style="display: block;
+    font-size: 11px;font-weight: 750;">Motor Insurance</span></a>
+      </div>
+      
+         <h:form>
+  <!-- .nav-menu -->
+     <div class="nav-menu d-none d-lg-block">
+        <ul>
+          <li class="active"><h:commandLink action="home.xhtml" >Home</h:commandLink> </li>
+          <li class="drop-down"><h:commandLink >Proposal</h:commandLink>
+            <ul>
+           		 <li><h:commandLink action="#{proposalController.getProposalForm()}" >Online Proposal Form</h:commandLink></li>
+             	 <li><h:commandLink action="#{proposalController.getProposalListForm()}">Proposal Status Checking</h:commandLink></li>
+            </ul>
+          </li>
+           <li class="drop-down"><h:commandLink >Claim</h:commandLink>
+            <ul>
+            	<li><h:commandLink action="#{cliamController.getClaimForm()}">Online Claim Form</h:commandLink></li>
+             	<li><h:commandLink action="#{cliamController.getClaimStatusCheckingForm()}">Claim Status Checking</h:commandLink></li>
+            </ul>
+          </li>
+           <li class="drop-down"><h:commandLink >Payment</h:commandLink>
+            <ul>
+            	<li><h:commandLink action="#{paymentController. getPaymentForm()}">Online Payment Form</h:commandLink></li>
+            	<li><h:commandLink action="#{paymentController.getPaymentListForm()}">Payment Listing</h:commandLink></li>
+            </ul>
+          </li>
+          <li class="drop-down"><h:commandLink >Policy</h:commandLink>
+            <ul>
+            	<li><h:commandLink action="#{policyController.getPolicyListForm()}">Policy List</h:commandLink></li>
+            </ul>
+          </li>
+              <li><h:commandLink action="#{userController.getProfile()}" >Profile</h:commandLink></li>
+          	 <li class="get-started"><h:commandLink action="#{userController.logout()}" onclick="if (!(confirm('Are you sure you want to logout your account?'))) return false">Logout</h:commandLink></li>
+        </ul>
+      </div><!-- .nav-menu -->
+     
+
+      
+	</div>
+  </div><!-- End Header -->
+  </h:form>
+   <div class="container">
+    <div class="row">
+      <div class="offset-lg-4 col-lg-4 col-sm-6 col-12 main-section text-center" style="margin-top:110px;">
+          <div class="row">
+              <div class="col-lg-12 col-sm-12 col-12 profile-header"></div>
+          </div>
+          <div class="row user-detail">
+              <div class="col-lg-12 col-sm-12 col-12">
+               <h:form >
+                  <img src="/templates/images/card.png" class="rounded-circle img-thumbnail" />
+                  <h5>#{user}</h5>
+                  <p><i class="fa fa-map-marker" aria-hidden="true"></i> New Jersey, USA.</p>
+                  <hr></hr>
+                 
+          <p:messages id="msgs" severity="warn" />
+          <div class="gi" style="text-align: left;">
+            <!-- <div class="form-group">
+              <p:outputLabel for="name" value="Name" />  
+			 <p:inputText id="name" class="form-control" required="true" value="#{userController.userModel.userName}" validatorMessage ="Name must be characters only and no spaces." > 
+			 	<f:validateRegex pattern="^[a-zA-Z_]+( [a-zA-Z_]+)*$" />  
+			  </p:inputText>
+			  <h:message for="name" style="color: red;" ></h:message> 
+            </div> -->
+            
+            <div class="form-group">
+            <p:outputLabel for="email" value="Email" />  
+              <p:inputText id="email" class="form-control"  required="true" value="#{email}"  validatorMessage ="InvaildEmail must be characters only and no spaces."  > 
+			 	<f:validateRegex pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" />  
+			  </p:inputText>
+		    <h:message for="email" style="color: red;" ></h:message> 
+            </div>
+            <!-- 
+            <div class="form-group">
+            <p:outputLabel for="phoneNo" value="Phone No" />  
+              <p:inputText id="phoneNo" class="form-control"  required="true" value="#{userController.userModel.userEmail}"  validatorMessage ="InvaildEmail must be characters only and no spaces."  > 
+			 	<f:validateRegex pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" />  
+			  </p:inputText>
+		    <h:message for="phoneNo" style="color: red;" ></h:message> 
+            </div>
+             -->
+            <div class="form-group">
+              <p:outputLabel for="password" value="Password" />  
+			 <p:password id="password" class="form-control" required="true" match=" " value="#{password}"  validatorMessage ="Password must have minimum eight characters, at least and no spaces." > 
+<!-- 			 	<f:validateRegex pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$" />   -->
+			  </p:password>
+		    <h:message for="password" style="color: red;" ></h:message> 
+            </div>
+            
+            
+              <div class="form-group">
+             	<p:outputLabel for="comfirmedPassword" value="Comfirmed Password" />  
+			 <p:password id="comfirmedPassword" class="form-control" required="true" match=" " value="#{userController.userModel.userConfirmPassword}"   validatorMessage ="Password must have minimum eight characters, at least and no spaces." > 
+<!-- 			 	<f:validateRegex pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$" />   -->
+			  </p:password>
+			<h:message for="comfirmedPassword" style="color: red;" ></h:message> 
+            </div>
+            
+            <!--  <div class="form-group">
+             	<p:outputLabel for="address" value="Address" />  
+			 <p:password id="address" class="form-control" required="true" match=" " value=""   validatorMessage ="Password must have minimum eight characters, at least and no spaces." > 
+			 	<f:validateRegex pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$" />  
+			  </p:password>
+			<h:message for="address" style="color: red;" ></h:message> 
+            </div> -->
+            <br></br>
+  			     
+		 	<p:commandButton  value="Edit"  action="profile.xhtml?faces-direct=true" />&nbsp;
+			<p:commandButton  value="Cancel" />
+            
+            </div>
+          </h:form>
+              </div>
+          </div>
+      </div>
+    </div>
+  </div>
+
+	
+	 <!-- Vendor JS Files -->
+  <script src="assets/vendor/jquery/jquery.min.js"></script> 
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="assets/js/main.js"></script>
+</h:body>
+</html>

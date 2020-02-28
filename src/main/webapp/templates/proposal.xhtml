@@ -1,0 +1,637 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<meta charset="utf-8"></meta>
+	<title>Proposal Form</title>
+	 <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,600,600i,700,700i" rel="stylesheet"/>
+
+  <!-- Vendor CSS Files -->
+  <link href="/templates/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="/templates/assets/vendor/icofont/icofont.min.css" rel="stylesheet" />
+ 
+	<link rel="shortcut icon" href="http://finsurance.com.ng/insurance/assets/img/test.png"></link>
+	<link href="http://finsurance.com.ng/insurance/assets/css/bootstrap.css" rel="stylesheet" type="text/css" />
+	<link href="http://finsurance.com.ng/insurance/assets/css/style.css" rel="stylesheet" type="text/css" />
+		<link href="assets/css/style.css" rel="stylesheet" />
+		<style >
+			.ui-calendar > input {
+				width:100%;
+			}
+	
+	.navbar-brand {
+    font-weight: 750;
+    font-size: 20px;
+    font-family: "Poppins", Arial, sans-serif;
+    line-height: 1;
+    text-transform: uppercase;
+    color:#fff;
+    padding-left: 1px;
+	}
+	</style>
+	
+	<script type="text/javascript">
+		window.onload = function() {
+			menu();
+		}
+
+	function showMessage(){     
+        var message = confirm("Are you sure to proposal?");
+        if(message)                 
+        document.getElementById('message').innerHTML = "Proposal Registration completed.";    
+    }
+	
+	
+</script>
+</h:head>
+
+
+<h:body class="main_body">
+<!-- ======= Header ======= -->
+<div class="fixed-top" id="header">
+    <div class="container d-flex">
+      <div class="logo mr-auto">
+       
+<a class="navbar-brand" href="home.xhtml">Phoenix<br></br><span style="display: block;
+    font-size: 11px;font-weight: 750;">Motor Insurance</span></a>
+
+      </div>
+
+         <h:form>
+  <!-- .nav-menu -->
+     <div class="nav-menu d-none d-lg-block">
+        <ul>
+          <li class="active"><p:commandLink action="home.xhtml"  >Home</p:commandLink> </li>
+          <li class="drop-down"><p:commandLink >Proposal</p:commandLink>
+            <ul>
+           		 <li><p:commandLink action="#{proposalController.getProposalForm()}" ajax="false">Online Proposal Form</p:commandLink></li>
+             	 <li><p:commandLink action="#{proposalController.getProposalListForm()}"  ajax="false">Proposal Status Checking</p:commandLink></li>
+            </ul>
+          </li>
+           <li class="drop-down"><p:commandLink >Claim</p:commandLink>
+            <ul>
+            	<li><p:commandLink action="#{cliamController.getClaimForm()}">Online Claim Form</p:commandLink></li>
+             	<li><p:commandLink action="#{cliamController.getClaimStatusCheckingForm()}">Claim Status Checking</p:commandLink></li>
+            </ul>
+          </li>
+           <li class="drop-down"><p:commandLink >Payment</p:commandLink>
+            <ul>
+            	<li><p:commandLink action="#{paymentController.getPaymentForm()}">Online Payment Form</p:commandLink></li>
+            	<li><p:commandLink action="#{paymentController.getPaymentListForm()}">Payment Listing</p:commandLink></li>
+            </ul>
+          </li>
+          <li class="drop-down"><p:commandLink >Policy</p:commandLink>
+            <ul>
+            	<li><p:commandLink action="#{policyController.getPolicyListForm()}">Policy List</p:commandLink></li>
+            </ul>
+          </li>
+              <li><p:commandLink action="#{userController.getProfile()}" >Profile</p:commandLink></li>
+          	 <li class="get-started"><p:commandLink action="#{userController.logout()}" onclick="if (!(confirm('Are you sure you want to logout your account?'))) return false">Logout</p:commandLink></li>
+        </ul>
+      </div><!-- .nav-menu -->
+      </h:form> 
+
+	</div>
+  </div><!-- End Header -->
+  
+  
+  
+   
+	<div class="colorBox" style="padding-top:90px;background: rgba(0, 0, 0, 0) linear-gradient(to right, rgb(28, 146, 210), rgb(242, 252, 254)) repeat scroll 0% 0%;">
+		<div class="container default-top" >
+			<div class="row">
+				<div class="col-xs-12" style="margin: 10px 0px">
+					<div class="panel panel-primary">
+						<div class="panel-body">
+							<div class="row">
+								<div class="col-xs-12">
+								<h:form>
+									<p:growl id="growl" showDetail="true" sticky="true" />  
+					<!-- 		Begin of Owner Details -->
+									<div class="col-sm-12">
+											<div style="overflow: auto; width: 100%; margin-top: 10px;">
+												<h2 style="font-size: 25px; font-weight: bold; color:  #2376d4  ;">Customer Informations</h2>
+												<hr style="margin: 0px;border:1px solid; color:  #2376d4  ;"></hr>
+											</div>
+										</div>
+
+										<div class="col-sm-3">
+											<div style="overflow: auto; width: 100%; margin-top: 10px;">
+												<h:outputLabel for="name">Name</h:outputLabel>
+												<span class="text-danger">*</span><span
+													class="text-muted small"></span>
+											</div>
+											<p:inputText id="name" label="Name" class="form-control" value="#{proposalController.proposal.pHolderName}" required="true" requiredMessage="Name is Required!" 
+											validatorMessage="Name length must be characters and numbers, length 2~50!">
+												<f:validateRegex pattern="^([a-zA-Z0-9]{2,50}+\s?)*$" />
+											</p:inputText>
+											&nbsp;
+											<h:message for="name" style="color: red;"></h:message>
+											<br></br>
+											<div style="overflow: auto; width: 100%; margin-top: 10px;">
+												<h:outputLabel for="phoneNo">Phone Number</h:outputLabel>
+												<span class="text-danger">*</span><span	class="text-muted small"></span>
+											</div>
+											<p:inputText id="phoneNo" label="Phone No" value="#{proposalController.proposal.pHolderPh}" class="form-control" data-validation="required" required="true" 
+											requiredMessage="Phone number is Required!" placeholder="+959760398573"
+												validatorMessage="Phone number must start with +959 followed by 9 digit">
+												<f:validateRegex pattern="^\+?(\+[0-9]{3})\)?[-. ]?([0-9]{4})[-. ]?([0-9]{5})$"/>
+											</p:inputText>
+											&nbsp;
+											<h:message for="phoneNo" style="color: red;"></h:message>
+											<br></br>
+											<div style="overflow: auto; width: 100%; margin-top: 10px;">
+												<h:outputLabel for="address">Address</h:outputLabel>
+												<span class="text-danger">*</span><span class="text-muted small"></span>
+											</div>
+											<p:inputText id="address" label="Address" class="form-control"  value="#{proposalController.proposal.pholderAddress}"  
+											required="true"  requiredMessage="Address is Required!" validatorMessage="Address must be characters and numbers(- . , _ ()), length 2~50!" >
+												<f:validateRegex pattern="^([a-zA-Z()0-9\-\.\_\,\/]{2,50}+\s?)*$" />
+											</p:inputText>
+											&nbsp;
+											<h:message for="address" style="color: red;"></h:message>
+										</div>
+										
+
+										<div class="col-sm-3">
+										<div style="overflow: auto; width: 100%; margin-top: 10px;">
+												<h:outputLabel for="nrc">NRC No</h:outputLabel>
+												<span class="text-danger">*</span><span
+													class="text-muted small"></span>
+											</div>
+											<p:inputText id="nrc" label="nrc" class="form-control"
+												required="true" value="#{proposalController.proposal.pHolderNrc}"  requiredMessage="NRC is Required!" 
+												validatorMessage="NRC format must like '1/MAKATA(N)134989' and no space." placeholder="1/MAKATA(N)013978">
+												<f:validateRegex pattern="^([\d]{1,2})\/([\w]{3}|[\w]{6})\(N\)([\d]{6})"/>
+											</p:inputText>
+											&nbsp;
+											<h:message for="nrc" style="color: red;"></h:message>
+											<br></br>
+											<div style="overflow: auto; width: 100%; margin-top: 10px;">
+												<h:outputLabel for="sumInsurance">Sum Insurance</h:outputLabel>
+												<span class="text-danger">*</span><span class="text-muted small"></span>
+											</div>
+											<p:inputText id="sumInsurance" label="Sum Insurance" class="form-control" value="#{proposalController.proposal.sumInsure}"  requiredMessage="Sum Inssure is Required!"
+												validatorMessage="Sum Insurance must only numbers and no space." required="true" >
+												<f:convertNumber pattern="#0.00" />
+												<p:ajax event="keyup" update="premium" listener="#{proposalController.ajaxEvent()}" />  
+												
+												<f:validateLength minimum="3" maximum="20" />
+											</p:inputText>
+											&nbsp;
+											<h:message for="sumInsurance" style="color: red;"></h:message>
+											<br></br>
+											
+											<div style="overflow: auto; width: 100%; margin-top: 10px;">
+												<h:outputLabel for="premium">Premium</h:outputLabel>
+												<span class="text-danger">*</span><span class="text-muted small"></span>
+											</div>
+											<p:inputText id="premium" label="Premium" class="form-control"  readonly="true"    data-validation="required" requiredMessage="Premium is Required!"
+												validatorMessage="Premium must only numbers and no space." required="true" value="#{proposalController.premium}" >
+											  <f:convertNumber pattern="#0.00" />
+												<f:validateLength minimum="3" maximum="20" />
+											</p:inputText>
+											&nbsp;
+											<h:message for="premium" style="color: red;"></h:message>
+										</div>
+										
+								
+										<div class="col-sm-3">
+										<div style="overflow: auto; width: 100%; margin-top: 10px;">										
+												<h:outputLabel for="occupation">Occupation</h:outputLabel>
+												<span class="text-danger">*</span><span class="text-muted small"></span>
+											</div>
+											<p:inputText id="occupation"  value="#{proposalController.proposal.pHolderOccupation}" label="Occupation" class="form-control" data-validation="required" required="true" 
+											 requiredMessage="Occupation is Required!" validatorMessage="Occupation must be character and number(-,.,/,_,() ), lenght 2~50 and no space " placeholder="Programmer(Android) / .Net">
+												<f:validateRegex pattern="^([a-zA-Z()0-9\-\.\_\/]{2,50}+\s?)*$" />
+											</p:inputText>
+											&nbsp;
+											<h:message for="occupation" style="color: red;"></h:message>
+										
+											<br></br>
+											<div style="overflow: auto; width: 100%; margin-top: 10px;">
+												<h:outputLabel for="startDate">Start Date</h:outputLabel>
+												<span class="text-danger">*</span><span class="text-muted small"></span>
+											</div>
+											<p:calendar id="startDate" label="Start Date"   mindate="today"   value="#{proposalController.proposal.startDate}"  requiredMessage="Date is Required!"
+												validatorMessage="Invalid Date"  navigator="true" pattern="dd-MMM-yyyy"  required="true" />
+												<script>
+												today = Date();
+												</script>  											 
+												&nbsp;
+											<h:message for="startDate" style="color: red;"></h:message>
+											<br></br>
+											
+												<div style="overflow: auto; width: 100%; margin-top: 10px;">
+												<h:outputLabel for="gender">Gender</h:outputLabel>
+												<span class="text-danger">*</span><span	class="text-muted small"></span>
+											</div>
+											<p:selectOneRadio id="gender"  selectable="true" value="#{proposalController.proposal.pHolderOccupation}" >
+												<f:selectItem itemLabel="Male" itemValue="Male" />
+												<f:selectItem itemLabel="Female" itemValue="Female" />
+											</p:selectOneRadio>
+											
+										</div>
+										
+										
+										
+										<div class="col-sm-3">	
+											<div style="overflow: auto; width: 100%; margin-top: 10px;">
+												<h:outputLabel for="dob">Date of Birth</h:outputLabel>
+												<span class="text-danger">*</span><span class="text-muted small"></span>
+											</div>
+											<p:calendar id="dob" value="#{proposalController.proposal.pHolderDob}" label="Date Of Birth"  data-validation="required" requiredMessage="Date is Required!"
+											yearRange="1996:2023" navigator="true" pattern="dd-MMM-yyyy"
+												validatorMessage="Invalid Date" required="true" />
+												&nbsp;
+											<h:message for="dob" style="color: red;"></h:message>
+											<br></br>	
+											
+											<div style="overflow: auto; width: 100%;margin-top: 10px;">
+												<h:outputLabel for="coverageType">Coverage Type</h:outputLabel>
+												<span class="text-danger">*</span><span class="text-muted small"></span>
+											</div>
+											<p:selectOneMenu id="coverageType"   value="#{proposalController.proposal.coverageType}"
+												style="width: 100%;">
+												<f:selectItem itemValue="Select One" itemLabel="Select One" noSelectionOption="true" />
+												<f:selectItem itemValue="Third Party" itemLabel="Thrid Party" />
+												<f:selectItem itemValue="Comprehensive" itemLabel="Comprehensive" />
+											</p:selectOneMenu><h:message for="coverageType" style="color: red;"></h:message>
+											&nbsp;
+											<h:message for="coverageType" style="color: red;"></h:message>																			
+											
+										</div>																													
+
+                                <!-- 		End of Owner Details -->
+										
+										
+								<!--  		Begin of Vehicle Detail -->
+										<div class="col-sm-12">
+											<div style="overflow: auto; width: 100%; margin-top: 10px;">
+												<h2 style="font-size: 25px; font-weight: bold; color:  #2376d4  ;">Vehicle Details</h2>
+												<hr style="margin: 0px;border:1px solid; color:  #2376d4  ;"></hr>
+											</div>
+										</div>
+
+										<div class="col-sm-3">
+											<div style="overflow: auto; width: 100%; margin-top: 10px;">
+												<h:outputLabel for="model">Model</h:outputLabel>
+												<span class="text-danger">*</span><span class="text-muted small"></span>
+											</div>
+											<p:inputText id="model" label="Model" class="form-control"  required="true" value="#{proposalController.proposal.model}" requiredMessage="Model is Required!"
+												validatorMessage="Model must be character and numbers, length 3~50." placeholder="BMW">
+												<f:validateRegex pattern="^([a-zA-Z\-\_\/]{3,50}+\s?)*$" />
+											</p:inputText>
+											&nbsp;
+											<h:message for="model" style="color: red;"></h:message>
+											<br></br>
+											<div style="overflow: auto; width: 100%; margin-top: 10px;">
+												<h:outputLabel for="bodyType">Body Type</h:outputLabel>
+												<span class="text-danger">*</span><span class="text-muted small"></span>
+											</div>
+											<p:selectOneMenu id="bodyType" style="width: 100%;"   value="#{proposalController.proposal.bodyType}" >
+												<f:selectItem itemLabel="Select One" itemValue=" " />
+												<f:selectItem itemLabel="Hatchback" itemValue="Hatchback" />
+												<f:selectItem itemLabel="Sedon" itemValue="Sedon" />
+												<f:selectItem itemLabel="MUV/SUV" itemValue="MUV/SUV" />
+												<f:selectItem itemLabel="Coupe" itemValue="Coupe" />
+												<f:selectItem itemLabel="Convertible" itemValue="Convertible" />
+												<f:selectItem itemLabel="Wagon" itemValue="Wagon" />
+												<f:selectItem itemLabel="Van" itemValue="Van" />
+												<f:selectItem itemLabel="Jeep" itemValue="Jeep" />
+											</p:selectOneMenu>
+											&nbsp;
+											<h:message for="bodyType" style="color: red;"></h:message>
+											
+											
+											<br></br>
+											<div style="overflow: auto; width: 100%; margin-top: 10px;">
+												<h:outputLabel for="color">Color</h:outputLabel>
+												<span class="text-danger">*</span><span class="text-muted small"></span>
+											</div>
+											<p:inputText id="color" label="Color" class="form-control" data-validation="required" required="true" value="#{proposalController.proposal.color}" requiredMessage="color is Required!"
+												validatorMessage="Color must only characters and length 3~15.">
+												<f:validateRegex pattern="^([a-zA-Z\-\_]{3,15}+\s?)*$" />
+											</p:inputText>
+											&nbsp;
+											<h:message for="color" style="color: red;"></h:message>
+										</div>
+
+
+										<div class="col-sm-3">
+											<div style="overflow: auto; width: 100%; margin-top: 10px;">
+												<h:outputLabel for="chassisNo">Chassis Number</h:outputLabel>
+												<span class="text-danger">*</span><span class="text-muted small"></span>
+											</div>
+											<p:inputText id="chassisNo" label="Chassis Number" class="form-control" data-validation="required"  required="true" value="#{proposalController.proposal.chassisNo}" 
+												requiredMessage="color is Required!"
+												validatorMessage="Chassis Number must be upper charator and number, length 17~20 and no space." placeholder="7SAARFCDEEDD344FD">
+												<f:validateRegex pattern="^$|^[A-Z0-9]{17,20}$"/>
+											</p:inputText>
+											&nbsp;
+											<h:message for="chassisNo" style="color: red;"></h:message>
+											<br></br>
+											<div style="overflow: auto; width: 100%; margin-top: 10px;">
+												<h:outputLabel for="vehicleRegistrationNumber">Vehicle Registration Number</h:outputLabel>
+												<span class="text-danger">*</span><span class="text-muted small"></span>
+											</div>
+											<p:inputText id="vehicleRegistrationNumber" label="Vehicle Registration Number" class="form-control"  required="true" value="#{proposalController.proposal.vehicleRegNo}"
+												requiredMessage="vehicleRegistrationNumber is Required!" placeholder="YGN 7F-5643" 
+												validatorMessage="Vehicle Registration Number format must like'MDY 6L-9876'." >
+												<!-- <f:validateRegex pattern="^([A-Z{3}0-9{1}\-A-Z{1}\-\A-Z{4}]+\s?)*$"/> -->
+											</p:inputText>
+											&nbsp;
+											<h:message for="dname" style="color: red;"></h:message>
+											<br></br>
+<!-- 											<div style="overflow: auto; width: 100%; margin-top: 10px;"> -->
+<!-- 												<h:outputLabel for="currentValue">Current Value</h:outputLabel> -->
+<!-- 												<span class="text-danger">*</span><span class="text-muted small"></span> -->
+<!-- 											</div> -->
+<!-- 											<p:inputText id="currentValue" label="Current Value" class="form-control" data-validation="required" -->
+<!-- 												validatorMessage="Current value must only numbers and no space." required="true" -->
+<!-- 												value="#{proposalController.proposal.currentValue}" > -->
+												
+<!-- 											</p:inputText> -->
+<!-- 											&nbsp; -->
+<!-- 											<h:message for="currentValue" style="color: red;"></h:message> -->
+										</div>
+										
+										<div class="col-sm-3">
+											<div style="overflow: auto; width: 100%; margin-top: 10px;">
+												<h:outputLabel for="engineCC">Engine CC</h:outputLabel>
+												<span class="text-danger">*</span><span class="text-muted small"></span>
+											</div>
+											<p:inputText id="engineCC" label="Engine CC" class="form-control" data-validation="required"
+												required="true" value="#{proposalController.proposal.engineCC}" 
+												requiredMessage="engineCC is Required!"
+												validatorMessage="EngineCC must be only number,length between 3~20 and no space.">
+												<f:validateRegex pattern="^$|^[0-9]{3,20}$" />
+											</p:inputText>
+											&nbsp;
+											<h:message for="engineCC" style="color: red;"></h:message>
+											<br></br>
+											<div style="overflow: auto; width: 100%; margin-top: 10px;">
+												<h:outputLabel for="engineNo">Engine No</h:outputLabel>
+												<span class="text-danger">*</span><span class="text-muted small"></span>
+											</div>
+											<p:inputText id="engineNo" label="Engine No" class="form-control" required="true"  value="#{proposalController.proposal.engineNo}" 
+												requiredMessage="engineNo is Required!" 
+												validatorMessage="Engine Number must be upper charator and number, length 10~20 and no space." placeholder="52WVC10338" >		
+												<f:validateRegex pattern="^$|^[A-Z0-9]{10,20}$"/>
+											</p:inputText>
+											&nbsp;
+											<h:message for="engineNo" style="color: red;"></h:message>
+											<br></br>
+											<div style="overflow: auto; width: 100%; margin-top: 10px;">
+												<h:outputLabel for="vehicleExpiredDate">Vehicle Expired Date</h:outputLabel>
+												<span class="text-danger">*</span><span class="text-muted small"></span>
+											</div>
+											<p:calendar id="vehicleExpiredDate" label="Vehicle Expired Date"  mindate="today" data-validation="required" required="true" value="#{proposalController.proposal.vehicleExpiredDate}"
+												requiredMessage="vehicleRegistrationNumber is Required!">
+											</p:calendar>
+											    <script>
+												today = Date();
+												</script>  	
+											&nbsp;
+											<h:message for="vehicleExpiredDate" style="color: red;"></h:message>
+										</div>
+									
+										
+										<div class="col-sm-3">
+											<div style="overflow: auto; width: 100%; margin-top: 10px;">
+												<h:outputLabel for="make">Make</h:outputLabel>
+												<span class="text-danger">*</span><span class="text-muted small"></span>
+											</div>
+											<p:selectOneMenu id="make"  style="width: 100%;"   
+												 value="#{proposalController.proposal.vehicleMake}" >
+												<f:selectItem itemLabel=" Select One" itemValue="" />
+												<f:selectItem itemLabel="Japan" itemValue="Japan" />
+												<f:selectItem itemLabel="Korea" itemValue="Korea" />
+												<f:selectItem itemLabel="India" itemValue="India" />
+												<f:selectItem itemLabel="Germany" itemValue="Germany"/>
+											</p:selectOneMenu>
+											&nbsp;
+											<h:message for="make" style="color: red;"></h:message>
+											<br></br>
+											<div style="overflow: auto; width: 100%; margin-top: 10px;">
+												<h:outputLabel for="engineType">Engine Type </h:outputLabel>
+												<span class="text-danger">*</span><span class="text-muted small"></span>
+											</div>
+											<p:selectOneMenu id="engineType" value="#{proposalController.proposal.engineType}"
+												style="width: 100%;" >
+												<f:selectItem itemLabel="Select One" itemValue="" />
+												<f:selectItem itemLabel="VEE" itemValue="VEE" />
+												<f:selectItem itemLabel="INLINE" itemValue="INLINE" />
+												<f:selectItem itemLabel="STRAIGHT" itemValue="STRAIGHT" />
+												<f:selectItem itemLabel="VR and W" itemValue="VR and W" />
+												<f:selectItem itemLabel="BOXER" itemValue="BOXER" />
+												<f:selectItem itemLabel="ROTARY" itemValue="ROTARY" />
+											</p:selectOneMenu>
+											&nbsp;
+											<h:message for="engineType" style="color: red;"></h:message>
+											<br></br>
+											<div style="overflow: auto; width: 100%; margin-top: 10px;">
+												<h:outputLabel for="manufactureYear">Manufacture Year</h:outputLabel>
+												<span class="text-danger">*</span><span class="text-muted small"></span>
+											</div>
+											<p:inputText id="manufactureYear" label="Manufacture Year" class="form-control" data-validation="required"
+											 required="true" value="#{proposalController.proposal.manufactureYear}"
+												requiredMessage="Manufacture Year is Required!" placeholder="2015" validatorMessage="Manufacture Year must only be numbers,length 4 and no space." >
+											</p:inputText>
+											&nbsp;
+											<h:message for="manufactureYear" style="color: red;"></h:message>
+											
+										</div>
+							<!--  		End of Vehicle Detail -->
+										
+							<!--  		Begin of Driver Detail -->	 
+                                     	<div class="col-sm-12">
+											<div style="overflow: auto; width: 100%; margin-top: 10px;">
+												<h2 style="font-size: 25px; font-weight: bold; color:  #2376d4  ;">Driver Details</h2>
+												<hr style="margin: 0px;border:1px solid; color:  #2376d4  ;"></hr>
+											</div>
+										</div>
+
+										<div class="col-sm-3">
+											<div style="overflow: auto; width: 100%; margin-top: 10px;">
+												<h:outputLabel for="dname">Name</h:outputLabel>
+												<span class="text-danger">*</span><span class="text-muted small"></span>
+											</div>
+											<p:inputText id="dname" label="Name" class="form-control" data-validation="required" required="true" value="#{proposalController.proposal.dName}"
+												requiredMessage="Name is Required!" validatorMessage="Name length must be characters and numbers, length 2~50!" >
+												<f:validateRegex pattern="^([a-zA-Z0-9]{2,50}+\s?)*$" />
+											</p:inputText>
+											&nbsp;
+											<h:message for="dname" style="color: red;"></h:message>
+										</div>
+
+										<div class="col-sm-3">
+											<div style="overflow: auto; width: 100%; margin-top: 10px;">
+												<h:outputLabel for="daddress">Address</h:outputLabel>
+												<span class="text-danger">*</span><span class="text-muted small"></span>
+											</div>
+											<p:inputText id="daddress" label="Address" class="form-control" 
+												required="true" value="#{proposalController.proposal.dAddress}" requiredMessage="Address is Required!"
+												validatorMessage="Address must be characters and numbers(- . , _ ()), length 2~50!" >
+												<f:validateRegex pattern="^([a-zA-Z()0-9\-\.\_\,\/]{2,50}+\s?)*$" />
+											</p:inputText>
+											&nbsp;
+											<h:message for="daddress" style="color: red;"></h:message>
+										</div>
+										
+
+										<div class="col-sm-3">
+											<div style="overflow: auto; width: 100%; margin-top: 10px;">
+												<h:outputLabel for="drivingLicence">Driving Licence</h:outputLabel>
+												<span class="text-danger">*</span><span
+													class="text-muted small"></span>
+											</div>
+											<p:inputText id="drivingLicence" label="Driving Lience" class="form-control" data-validation="required"
+												required="true" value="#{proposalController.proposal.dDrivingLicene}"  requiredMessage="Driving Licence is Required!"	validatorMessage="Driving Licence format like 'C/00001/18' and no space." placeholder="C/00001/18">
+												<f:validateRegex pattern="^([A-Z{1}\/0-9{5}\/0-9{2}])*$" />
+											</p:inputText>
+											&nbsp;
+											<h:message for="drivingLicence" style="color: red;"></h:message>
+										</div>
+
+										<div class="col-sm-3">
+											<div style="overflow: auto; width: 100%; margin-top: 10px;">
+												<h:outputLabel for="dphoneNo">Phone Number</h:outputLabel>
+												<span class="text-danger">*</span><span class="text-muted small"></span>
+											</div>
+											<p:inputText id="dphoneNo" label="Phone No" class="form-control" required="true" value="#{proposalController.proposal.dPhno}" requiredMessage="Phone No is Required!" 
+											placeholder="+959760398573" validatorMessage="Phone number must start with +959 followed by 9 digit" > 
+											<f:validateRegex pattern="^\+?(\+[0-9]{3})\)?[-. ]?([0-9]{4})[-. ]?([0-9]{5})$"/>
+											</p:inputText>
+											&nbsp;
+											<h:message for="dphoneNo" style="color: red;"></h:message>
+										</div>
+
+										<div class="col-sm-3">
+											<div style="overflow: auto; width: 100%; margin-top: 10px;">
+												<h:outputLabel for="lienceExpiredDate">Lience Expired Date</h:outputLabel>
+												<span class="text-danger">*</span><span class="text-muted small"></span>
+											</div>
+											<p:calendar id="lienceExpiredDate" label="Lience Expired Date"  data-validation="required" requiredMessage="Date is Required!"
+												validatorMessage="Invalid Date" mindate="today"  required="true"  value="#{proposalController.proposal.dLiceneExpiredDate}"  />
+												<script>
+												today = Date();
+												</script> 
+										</div>			
+							<!--  		End of Driver Detail -->	 
+					
+					
+							<!--  		Begin of Beneficial Detail -->	
+										<div class="col-xs-12">
+											<div style="overflow: auto" >
+												<h2 style="font-size: 25px; font-weight: bold; color:  #2376d4  ;">Beneficial Details</h2>
+												<hr style="margin: 0px;border:1px solid #2376d4; color:  #2376d4  ;"></hr>
+											</div>
+										</div>
+
+										<div class="col-sm-3">
+											<div style="overflow: auto; width: 100%; margin-top: 10px;">
+												<h:outputLabel for="bname">Name</h:outputLabel>
+												<span class="text-danger">*</span><span class="text-muted small"></span>
+											</div>
+											<p:inputText id="bname" label="Name" class="form-control" data-validation="required" required="true"  value="#{proposalController.proposal.bName}" 
+												requiredMessage="Name is Required!" validatorMessage="Name length must be characters and numbers, length 2~50!" >
+												<f:validateRegex pattern="^([a-zA-Z0-9]{2,50}+\s?)*$" />
+											</p:inputText>
+											&nbsp;
+											<h:message for="bname" style="color: red;"></h:message>
+										</div>
+
+										<!-- <div class="col-sm-3">
+											<div style="overflow: auto; width: 100%; margin-top: 10px;">
+												<h:outputLabel for="bnrc">NRC No</h:outputLabel>
+												<span class="text-danger">*</span><span class="text-muted small"></span>
+											</div>
+											<p:inputText id="bnrc" label="nrc" class="form-control" 
+											data-validation="required" required="true" 
+											value="#{proposalController.proposal.bNrc}"
+												requiredMessage="NRC is Required!" validatorMessage="Invalid  NRC">
+												<f:validateLength minimum="3" maximum="20" />
+											</p:inputText>
+											&nbsp;
+											<h:message for="nrc" style="color: red;"></h:message>
+										</div>
+										
+										 -->
+										
+										<div class="col-sm-3">
+										<div style="overflow: auto; width: 100%; margin-top: 10px;">
+												<h:outputLabel for="bnrc">NRC No</h:outputLabel>
+												<span class="text-danger">*</span><span
+													class="text-muted small"></span>
+											</div>
+											<p:inputText id="bnrc" label="nrc" class="form-control"
+												required="true" value="#{proposalController.proposal.bNrc}" 
+												 requiredMessage="NRC is Required!" 
+												validatorMessage="NRC format must like '1/MAKATA(N)134989'" 
+												placeholder="1/MAKATA(N)013978">
+												<f:validateRegex pattern="^([\d]{1,2})\/([\w]{3}|[\w]{6})\(N\)([\d]{6})"/>
+											</p:inputText>
+											&nbsp;
+											<h:message for="nrc" style="color: red;"></h:message>
+										</div>
+
+										<div class="col-sm-3">
+											<div style="overflow: auto; width: 100%; margin-top: 10px;">
+												<h:outputLabel for="bphoneNo">Phone Number</h:outputLabel>
+												<span class="text-danger">*</span><span class="text-muted small"></span>
+											</div>
+											<p:inputText id="bphoneNo" label="Phone No" class="form-control" required="true" value="#{proposalController.proposal.bPhone}" requiredMessage="Phone No is required!"
+											placeholder="+959760398573" validatorMessage="Phone number must start with +959 followed by 9 digit" >
+												<f:validateRegex pattern="^\+?(\+[0-9]{3})\)?[-. ]?([0-9]{4})[-. ]?([0-9]{5})$"/>
+											</p:inputText>
+											&nbsp;
+											<h:message for="bphoneNo" style="color: red;"></h:message>
+										</div>
+										
+
+										<div class="col-sm-3">
+											<div style="overflow: auto; width: 100%; margin-top: 10px;">
+												<h:outputLabel for="baddress">Address</h:outputLabel>
+												<span class="text-danger">*</span><span class="text-muted small"></span>
+											</div>
+											<p:inputText id="baddress" label="Address" class="form-control"
+												required="true" value="#{proposalController.proposal.bAddress}"  requiredMessage="Address is Required!" 
+												validatorMessage="Address must be characters and numbers(- . , _ ()), length 2~50!" >
+												<f:validateRegex pattern="^([a-zA-Z()0-9\-\.\_\,\/]{2,50}+\s?)*$" />
+											</p:inputText>
+											&nbsp;
+											<h:message for="baddress" style="color: red;"></h:message>
+										</div>
+						<!--  		End of Beneficial Detail -->	
+										<br />
+										<br />
+
+										<div class="col-sm-12">
+											<div class="form-group">
+												<h:commandButton value="Submit" action="#{proposalController.proposalSave()}"  update="@form" onclick="if (!(confirm('Are you sure to Save Proposal?'))) return false"
+													class="btn btn-primary" styleClass="ui-priority-primary"   
+													style="background-color:#0000ff ;width:80px;height:35px;font-size:17px;color:#fff;border-radius:8px;"/>
+											</div>
+										</div>
+
+									</h:form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+ <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="assets/js/main.js"></script>
+</h:body>
+</html>

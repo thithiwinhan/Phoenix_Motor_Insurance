@@ -1,0 +1,123 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Proposal Status Checking</title>
+	Google Fonts
+	<link
+		href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,600,600i,700,700i"
+		rel="stylesheet" />
+
+	Vendor CSS Files
+	<link href="/templates/assets/vendor/bootstrap/css/bootstrap.min.css"
+		rel="stylesheet" />
+	<link href="/templates/assets/vendor/icofont/icofont.min.css"
+		rel="stylesheet" />
+
+	<link rel="stylesheet"
+		href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
+	<link rel="stylesheet" type="text/css" href="/templates/css/status.css"></link>
+	<link href="/templates/assets/css/style.css" rel="stylesheet" />
+	<style>
+.navbar-brand {
+	font-weight: 700;
+	font-size: 20px;
+	font-family: "Poppins", Arial, sans-serif;
+	line-height: 1;
+	text-transform: uppercase;
+	color: #fff;
+}
+</style>
+</h:head>
+<h:body>
+	<!-- ======= Header ======= -->
+	<div class="fixed-top" id="header">
+		<div class="container d-flex">
+			<div class="logo mr-auto">
+				<h1 class="text-light">
+					<a href="home.xhtml"><span>CarInsurance</span></a>
+				</h1>
+			</div>
+
+			      <h:form>
+  <!-- .nav-menu -->
+     <div class="nav-menu d-none d-lg-block">
+        <ul>
+          <li class="active"><h:commandLink action="home.xhtml" >Home</h:commandLink> </li>
+          <li class="drop-down"><h:commandLink >Proposal</h:commandLink>
+            <ul>
+           		 <li><h:commandLink action="#{proposalController.getProposalForm()}" >Online Proposal Form</h:commandLink></li>
+             	 <li><h:commandLink action="#{proposalController.getProposalListForm()}">Proposal Status Checking</h:commandLink></li>
+            </ul>
+          </li>
+           <li class="drop-down"><h:commandLink >Claim</h:commandLink>
+            <ul>
+            	<li><h:commandLink action="#{cliamController.getClaimForm()}">Online Claim Form</h:commandLink></li>
+             	<li><h:commandLink action="#{cliamController.getClaimStatusCheckingForm()}">Claim Status Checking</h:commandLink></li>
+            </ul>
+          </li>
+           <li class="drop-down"><h:commandLink >Payment</h:commandLink>
+            <ul>
+            	<li><h:commandLink action="#{paymentController. getPaymentForm()}">Online Payment Form</h:commandLink></li>
+            	<li><h:commandLink action="#{paymentController.getPaymentListForm()}">Payment Listing</h:commandLink></li>
+            </ul>
+          </li>
+          <li class="drop-down"><h:commandLink >Policy</h:commandLink>
+            <ul>
+            	<li><h:commandLink action="#{policyController.getPolicyListForm()}">Policy List</h:commandLink></li>
+            </ul>
+          </li>
+              <li><h:commandLink action="#{userController.getProfile()}" >Profile</h:commandLink></li>
+          	 <li class="get-started"><h:commandLink action="#{userController.logout()}" onclick="if (!(confirm('Are you sure you want to logout your account?'))) return false">Logout</h:commandLink></li>
+        </ul>
+      </div><!-- .nav-menu -->
+      </h:form> 
+
+		</div>
+	</div>
+	<!-- End Header -->
+
+	<!-- Start main body -->
+	<div class="container">
+		<div class="table-wrapper" style="margin: 130px auto; width: 100%;">
+			<h:form>
+				<p:dataTable id="basicDT" var="paymentList"
+					value="#{paymentController.paymentList}">
+					<f:facet name="header">
+           				 Payment Listing
+        			</f:facet>
+					<p:column headerText="PolicyID">
+						<h:outputText value="#{paymentList.proposal.proposalId}" />
+					</p:column>
+					<p:column headerText="User Name">
+						<h:outputText value="#{paymentList.proposal.policyHolder.name}" />
+					</p:column>
+
+					<p:column headerText="Bank">
+						<h:outputText value="#{paymentList.bank}" />
+					</p:column>
+					<p:column headerText="Payment Date">
+						<h:outputText value="#{paymentList.paydate}" />
+					</p:column>
+					<p:column headerText="Amount">
+						<h:outputText value="#{paymentList.amount}" style="color:green;">
+							<f:convertNumber pattern="#0.00" />
+						</h:outputText>
+
+					</p:column>
+				</p:dataTable>
+			</h:form>
+		</div>
+	</div>
+
+	<script src="assets/vendor/jquery/jquery.min.js"></script>
+	<script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+
+	<script src="/templates/assets/js/main.js"></script>
+</h:body>
+</html>

@@ -1,0 +1,235 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Proposal Status Checking</title>
+	 <!-- Google Fonts -->
+ 	 <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,600,600i,700,700i" rel="stylesheet"/>
+
+  	<!-- Vendor CSS Files -->
+  	<link href="/templates/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+  	<link href="/templates/assets/vendor/icofont/icofont.min.css" rel="stylesheet" />
+ 
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
+	<link rel="stylesheet" type="text/css" href="/templates/css/claimStatusChecking.css"></link>	
+	 <link href="/templates/assets/css/style.css" rel="stylesheet" />
+	 <h:outputStylesheet name="primeicons/primeicons.css" library="primefaces" />
+	 <style>
+	
+	.navbar-brand {
+    font-weight: 750;
+    font-size: 20px;
+    font-family: "Poppins", Arial, sans-serif;
+    line-height: 1;
+    text-transform: uppercase;
+    color:#fff;
+    padding-left: 1px;
+    padding-top: 1px;
+	}
+
+.ui-datatable.ui-corner-all table {
+	border-collapse: separate;
+	border-spacing: 0;
+}
+
+.ui-datatable.ui-corner-all table tr:first-child th:first-child {
+	-moz-border-radius: 10px 0 0 0;
+	-webkit-border-radius: 10px 0 0 0;
+	border-radius: 10px 0 0 0;
+}
+
+.ui-datatable.ui-corner-all table tr:first-child th:last-child {
+	-moz-border-radius: 0 10px 0 0;
+	-webkit-border-radius: 0 10px 0 0;
+	border-radius: 0 10px 0 0;
+}
+
+.ui-datatable.ui-corner-all table tr:first-child th:only-child {
+	-moz-border-radius: 10px 10px 0 0;
+	-webkit-border-radius: 10px 10px 0 0;
+	border-radius: 10px 10px 0 0;
+}
+
+.ui-datatable.ui-corner-all table tbody td {
+	border-top: 0;
+}
+
+.ui-datatable.ui-corner-all table tr:last-child td:first-child {
+	-moz-border-radius: 0 0 0 10px;
+	-webkit-border-radius: 0 0 0 10px;
+	border-radius: 0 0 0 10px;
+}
+
+.ui-datatable.ui-corner-all table tr:last-child td:last-child {
+	-moz-border-radius: 0 0 10px 0;
+	-webkit-border-radius: 0 0 10px 0;
+	border-radius: 0 0 10px 0;
+}
+
+.ui-datatable.ui-corner-all table tr:last-child td:only-child {
+	-moz-border-radius: 0 0 10px 10px;
+	-webkit-border-radius: 0 0 10px 10px;
+	border-radius: 0 0 10px 10px;
+}
+
+th {
+	background-color: #6c7ae0 !important;
+	color: #fff !important;
+	height: 35px !important;
+}
+
+	</style>
+	
+	<!-- <script>
+   jQuery(document).ready(function($) {
+	   
+	   
+		
+	$(PrimeFaces.escapeClientId('form:j_idt11:1:btn')).load( "payment.xhtml" );
+		
+   });
+</script> -->
+	
+</h:head>
+<h:body>
+
+<!-- ======= Header ======= -->
+<div class="fixed-top" id="header">
+    <div class="container d-flex">
+      <div class="logo mr-auto">
+        <a class="navbar-brand" href="home.xhtml">Phoenix<br></br><span style="display: block;
+    font-size: 11px;font-weight: 750;">Motor Insurance</span></a>
+      </div>
+         <h:form>
+  <!-- .nav-menu -->
+     <div class="nav-menu d-none d-lg-block">
+        <ul>
+          <li class="active"><h:commandLink action="home.xhtml" >Home</h:commandLink> </li>
+          <li class="drop-down"><h:commandLink >Proposal</h:commandLink>
+            <ul>
+           		 <li><h:commandLink action="#{proposalController.getProposalForm()}" >Online Proposal Form</h:commandLink></li>
+             	 <li><h:commandLink action="#{proposalController.getProposalListForm()}">Proposal Status Checking</h:commandLink></li>
+            </ul>
+          </li>
+           <li class="drop-down"><h:commandLink >Claim</h:commandLink>
+            <ul>
+            	<li><h:commandLink action="#{cliamController.getClaimForm()}">Online Claim Form</h:commandLink></li>
+             	<li><h:commandLink action="#{cliamController.getClaimStatusCheckingForm()}">Claim Status Checking</h:commandLink></li>
+            </ul>
+          </li>
+           <li class="drop-down"><h:commandLink >Payment</h:commandLink>
+            <ul>
+            	<li><h:commandLink action="#{paymentController. getPaymentForm()}">Online Payment Form</h:commandLink></li>
+            	<li><h:commandLink action="#{paymentController.getPaymentListForm()}">Payment Listing</h:commandLink></li>
+            </ul>
+          </li>
+          <li class="drop-down"><h:commandLink >Policy</h:commandLink>
+            <ul>
+            	<li><h:commandLink action="#{policyController.getPolicyListForm()}">Policy List</h:commandLink></li>
+            </ul>
+          </li>
+              <li><h:commandLink action="#{userController.getProfile()}" >Profile</h:commandLink></li>
+          	 <li class="get-started"><h:commandLink action="#{userController.logout()}" onclick="if (!(confirm('Are you sure you want to logout your account?'))) return false">Logout</h:commandLink></li>
+        </ul>
+      </div><!-- .nav-menu -->
+      </h:form> 
+
+	</div>
+  </div><!-- End Header -->
+  
+<!-- Start main body -->
+	<div class="container" >
+		<div class="table-wrapper"  style="margin: 150px auto;">
+		<h:form id="form">
+		
+			<h2 style="font-size: 25px; font-weight: bold; color:  #2376d4  ;">Proposal Status Checking</h2>
+			
+			<br></br>
+			<!-- <div class="search">
+     			<p:inputText id="search" value="#{proposalController.proposal.pID}"  placeholder="Enter proposal ID" />
+     		 		<p:commandButton icon="pi pi-search" action="#{proposalController.search()}" update="@form"> </p:commandButton>
+    		</div>	 -->
+    		<div class="search">
+					<h:selectOneMenu value="#{proposalController.proposal.pID}" id="search"
+						style="height:33px; width:150px;">
+						<f:selectItem    itemLabel="Select Proposal ID" itemValue=""
+							noSelectionOption="true" />
+						<f:selectItems value="#{proposalController.proposalIdList}" />
+					</h:selectOneMenu>
+					<!-- <p:inputText id="search"
+						value="#{cliamController.claimModel.proposal.proposalId}"
+						placeholder="Enter Policy ID " />-->
+					<p:commandButton value="Search" icon="pi pi-search"
+						action="#{proposalController.search()}" update="@form">
+					</p:commandButton>  
+					
+				</div>
+				
+    				 
+			<br />
+			<p:dataTable var="plist"  value="#{proposalController.proposalList}" styleClass="ui-corner-all" >
+			
+				<p:column headerText="Proposal ID" >
+					<h:outputText value="#{plist.pID}" />
+				</p:column>
+
+				<p:column headerText="Name">
+					<h:outputText value="#{plist.pHolderName}" />
+				</p:column>
+
+				<p:column headerText="NRC" >
+					<h:outputText value="#{plist.pHolderNrc}" />
+				</p:column>
+
+				<p:column headerText="Coverage Type">
+					<h:outputText value="#{plist.coverageType}" />
+				</p:column>
+				
+				<p:column headerText="Status">
+					<h:outputText  value="#{plist.status}" style="color:#00a651;font-weight:bold;"  />
+					
+				</p:column>
+				
+				<p:column  headerText="Options" style="width:70px;">
+					<p:commandButton id="btn" icon="pi pi-pencil"  disabled="#{plist.status != 'pending'}" action="#{proposalController.edit(plist)}" style="width:30px;background-color:#00a651;" update="@form" process="@this" >
+				        <p:confirm header="Confirmation" message="Are you sure?" icon="pi pi-exclamation-triangle" /></p:commandButton>
+				
+					<p:commandButton icon="pi pi-trash"  disabled="#{plist.status != 'pending'}"  action="#{proposalController.proposalDelete(plist)}"  style="width:30px;background-color:#ec1e1e;" update="@form" process="@this">		
+							        <p:confirm header="Confirmation" message="Are you sure?" icon="pi pi-exclamation-triangle" /></p:commandButton>
+			
+     
+				</p:column>
+				
+				
+			</p:dataTable>
+			</h:form>
+
+
+			<h:form>
+				<p:growl id="message" showDetail="true" />
+
+				<p:confirmDialog global="true" showEffect="fade" hideEffect="fade"
+					style="width:20%;margin: 20px  50px  40px 40px">
+					<p:commandButton value="Yes" type="button"
+						styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
+					<p:commandButton value="No" type="button"
+						styleClass="ui-confirmdialog-no" icon="pi pi-times" />
+				</p:confirmDialog>
+			</h:form>
+		</div>
+	</div>
+	
+	<!-- End main body -->
+	
+	 <!-- Vendor JS Files -->
+  <script src="assets/vendor/jquery/jquery.min.js"></script>
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="/templates/assets/js/main.js"></script>
+</h:body>
+</html>

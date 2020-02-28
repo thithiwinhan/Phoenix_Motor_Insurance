@@ -1,0 +1,223 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Claim Form</title>
+	<link rel="stylesheet"
+		href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></link>
+
+	<!-- Google Fonts -->
+	<link
+		href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,600,600i,700,700i"
+		rel="stylesheet" />
+
+	<!-- Vendor CSS Files -->
+	<link href="/templates/assets/vendor/bootstrap/css/bootstrap.min.css"
+		rel="stylesheet" />
+	<link href="/templates/assets/vendor/icofont/icofont.min.css"
+		rel="stylesheet" />
+
+	<link href="/templates/css/main4.css" rel="stylesheet" media="all"></link>
+	<link href="assets/css/style.css" rel="stylesheet" />
+	<style>
+	.navbar-brand {
+    font-weight: 750;
+    font-size: 20px;
+    font-family: "Poppins", Arial, sans-serif;
+    line-height: 1;
+    text-transform: uppercase;
+    color:#fff;
+    padding-left: 1px;
+	}
+	</style>
+
+</h:head>
+<h:body>
+	<!-- ======= Header ======= -->
+<div class="fixed-top" id="header">
+    <div class="container d-flex">
+      <div class="logo mr-auto">
+        <a class="navbar-brand" href="home.xhtml">Phoenix<br></br><span style="display: block;
+    font-size: 11px;font-weight: 750;">Motor Insurance</span></a>
+      </div>
+
+           <h:form>
+  <!-- .nav-menu -->
+     <div class="nav-menu d-none d-lg-block">
+        <ul>
+          <li class="active"><h:commandLink action="home.xhtml" >Home</h:commandLink> </li>
+          <li class="drop-down"><h:commandLink >Proposal</h:commandLink>
+            <ul>
+           		 <li><h:commandLink action="#{proposalController.getProposalForm()}" >Online Proposal Form</h:commandLink></li>
+             	 <li><h:commandLink action="#{proposalController.getProposalListForm()}">Proposal Status Checking</h:commandLink></li>
+            </ul>
+          </li>
+           <li class="drop-down"><h:commandLink >Claim</h:commandLink>
+            <ul>
+            	<li><h:commandLink action="#{cliamController.getClaimForm()}">Online Claim Form</h:commandLink></li>
+             	<li><h:commandLink action="#{cliamController.getClaimStatusCheckingForm()}">Claim Status Checking</h:commandLink></li>
+            </ul>
+          </li>
+           <li class="drop-down"><h:commandLink >Payment</h:commandLink>
+            <ul>
+            	<li><h:commandLink action="#{paymentController. getPaymentForm()}">Online Payment Form</h:commandLink></li>
+            	<li><h:commandLink action="#{paymentController.getPaymentListForm()}">Payment Listing</h:commandLink></li>
+            </ul>
+          </li>
+          <li class="drop-down"><h:commandLink >Policy</h:commandLink>
+            <ul>
+            	<li><h:commandLink action="#{policyController.getPolicyListForm()}">Policy List</h:commandLink></li>
+            </ul>
+          </li>
+              <li><h:commandLink action="#{userController.getProfile()}" >Profile</h:commandLink></li>
+          	 <li class="get-started"><h:commandLink action="#{userController.logout()}" onclick="if (!(confirm('Are you sure you want to logout your account?'))) return false">Logout</h:commandLink></li>
+        </ul>
+      </div><!-- .nav-menu -->
+      </h:form> 
+
+	</div>
+  </div><!-- End Header -->
+  
+
+	<!-- Start Main Body -->
+	<div class="page-wrapper bg-gra-02 p-t-130 p-b-100 font-poppins">
+		<div class="wrapper wrapper--w680">
+			<div class="card card-4">
+				<div class="card-body">
+					<h2 class="title"><b>Vehicle Claim Forms</b></h2>
+					<h:form>
+						<p:growl id="growl" showDetail="true"  showSummary="true"     sticky="true" />  
+					
+						<div class="search">
+						<h:selectOneMenu 
+							value="#{cliamController.claimModel.proposal.proposalId}"  required="true" requiredMessage="Proposal Id is required"
+							id="pid" style="height:33px; width:150px;">
+							<f:selectItem itemLabel="Select Proposal ID" itemValue=""
+								noSelectionOption="true" />
+							<f:selectItems value="#{proposalController.proposalIdList}" />
+							
+						</h:selectOneMenu>
+					
+						 </div>
+						 
+						<!--  <div class="row row-space">
+							<div class="col-6">
+								<div class="input-group">
+									 <p:fileUpload listener="#{fileUploadView.handleFileUpload}" mode="advanced" dragDropSupport="false"
+                         update="growl" fileLimit="1" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
+ 
+								</div>
+							</div>
+						 </div> -->
+						<br></br>
+						<br></br>
+						<div class="row row-space">
+							<div class="col-6">
+								<div class="input-group">
+									<h:outputLabel for="name">Other Party Name   :</h:outputLabel>
+									<p:inputText id="name" label="Other Party Name "  value="#{cliamController.claimModel.otherPartyName}" />
+								</div>
+							</div>
+							<div class="col-6">
+								<div class="input-group">
+									<h:outputLabel for="ph"> Other Party  Phno   :</h:outputLabel>
+									<p:inputText id="ph"    label="Other Party  Phno " value="#{cliamController.claimModel.otherPartyPhone}"
+										/>
+								</div>
+							</div>
+						</div>
+
+<!-- 						<div class="row row-space"> -->
+<!-- 							<div class="col-6"> -->
+<!-- 								<div class="input-group"> -->
+<!-- 								<input type="hidden" name="ProposalId" value=""  /> -->
+
+<!-- 									<h:outputLabel for="sumInsurance">Sum Insurance  :</h:outputLabel> -->
+<!-- 									<p:inputText id="sumInsurance"  label="Sum Insurance " -->
+<!-- 										 /> -->
+<!-- 								</div> -->
+<!-- 							</div> -->
+<!-- 							<div class="col-6"> -->
+<!-- 								<div class="input-group"> -->
+<!-- 									<h:outputLabel for="coverage">CoverageType  :</h:outputLabel> -->
+<!-- 									<p:inputText id="coverage"  readonly="true"  label="Premium" -->
+<!-- 										/> -->
+<!-- 								</div> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
+                          
+                          
+						<div class="row row-space">
+							<div class="col-6">
+								<div class="input-group">
+									<h:outputLabel for="lossOfDate">Loss Of Date   :</h:outputLabel>
+									<p:calendar id="lossOfDate" style="width:100%;"
+										value="#{cliamController.claimModel.claimLossOfDate}"
+										data-validation="required" requiredMessage="Date is Required!" maxdate="today"
+										validatorMessage="Invalid Date" required="true" />
+										<script>
+												today = Date();
+												</script>  	
+								</div>
+							</div>
+							<div class="col-6">
+								<div class="input-group">
+									<h:outputLabel for="accidentLocation">Accident Location   :</h:outputLabel>
+									<p:inputText id="accidentLocation"
+										value="#{cliamController.claimModel.claimAccidentLocation}"
+										label="Accident Location"  required="true"
+										requiredMessage="Accident Location is Required!" />
+								</div>
+							</div>
+						</div>
+
+						<div class="row row-space">
+							<h:outputLabel for="accidentDetails" style="margin-left: 15px;">Accident Details  :</h:outputLabel>	
+							<div class="col-12">
+								<div class="input-group">
+									<p:inputTextarea id="accidentDetails" style="width:100%;"
+										value="#{cliamController.claimModel.claimAccidentDetail}"
+										label="Accident Detail"  required="true"
+										requiredMessage="Accident Detail is Required!" />
+								</div>
+							</div>
+						</div>
+
+
+						<div class="p-t-15">
+							<p:commandButton value="Claim" 
+								action="#{cliamController.save()}"  update="@form" onclick="if (!(confirm('Are you sure to Claim?'))) return false" />
+							&nbsp;
+							<p:commandButton value="Cancel" 
+								action="#{cliamController.clear()}" />
+						</div>
+					</h:form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script type="text/javascript">
+		function toggle(id) {
+			var element = document.getElementById(id);
+			if (element.style.display == 'none') {
+				element.style.display = 'block';
+			} else {
+				element.style.display = 'none'
+			}
+		}
+	</script>
+
+	<!-- End Main Body -->
+
+
+	<!-- Vendor JS Files -->
+	<script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+	<!-- Template Main JS File -->
+	<script src="assets/js/main.js"></script>
+</h:body>
+</html>
