@@ -54,15 +54,17 @@ public class PolicyController {
 						this.policyList = policylistingService.policyListing(user);
 					    } 
 						catch (IndexOutOfBoundsException e) {
-							e.printStackTrace();
+							this.policyList= new ArrayList<ProposalModel>();
 					    }
 				}
 				else{
-					System.out.println("session is null");
+					this.policyList = new ArrayList<ProposalModel>();
+
 				    }
 		   } 
 			catch (Exception e) {
-				 e.printStackTrace();
+				System.out.println("Null In Policy Listing!!!!");
+
 			}
 		
 

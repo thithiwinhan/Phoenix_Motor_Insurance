@@ -46,10 +46,24 @@ public class PaymentController {
 
 	@Autowired
 	ProposalListingService listingService;
+	@Autowired
+	ProposalController p;
 
 	HashMap<Integer, Integer> proposalIdList = new HashMap<Integer, Integer>(); // for show proposal list in combobox
 	
+	Double amount ;
 	
+	
+
+	public Double getAmount() {
+		return amount;
+	}
+
+
+	public void setAmount(Double amount) {
+		this.amount=amount;
+	}
+
 
 	public void save() {
 
@@ -65,7 +79,7 @@ public class PaymentController {
 
 			}
 			else if (proposal.getStatus().equalsIgnoreCase("accept")) {
-					paymentModel.setAmount(paymentList.get(0).getAmount());
+					paymentModel.setAmount(amount);
 					paymentModel.setProposal(proposal);
 					paymentservice.save(paymentModel);
 					paymentModel = new PaymentModel();
@@ -97,6 +111,7 @@ public class PaymentController {
 					    }
 					catch (IndexOutOfBoundsException e) {
                           System.out.println( "Index Out of bound payment list");
+                          e.printStackTrace();
 					    }
 			    }
 			  else {
@@ -104,9 +119,11 @@ public class PaymentController {
 			   }
 		} 
 		catch (NullPointerException e) {
-			System.out.println("---------------Null------------");
+			System.out.println("payment list null arrive");
+			this.paymentList= new ArrayList<PaymentModel>();
+            
 		}
-
+        
 
 	}
 	
@@ -120,6 +137,8 @@ public class PaymentController {
 	
 
 	public String  getPaymentForm() {
+		 p.proposalList();//add for get proposal id list
+
     	System.out.println("*******getPaymentForm()********");
 		 paymentList();
 		 return "payment.xhtml?faces-redirect=true";
@@ -127,28 +146,50 @@ public class PaymentController {
 	}
 	
 	
+	/*
+	 * public void search() {
+	 * System.out.println("====Proposal Search Controller======" +
+	 * paymentModel.getProposal().getProposalId()); paymentList = new
+	 * ArrayList<PaymentModel>(); if (paymentModel.getProposal().getProposalId() !=
+	 * 0) { paymentList = paymentListingService
+	 * .findPaymentAmountByProposalId(paymentModel.getProposal().getProposalId());
+	 * //paymentList=proposalService.findProposalById(paymentModel.getProposal().
+	 * getProposalId()) try { if (!paymentList.isEmpty()) {
+	 * amount=paymentList.get(0).getProposal().getPremium(); } else {
+	 * System.out.println("empty payment list"); } } catch
+	 * (IndexOutOfBoundsException e) {
+	 * System.out.println("cannot find!.index out od bound!!!!!");
+	 * e.printStackTrace(); } }
+	 * 
+	 * }
+	 * 
+	 * 
+	 */
+	
 
 	public void search() {
-		System.out.println("====Proposal Search Controller======" + paymentModel.getProposal().getProposalId());
-		paymentList = new ArrayList<PaymentModel>();
+		System.out.println("**********serach arrive in payment Controller**********");
+		
 		if (paymentModel.getProposal().getProposalId() != 0) {
-			paymentList = paymentListingService
-					.findPaymentAmountByProposalId(paymentModel.getProposal().getProposalId());
+			Proposal proposal = proposalService.findProposalById(paymentModel.getProposal().getProposalId());
 			try {
-					if (!paymentList.isEmpty()) {
-						System.out.println("amount>>" + paymentList.get(0).getAmount());
+					if (proposal!=null) {
+						this.amount=proposal.getPremium();
 					}
 					else {
-						System.out.println("empty payment list");
+						System.out.println(" not found proposal by id");
 					}
 			} 
-			catch (IndexOutOfBoundsException e) {
-					System.out.println("canot find!.index out od bound!!!!!");
+			catch (NullPointerException e) {
+				this.amount=0.0;
 					e.printStackTrace();
 			}
 		}
 				
 	}
+	
+	
+	
 	
 	public List<ProposalModel> getProposalList() {
 		return proposalList;

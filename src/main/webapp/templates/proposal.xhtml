@@ -73,12 +73,7 @@
              	 <li><p:commandLink action="#{proposalController.getProposalListForm()}"  ajax="false">Proposal Status Checking</p:commandLink></li>
             </ul>
           </li>
-           <li class="drop-down"><p:commandLink >Claim</p:commandLink>
-            <ul>
-            	<li><p:commandLink action="#{cliamController.getClaimForm()}">Online Claim Form</p:commandLink></li>
-             	<li><p:commandLink action="#{cliamController.getClaimStatusCheckingForm()}">Claim Status Checking</p:commandLink></li>
-            </ul>
-          </li>
+          
            <li class="drop-down"><p:commandLink >Payment</p:commandLink>
             <ul>
             	<li><p:commandLink action="#{paymentController.getPaymentForm()}">Online Payment Form</p:commandLink></li>
@@ -88,6 +83,12 @@
           <li class="drop-down"><p:commandLink >Policy</p:commandLink>
             <ul>
             	<li><p:commandLink action="#{policyController.getPolicyListForm()}">Policy List</p:commandLink></li>
+            </ul>
+          </li>
+           <li class="drop-down"><p:commandLink >Claim</p:commandLink>
+            <ul>
+            	<li><p:commandLink action="#{cliamController.getClaimForm()}">Online Claim Form</p:commandLink></li>
+             	<li><p:commandLink action="#{cliamController.getClaimStatusCheckingForm()}">Claim Status Checking</p:commandLink></li>
             </ul>
           </li>
               <li><p:commandLink action="#{userController.getProfile()}" >Profile</p:commandLink></li>
@@ -111,14 +112,34 @@
 							<div class="row">
 								<div class="col-xs-12">
 								<h:form>
-									<p:growl id="growl" showDetail="true" sticky="true" />  
+									<p:growl id="msgs"  severity="info"/>  
 					<!-- 		Begin of Owner Details -->
 									<div class="col-sm-12">
-											<div style="overflow: auto; width: 100%; margin-top: 10px;">
-												<h2 style="font-size: 25px; font-weight: bold; color:  #2376d4  ;">Customer Informations</h2>
-												<hr style="margin: 0px;border:1px solid; color:  #2376d4  ;"></hr>
+										<div style="overflow: auto; width: 100%; ">
+											<div class="col-md-10">
+												<h2 style="font-size: 25px; font-weight: bold; color:  #2376d4  ;margin-left:-14px;margin-top:31px;">Customer Informations</h2>								
 											</div>
+											<div class="col-md-2" >
+											<h5><b>Proposal ID :</b></h5>
+												<p:inputText id="proposalId" label="Proposal ID" class="form-control" value="" required="true" style="border: 2px solid #2376d4;margin-bottom:8px;margin-top:-9px;" />
+											</div>
+												
 										</div>
+											<hr style="margin: 0px;border:1px solid; color:  #2376d4  ;"></hr>
+									</div>
+										<!-- 
+										<div class="col-sm-12">
+											<div style="overflow: auto; width: 100%; margin-top: 10px;">
+											<div class="col-md-6">
+												<h2 style="font-size: 25px; font-weight: bold; color:  #2376d4  ;">Customer Informations</h2>
+											</div>
+											<div class="col-md-6">
+												<p:inputText id="policyId" label="Policy ID" class="form-control" value="" required="true" />
+											</div>
+												
+											</div>
+											<hr style="margin: 0px;border:1px solid; color:  #2376d4  ;"></hr>
+										</div> -->
 
 										<div class="col-sm-3">
 											<div style="overflow: auto; width: 100%; margin-top: 10px;">
@@ -173,16 +194,14 @@
 											<h:message for="nrc" style="color: red;"></h:message>
 											<br></br>
 											<div style="overflow: auto; width: 100%; margin-top: 10px;">
-												<h:outputLabel for="sumInsurance">Sum Insurance</h:outputLabel>
+												<h:outputLabel for="sumInsurance">Sum Insured</h:outputLabel>
 												<span class="text-danger">*</span><span class="text-muted small"></span>
 											</div>
 											<p:inputText id="sumInsurance" label="Sum Insurance" class="form-control" value="#{proposalController.proposal.sumInsure}"  requiredMessage="Sum Inssure is Required!"
-												validatorMessage="Sum Insurance must only numbers and no space." required="true" >
+												validatorMessage="Sum Insured must be between 100000 kyats and 10000000 kyats." required="true" >
 												<f:convertNumber pattern="#0.00" />
 												<p:ajax event="keyup" update="premium" listener="#{proposalController.ajaxEvent()}" />  
-												
-												<f:validateLength minimum="3" maximum="20" />
-											</p:inputText>
+                                               <f:validateDoubleRange minimum="100000.00" maximum="10000000.00" />											</p:inputText>
 											&nbsp;
 											<h:message for="sumInsurance" style="color: red;"></h:message>
 											<br></br>
@@ -246,7 +265,7 @@
 												<span class="text-danger">*</span><span class="text-muted small"></span>
 											</div>
 											<p:calendar id="dob" value="#{proposalController.proposal.pHolderDob}" label="Date Of Birth"  data-validation="required" requiredMessage="Date is Required!"
-											yearRange="1996:2023" navigator="true" pattern="dd-MMM-yyyy"
+											yearRange="1955:2002" navigator="true" pattern="dd-MMM-yyyy"
 												validatorMessage="Invalid Date" required="true" />
 												&nbsp;
 											<h:message for="dob" style="color: red;"></h:message>
@@ -284,8 +303,8 @@
 												<span class="text-danger">*</span><span class="text-muted small"></span>
 											</div>
 											<p:inputText id="model" label="Model" class="form-control"  required="true" value="#{proposalController.proposal.model}" requiredMessage="Model is Required!"
-												validatorMessage="Model must be character and numbers, length 3~50." placeholder="BMW">
-												<f:validateRegex pattern="^([a-zA-Z\-\_\/]{3,50}+\s?)*$" />
+												validatorMessage="Model must be character and numbers, length 3~50." placeholder="Camry">
+												<f:validateRegex pattern="^([a-zA-Z0-9\-]{1,50}+\s?)*$" />
 											</p:inputText>
 											&nbsp;
 											<h:message for="model" style="color: red;"></h:message>
@@ -348,17 +367,18 @@
 											&nbsp;
 											<h:message for="dname" style="color: red;"></h:message>
 											<br></br>
-<!-- 											<div style="overflow: auto; width: 100%; margin-top: 10px;"> -->
-<!-- 												<h:outputLabel for="currentValue">Current Value</h:outputLabel> -->
-<!-- 												<span class="text-danger">*</span><span class="text-muted small"></span> -->
-<!-- 											</div> -->
-<!-- 											<p:inputText id="currentValue" label="Current Value" class="form-control" data-validation="required" -->
-<!-- 												validatorMessage="Current value must only numbers and no space." required="true" -->
-<!-- 												value="#{proposalController.proposal.currentValue}" > -->
-												
-<!-- 											</p:inputText> -->
-<!-- 											&nbsp; -->
-<!-- 											<h:message for="currentValue" style="color: red;"></h:message> -->
+											<div style="overflow: auto; width: 100%; margin-top: 10px;">
+												<h:outputLabel for="vehicleExpiredDate">Vehicle Expired Date</h:outputLabel>
+												<span class="text-danger">*</span><span class="text-muted small"></span>
+											</div>
+											<p:calendar id="vehicleExpiredDate" label="Vehicle Expired Date"  mindate="today" data-validation="required" required="true" value="#{proposalController.proposal.vehicleExpiredDate}"
+												requiredMessage="vehicleRegistrationNumber is Required!">
+											</p:calendar>
+											    <script>
+												today = Date();
+												</script>  	
+											&nbsp;
+											<h:message for="vehicleExpiredDate" style="color: red;"></h:message>
 										</div>
 										
 										<div class="col-sm-3">
@@ -386,19 +406,19 @@
 											</p:inputText>
 											&nbsp;
 											<h:message for="engineNo" style="color: red;"></h:message>
-											<br></br>
+											<br />
 											<div style="overflow: auto; width: 100%; margin-top: 10px;">
-												<h:outputLabel for="vehicleExpiredDate">Vehicle Expired Date</h:outputLabel>
+												<h:outputLabel for="manufactureYear">Manufacture Year</h:outputLabel>
 												<span class="text-danger">*</span><span class="text-muted small"></span>
 											</div>
-											<p:calendar id="vehicleExpiredDate" label="Vehicle Expired Date"  mindate="today" data-validation="required" required="true" value="#{proposalController.proposal.vehicleExpiredDate}"
-												requiredMessage="vehicleRegistrationNumber is Required!">
-											</p:calendar>
-											    <script>
-												today = Date();
-												</script>  	
+											<p:inputText id="manufactureYear" label="Manufacture Year" class="form-control" data-validation="required" 
+											 required="true" value="#{proposalController.proposal.manufactureYear}"
+												requiredMessage="Manufacture Year is Required!" placeholder="2015" validatorMessage="Manufacture Year must only between 1980 and 2020" >
+												 <f:validateLongRange maximum="2020" minimum="1980" />
+											</p:inputText>
 											&nbsp;
-											<h:message for="vehicleExpiredDate" style="color: red;"></h:message>
+											<h:message for="manufactureYear" style="color: red;"></h:message>
+											
 										</div>
 									
 										
@@ -410,10 +430,14 @@
 											<p:selectOneMenu id="make"  style="width: 100%;"   
 												 value="#{proposalController.proposal.vehicleMake}" >
 												<f:selectItem itemLabel=" Select One" itemValue="" />
-												<f:selectItem itemLabel="Japan" itemValue="Japan" />
-												<f:selectItem itemLabel="Korea" itemValue="Korea" />
-												<f:selectItem itemLabel="India" itemValue="India" />
-												<f:selectItem itemLabel="Germany" itemValue="Germany"/>
+												<f:selectItem itemLabel="Toyota" itemValue="Toyota" />
+												<f:selectItem itemLabel="BMW" itemValue="BMW" />
+												<f:selectItem itemLabel="Honda" itemValue="Honda" />
+												<f:selectItem itemLabel="Nissan" itemValue="Nissan" />
+												<f:selectItem itemLabel="Hino" itemValue="Hino" />
+												<f:selectItem itemLabel="Mitsubishi" itemValue="Mitsubishi" />
+												<f:selectItem itemLabel="Chevrolet" itemValue="Chevrolet" />
+												<f:selectItem itemLabel="Suzuki" itemValue="Suzuki"/>
 											</p:selectOneMenu>
 											&nbsp;
 											<h:message for="make" style="color: red;"></h:message>
@@ -434,18 +458,6 @@
 											</p:selectOneMenu>
 											&nbsp;
 											<h:message for="engineType" style="color: red;"></h:message>
-											<br></br>
-											<div style="overflow: auto; width: 100%; margin-top: 10px;">
-												<h:outputLabel for="manufactureYear">Manufacture Year</h:outputLabel>
-												<span class="text-danger">*</span><span class="text-muted small"></span>
-											</div>
-											<p:inputText id="manufactureYear" label="Manufacture Year" class="form-control" data-validation="required"
-											 required="true" value="#{proposalController.proposal.manufactureYear}"
-												requiredMessage="Manufacture Year is Required!" placeholder="2015" validatorMessage="Manufacture Year must only be numbers,length 4 and no space." >
-											</p:inputText>
-											&nbsp;
-											<h:message for="manufactureYear" style="color: red;"></h:message>
-											
 										</div>
 							<!--  		End of Vehicle Detail -->
 										
@@ -614,9 +626,8 @@
 
 										<div class="col-sm-12">
 											<div class="form-group">
-												<h:commandButton value="Submit" action="#{proposalController.proposalSave()}"  update="@form" onclick="if (!(confirm('Are you sure to Save Proposal?'))) return false"
-													class="btn btn-primary" styleClass="ui-priority-primary"   
-													style="background-color:#0000ff ;width:80px;height:35px;font-size:17px;color:#fff;border-radius:8px;"/>
+												<p:commandButton value="Submit" action="#{proposalController.proposalSave()}"  update="@form" onclick="if (!(confirm('Are you sure to Save Proposal?'))) return false" />&nbsp;
+												<p:commandButton value="Cancel" action="#{proposalController.cancel()}"  update="@form" />
 											</div>
 										</div>
 

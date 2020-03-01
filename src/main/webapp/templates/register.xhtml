@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="/templates/cssone/elephant.min.css"/>
     <link rel="stylesheet" href="/templates/cssone/login-2.min.css"/>
   </h:head>
+  
   <h:body>
     <div class="login">
       <div class="login-body">
@@ -23,56 +24,85 @@
         <div class="login-form">
         
           <h:form >
-						<p:growl id="growl" showDetail="true" sticky="true" />  
+				<p:messages id="msgs" severity="info" />  
             <div class="form-group">
               <p:outputLabel for="name" value="Name" />  
-			 <p:inputText id="name" class="form-control" required="true" value="#{userController.userModel.userName}" validatorMessage ="Name must be characters only and no spaces." > 
+			 <!-- <p:inputText id="name" class="form-control" required="true" value="#{userController.userModel.userName}" validatorMessage ="Name must be characters only and no spaces." > 
 			 	<f:validateRegex pattern="^[a-zA-Z_]+( [a-zA-Z_]+)*$" />  
-			  </p:inputText>
+			  </p:inputText> -->
+			  
+			  <p:inputText id="name" class="form-control" required="true"
+							value="#{userController.userModel.userName}" requiredMessage="Name is Required!"
+							validatorMessage="Name must be characters and number, length between 4 to 50." placeholder="Name">
+							<f:validateRegex pattern="^([a-zA-Z0-9]{4,50}+\s?)*$" />
+						</p:inputText>
+			  
 			  <h:message for="name" style="color: red;" ></h:message> 
             </div>
             
             <div class="form-group">
             <p:outputLabel for="email" value="Email" />  
-              <p:inputText id="email" class="form-control"  required="true" value="#{userController.userModel.userEmail}"  validatorMessage ="InvaildEmail must be characters only and no spaces." placeholder="email" > 
+              <!-- <p:inputText id="email" class="form-control"  required="true" value="#{userController.userModel.userEmail}"  validatorMessage ="InvaildEmail must be characters only and no spaces." placeholder="email" > 
 			 	<f:validateRegex pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" />  
-			  </p:inputText>
+			  </p:inputText> -->
+			  <p:inputText id="email" class="form-control" required="true"
+							value="#{userController.userModel.userEmail}" requiredMessage="Email is Required!"
+							validatorMessage="Invaild Email format and no spaces."
+							placeholder="Email">
+							<f:validateRegex
+								pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" />
+						</p:inputText>
 		    <h:message for="email" style="color: red;" ></h:message> 
             </div>
             
             <div class="form-group">
               <p:outputLabel for="password" value="Password" />  
-			 <p:password id="password" class="form-control" required="true" match=" " value="#{userController.userModel.userPassword}"  validatorMessage ="Password must have minimum eight characters, at least and no spaces." > 
-<!-- 			 	<f:validateRegex pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$" />   -->
-			  </p:password>
+			 <!-- <p:password id="password" class="form-control" required="true" match=" " value="#{userController.userModel.userPassword}"  validatorMessage ="Password must have minimum eight characters, at least and no spaces." > 
+		 	<f:validateRegex pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$" />   
+			  </p:password> -->
+			  
+			  <p:password id="password" class="form-control" required="true"
+							match=" " value="#{userController.userModel.userPassword}"
+							feedback="true" weakLabel="Weak" goodLabel="Good"
+							strongLabel="Strong" requiredMessage="Password is Required!"
+							validatorMessage="Password must have minimum eight characters and number, at least and no spaces." placeholder="Password">
+							<f:validateLength minimum="5" maximum="101" />
+						</p:password>
 		    <h:message for="password" style="color: red;" ></h:message> 
 		    
             </div>
               <div class="form-group">
              	<p:outputLabel for="comfirmedPassword" value="Comfirmed Password" />  
-			 <p:password id="comfirmedPassword" class="form-control" required="true" match=" " value="#{userController.userModel.userConfirmPassword}"   validatorMessage ="Password must have minimum eight characters, at least and no spaces." > 
-<!-- 			 	<f:validateRegex pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$" />   -->
-			  </p:password>
+			 <!-- <p:password id="comfirmedPassword" class="form-control" required="true" match=" " value="#{userController.userModel.userConfirmPassword}"   validatorMessage ="Password must have minimum eight characters, at least and no spaces." > 
+		 	<f:validateRegex pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$" />   
+			  </p:password> -->
+			  <p:password id="comfirmedPassword" class="form-control" required="true"
+							match=" " value="#{userController.userModel.userConfirmPassword}"
+							feedback="true" weakLabel="Weak" goodLabel="Good"
+							strongLabel="Strong" requiredMessage="Comfirm password is Required!"
+							validatorMessage="Password must have minimum eight characters and number, at least and no spaces." placeholder="Comfirm password">
+							<f:validateLength minimum="5" maximum="101" />
+						</p:password>
 			<h:message for="comfirmedPassword" style="color: red;" ></h:message> 
             </div>
             
             <div class="form-group">
               <label class="custom-control custom-control-primary custom-checkbox">
                 <input class="custom-control-input" type="checkbox" checked="checked"/>
-                <span class="custom-control-indicator"></span>
+                <span class="custom-control-indicator" style="background-color: #007ad9;"></span>
                 <span class="custom-control-label">Keep me signed in</span>
               </label>
              
             </div>
-		 	<p:commandButton   class="btn btn-primary btn-block" value="Register Now" name="register"  
+		 	<p:commandButton   class="btn-block" value="Register Now" name="register"  style="background-color: #007ad9;"
                     action="#{userController.save()}" update="@form"></p:commandButton>
-            
+            <div class="login-footer"  >
+        		You already  an account? <a href="/templates/login.xhtml"><b>Sign In</b></a>
+      		</div>
           </h:form>
         </div>
       </div>
-      <div class="login-footer">
-        You already  an account? <a href="/templates/login.xhtml">Sign In</a>
-      </div>
+      
     </div>
     
   </h:body>

@@ -18,7 +18,7 @@ import com.motor.insurance.model.UserModel;
 import com.motor.insurance.service.UserService;
 
 @Named
-@ViewScoped
+@SessionScope
 public class UserController{
 
 	private UserModel userModel = new UserModel();
@@ -40,15 +40,16 @@ public class UserController{
 		boolean flag = userservice.searchByUserEmail(userModel);
 		if (flag) {
 			FacesContext.getCurrentInstance().addMessage(null,
-					new FacesMessage(FacesMessage.SEVERITY_FATAL, "Email is already Exit ", "Failed to register"));
+					new FacesMessage(FacesMessage.SEVERITY_INFO, "Email is already Exit ", "Failed to register"));
 			return "";
 
 		} else {
 			if (userModel.getUserPassword().trim().equals(userModel.getUserConfirmPassword().trim())) {
 				userservice.createUser(userModel);
+				userModel= new UserModel();
 				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN,
 						"Registration is successful ", "Welcome to Phonex Insurance"));
-				return "home.xhtml?faces-redirect=true";
+				return "login.xhtml?faces-redirect=true";
 			} else {
 				FacesContext.getCurrentInstance().addMessage(null,
 						new FacesMessage(FacesMessage.SEVERITY_ERROR, "Password did not match ", "Try Again!"));
@@ -72,10 +73,11 @@ public class UserController{
 			System.out.println("Empty list");
 
 			FacesContext.getCurrentInstance().addMessage(null,
-					new FacesMessage(FacesMessage.SEVERITY_INFO, "Login Failed!", "Try Again"));
+					new FacesMessage(FacesMessage.SEVERITY_INFO, "Login Failed!", "That user does'nt exit"));
 			return "";
 
 		}else {
+			userModel= new UserModel();
 			FacesContext.getCurrentInstance().addMessage(null,
 					new FacesMessage(FacesMessage.SEVERITY_INFO, "SuccessFul Login!", "info Messages"));
 			System.out.println("success");
@@ -87,7 +89,7 @@ public class UserController{
 			session.setAttribute("user", userList.get(0).getUserName());
 			session.setAttribute("email", userList.get(0).getUserEmail());
 			session.setAttribute("id", userList.get(0).getUserId());
-			session.setAttribute("password", userList.get(0));
+			session.setAttribute("password", userList.get(0).getUserPassword());
 			System.out.println(session.getAttribute("user"));
 			userModel = new UserModel();
 			return "home.xhtml?faces-redirect=true";
@@ -98,6 +100,7 @@ public class UserController{
 	}
 	public String logout() {
 		try {
+			System.out.println("logout");
 			FacesContext fc = FacesContext.getCurrentInstance();
 			HttpSession session = (HttpSession) fc.getExternalContext().getSession(false);
 			fc.getExternalContext().getSessionMap().clear();
@@ -109,6 +112,24 @@ public class UserController{
 
 	}
 	public String getProfile() {
+		System.out.println("get Profile arrive!!!");
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
+		try {
+			if(session!=null) {
+				
+				userModel.setUserId((int) (session.getAttribute("id")));
+				userModel.setUserName((session.getAttribute("user")).toString());
+				System.out.println("userName"+userModel.getUserName());
+				userModel.setUserEmail((session.getAttribute("email")).toString());
+				userModel.setUserPassword((session.getAttribute("password")).toString());
+			}
+			
+		} catch (Exception e) {
+			return "profile.xhtml?faces-redirect=true";
+
+		}
+		
 		return "profile.xhtml?faces-redirect=true";
 		
 	}
@@ -122,8 +143,27 @@ public class UserController{
 		userList = userservice.findUserById(userModel.getUserId());
 	}
 
-	public void userProfileUpdate() {
-		userservice.updateProfile(userModel);
+	public String userProfileUpdate() {
+		System.out.println("===============Save=====================");
+		userList = new ArrayList<UserModel>();
+		boolean flag = userservice.searchByUserEmail(userModel);
+		if (flag) {
+			FacesContext.getCurrentInstance().addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_INFO, "Email is already Exit ", "Failed to register"));
+			return "";
+
+		} else {
+			if (userModel.getUserPassword().trim().equals(userModel.getUserConfirmPassword().trim())) {
+				userservice.updateProfile(userModel);
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN,
+						" Profile Update is successful ", ""));
+				return "login.xhtml?faces-redirect=true";
+			} else {
+				FacesContext.getCurrentInstance().addMessage(null,
+						new FacesMessage(FacesMessage.SEVERITY_ERROR, "Password did not match ", "Try Again!"));
+				return "";
+			}
+		}
 	}
 
 	public List<UserModel> getUserList() {

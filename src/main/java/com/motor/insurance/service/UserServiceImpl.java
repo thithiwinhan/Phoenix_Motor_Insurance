@@ -1,5 +1,6 @@
 package com.motor.insurance.service;
 
+import java.security.MessageDigest;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -46,7 +47,9 @@ public class UserServiceImpl implements UserService {
 			User userEntity = new User();
 			userEntity.setEmail(userModel.getUserEmail());
 			userEntity.setName(userModel.getUserName());
-			//userEntity.setPassword(bCryptPasswordEncoder.encode(userModel.getUserPassword()));
+			//userEntity.setPassword(userModel.getUserPassword());
+			userEntity.setPassword(PasswordEncoder(userModel.getUserPassword()));
+
 			userDao.save(userEntity);
 
 		}
@@ -73,15 +76,24 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void updateProfile(UserModel userModel) {
-
+       
 		// TODO Auto-generated method stub
-		User userEntity = new User();
-		userEntity.setId(userModel.getUserId());
-		userEntity.setEmail(userModel.getUserEmail());
-		userEntity.setName(userModel.getUserName());
-		userEntity.setPassword(userModel.getUserPassword());
-		userDao.save(userEntity);
+		
+		
+				Optional<User> UserDb = this.userDao.findById(userModel.getUserId());
+				System.out.println("------usrmodel----" + userModel.getUserId());
+				if (UserDb.isPresent()) {
+					User userUpdate = UserDb.get();
+					userUpdate.setName(userModel.getUserName());
+					userUpdate.setEmail(userModel.getUserEmail());
+					userUpdate.setPassword(PasswordEncoder(userModel.getUserPassword()));
 
+					userDao.save(userUpdate);
+
+				} else {
+					throw new ResourceNotFoundException("Record not found with id : " + userModel.getUserId());
+				
+				}
 		
 		
 	}
@@ -130,23 +142,15 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public List<UserModel> checkAuthentication(UserModel userModel) {
 		
-		
-		
-		/*
-		 * BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();;
-		 * System.out.println("Security"+bCryptPasswordEncoder.encode("joker123"));
-		 */
-		  
-		      
-		
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaQuery<User> cq = cb.createQuery(User.class);
 		System.out.println("---------User Login -------------" + userModel.getUserEmail()+userModel.getUserPassword().trim());
 		Root<User> user = cq.from(User.class);
+		String password = PasswordEncoder(userModel.getUserPassword().trim());
 		Predicate p = cb.equal(user.get("email"), userModel.getUserEmail().trim());
-	//	Predicate p1 = cb.equal(user.get("password"), userModel.getUserPassword().trim());
+	    Predicate p1 = cb.equal(user.get("password"), password);
 
-		cq.where(p).distinct(true);
+		cq.where(p,p1).distinct(true);
 		TypedQuery<User> typedQuery = em.createQuery(cq);
 		List<User> resultList = new ArrayList<User>();
          UserModel model = new UserModel();
@@ -164,7 +168,7 @@ public class UserServiceImpl implements UserService {
 						model.setUserEmail(u.getEmail() );
 						model.setUserName(u.getName());
 						model.setUserId(u.getId());
-						model.setUserPassword(u.getPassword());
+						model.setUserPassword(PasswordEncoder(u.getPassword()));
 						System.out.println("-----ssssss----" + resultList);
 					}
 					modellist.add(model);
@@ -184,7 +188,40 @@ public class UserServiceImpl implements UserService {
 
 	
 	}
+	
+	
+	
+	
+	String PasswordEncoder(String name) {
+		String password = name;
+		String algorithm = "SHA";
+
+		byte[] plainText = password.getBytes();
+	    StringBuilder sb = new StringBuilder();
+
+		try {
+		    MessageDigest md = MessageDigest.getInstance(algorithm);
+
+		    md.reset();
+		    md.update(plainText);
+		    byte[] encodedPassword = md.digest();
+
+		    for (int i = 0; i < encodedPassword.length; i++) {
+		        if ((encodedPassword[i] & 0xff) < 0x10) {
+		            sb.append("0");
+		        }
+
+		        sb.append(Long.toString(encodedPassword[i] & 0xff, 16));
+		    }
+
+		    System.out.println("Plain    : " + password);
+		    System.out.println("Encrypted: " + sb.toString());
+		} catch (Exception e) {
+		    e.printStackTrace();
+		}
+		return sb.toString();
 	}
+}
 
 
 

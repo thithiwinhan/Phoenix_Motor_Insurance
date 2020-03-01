@@ -54,7 +54,7 @@ public class CliamController {
 			if (d1.after(proposal.getEndDate())) {
 				FacesContext context = FacesContext.getCurrentInstance();
 				context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
-				"Claim save is failed! " + "Your policy is expired ", ""));
+				"Claim  is failed! " + "Your policy is expired ", ""));
 
 			} else {
 				claimModel.setProposal(proposal);
@@ -113,16 +113,21 @@ public class CliamController {
 			}
 
 			else {
-              System.out.println("session is null");
+				claimList= new ArrayList<ClaimModel>();
 			}
+			
 		} catch (NullPointerException e) {
-            e.printStackTrace();
+			System.out.println("null pointer in cliam listing");
+			claimList= new ArrayList<ClaimModel>();
+
 		}
 
 	}
 
-	public void clear() {
+	public String clear() {
+		System.out.println("CLAEAR=================");
 		claimModel = new ClaimModel();
+		return "claim.xhtml?faces-redirect=true";
 	}
 
 	public void search() {

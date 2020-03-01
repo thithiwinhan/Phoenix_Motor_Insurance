@@ -14,7 +14,7 @@ public class MyApp {
 	        extracted();
 	    }
 	private static void extracted() {
-		String password = "secret";
+		String password = "12345";
 		String algorithm = "SHA";
 
 		byte[] plainText = password.getBytes();

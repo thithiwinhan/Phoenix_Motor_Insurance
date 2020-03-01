@@ -11,6 +11,7 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.servlet.http.HttpSession;
+import javax.websocket.Session;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -34,7 +35,8 @@ public class ProposalController {
 
 	@Autowired
 	ProposalService proposalService;
-
+	
+	
 	@Autowired
 	ProposalListingService listingService;
 
@@ -52,7 +54,7 @@ public class ProposalController {
 
 	public void ajaxEvent() {
 		double sI = proposal.getSumInsure();
-		premium = (sI / 100) * 20;
+		premium = (sI / 100) * 10;
 
 	}
 
@@ -91,13 +93,17 @@ public class ProposalController {
 			int id = (int) session.getAttribute("id");
 			user.setId(id);
 			try {
+				System.out.println("9999999999999999999999999 ID"+user.getId());
 				proposalList = listingService.proposalListing(user);
-				   if (!proposalList.isEmpty()) {
+				   if (!proposalList.isEmpty()||proposalIdList.size()==0) {
 					    proposalIdList = new HashMap<Integer, Integer>();
 						for (int i = 0; i < proposalList.size(); i++) {
 						this.proposalIdList.put(proposalList.get(i).getpID(), proposalList.get(i).getpID());
 				        }
 			       }
+				   else {
+					   proposalIdList= new HashMap<Integer, Integer>();
+				   }
 			} 
 			catch (IndexOutOfBoundsException e) {
 					e.printStackTrace();
@@ -154,7 +160,7 @@ public class ProposalController {
 			System.out.println("---- for ownerID check-----" + proposal.getpHolderID());
 
 			System.out.println("---- for proposal main info reloading-----");
-			proposal.setPremium(model.getPremium());
+			proposal.setPremium(premium);
 			proposal.setCoverageType(model.getCoverageType());
 			proposal.setSumInsure(model.getSumInsure());
 			proposal.setStartDate(model.getStartDate());
@@ -234,42 +240,70 @@ public class ProposalController {
 			User user = new User();
 			FacesContext facesContext = FacesContext.getCurrentInstance();
 			HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
-			int id = (int) session.getAttribute("id");
-			user.setId(id);
 
-			proposalList = listingService.proposalListing(user);
+			try {
+				if (session!=null) {
+					int id = (int) session.getAttribute("id");
+					user.setId(id);
+
+					try {
+						proposalList = listingService.proposalListing(user);
+					} catch (IndexOutOfBoundsException e) {
+						proposalList= new ArrayList<ProposalModel>();
+					}
+				}
+					else {
+						System.out.println("session is null");
+				}
+			} catch (NullPointerException e) {
+				System.out.println("session is null");
+			}
+			
 
 		}
 
 	}
 
-	public void cancel() {
-		// proposalList = new ArrayList<ProposalModel>();
-
+	
+	public String cancelUpdate() {
+		 return "proposalStatusChecking.xhtml?faces-redirect=true";
+		
+	}
+	public String cancel() {
+      proposal= new ProposalModel();
+		 return "proposal.xhtml?faces-redirect=true";
+      
 	}
 
 	// save propsal form according to user id,current set fixed user id 1
 	public void proposalDelete(ProposalModel model) {
 
-		 User user = new User(); FacesContext facesContext =
-				  FacesContext.getCurrentInstance(); HttpSession session = (HttpSession)
-				  facesContext.getExternalContext().getSession(true);
-				  int id=(int)session.getAttribute("id");
-				  user.setId(id);
-				 
+		User user = new User();
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(true);
+		try {
+			
+			if (session != null) {
+				int id = (int) session.getAttribute("id");
+				user.setId(id);
 
-		boolean deleteflag = proposalService.delete(model);
-		if(deleteflag==true) {
-			this.proposalList = listingService.proposalListing(user);
-			      FacesContext context = FacesContext.getCurrentInstance();
-			       context.addMessage(null,
+				boolean deleteflag = proposalService.delete(model);
+				if (deleteflag == true) {
+					this.proposalList = listingService.proposalListing(user);
+					FacesContext context = FacesContext.getCurrentInstance();
+					context.addMessage(null,
 					new FacesMessage(FacesMessage.SEVERITY_INFO, "Successfully Delete!!" + "", ""));
+				} 
+				else {
+					FacesContext context = FacesContext.getCurrentInstance();
+					context.addMessage(null,
+					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Sorry" + "Failed to delete", ""));
+				}
+			}
+		} catch (NullPointerException e) {
+			System.out.println("null in proposal delete");
 		}
-		else {
-			FacesContext context = FacesContext.getCurrentInstance();
-		       context.addMessage(null,
-				new FacesMessage(FacesMessage.SEVERITY_ERROR, "Sorry" + "Failed to delete", ""));
-		}
+		
 	}
 
 	public ProposalModel getProposal() {

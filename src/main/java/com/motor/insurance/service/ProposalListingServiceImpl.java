@@ -41,7 +41,7 @@ public class ProposalListingServiceImpl implements ProposalListingService {
 			Root<Proposal> root = cr.from(Proposal.class);
 			System.out.println("----------user ID-----------"+user.getId());
 			
-			Predicate p = cb.equal(root.get("user"), user);
+			Predicate p = cb.equal(root.get("user"), user.getId());
 			Predicate p2=cb.equal(root.get("active"), 1);
  
 			

@@ -73,6 +73,17 @@ th {
 	color: #fff !important;
 	height: 35px !important;
 }
+.navbar-brand {
+    font-weight: 750;
+    font-size: 20px;
+    font-family: "Poppins", Arial, sans-serif;
+    line-height: 1;
+    text-transform: uppercase;
+    color:#fff;
+    padding-left: 1px;
+        padding-top: 2px;
+	}
+	
 </style>
 
 </h:head>
@@ -82,7 +93,8 @@ th {
 		<div class="container d-flex">
 			<div class="logo mr-auto">
 				<h1 class="text-light">
-					<a href="home.xhtml"><span>CarInsurance</span></a>
+					<a class="navbar-brand" href="home.xhtml" style="color:#ffffff; letter-spacing:0.5px;">Phoenix<br></br><span style="display: block;
+                     font-size: 11px;font-weight: 750;">Motor Insurance</span></a>
 				</h1>
 			</div>
 
@@ -97,12 +109,7 @@ th {
              	 <li><h:commandLink action="#{proposalController.getProposalListForm()}">Proposal Status Checking</h:commandLink></li>
             </ul>
           </li>
-           <li class="drop-down"><h:commandLink >Claim</h:commandLink>
-            <ul>
-            	<li><h:commandLink action="#{cliamController.getClaimForm()}">Online Claim Form</h:commandLink></li>
-             	<li><h:commandLink action="#{cliamController.getClaimStatusCheckingForm()}">Claim Status Checking</h:commandLink></li>
-            </ul>
-          </li>
+          
            <li class="drop-down"><h:commandLink >Payment</h:commandLink>
             <ul>
             	<li><h:commandLink action="#{paymentController. getPaymentForm()}">Online Payment Form</h:commandLink></li>
@@ -112,6 +119,12 @@ th {
           <li class="drop-down"><h:commandLink >Policy</h:commandLink>
             <ul>
             	<li><h:commandLink action="#{policyController.getPolicyListForm()}">Policy List</h:commandLink></li>
+            </ul>
+          </li>
+           <li class="drop-down"><h:commandLink >Claim</h:commandLink>
+            <ul>
+            	<li><h:commandLink action="#{cliamController.getClaimForm()}">Online Claim Form</h:commandLink></li>
+             	<li><h:commandLink action="#{cliamController.getClaimStatusCheckingForm()}">Claim Status Checking</h:commandLink></li>
             </ul>
           </li>
               <li><h:commandLink action="#{userController.getProfile()}" >Profile</h:commandLink></li>

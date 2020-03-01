@@ -23,176 +23,206 @@
 	<link href="/templates/css/main4.css" rel="stylesheet" media="all"></link>
 	<link href="assets/css/style.css" rel="stylesheet" />
 	<style>
-	.navbar-brand {
-    font-weight: 750;
-    font-size: 20px;
-    font-family: "Poppins", Arial, sans-serif;
-    line-height: 1;
-    text-transform: uppercase;
-    color:#fff;
-    padding-left: 1px;
-	}
-	</style>
+.navbar-brand {
+	font-weight: 750;
+	font-size: 20px;
+	font-family: "Poppins", Arial, sans-serif;
+	line-height: 1;
+	text-transform: uppercase;
+	color: #fff;
+	padding-left: 1px;
+}
+</style>
 
 </h:head>
 <h:body>
 	<!-- ======= Header ======= -->
-<div class="fixed-top" id="header">
-    <div class="container d-flex">
-      <div class="logo mr-auto">
-        <a class="navbar-brand" href="home.xhtml">Phoenix<br></br><span style="display: block;
-    font-size: 11px;font-weight: 750;">Motor Insurance</span></a>
-      </div>
+	<div class="fixed-top" id="header">
+		<div class="container d-flex">
+			<div class="logo mr-auto">
+				<a class="navbar-brand" href="home.xhtml">Phoenix<br></br> <span
+					style="display: block; font-size: 11px; font-weight: 750;">Motor
+						Insurance</span></a>
+			</div>
 
-           <h:form>
-  <!-- .nav-menu -->
-     <div class="nav-menu d-none d-lg-block">
-        <ul>
-          <li class="active"><h:commandLink action="home.xhtml" >Home</h:commandLink> </li>
-          <li class="drop-down"><h:commandLink >Proposal</h:commandLink>
-            <ul>
-           		 <li><h:commandLink action="#{proposalController.getProposalForm()}" >Online Proposal Form</h:commandLink></li>
-             	 <li><h:commandLink action="#{proposalController.getProposalListForm()}">Proposal Status Checking</h:commandLink></li>
-            </ul>
-          </li>
-           <li class="drop-down"><h:commandLink >Claim</h:commandLink>
-            <ul>
-            	<li><h:commandLink action="#{cliamController.getClaimForm()}">Online Claim Form</h:commandLink></li>
-             	<li><h:commandLink action="#{cliamController.getClaimStatusCheckingForm()}">Claim Status Checking</h:commandLink></li>
-            </ul>
-          </li>
-           <li class="drop-down"><h:commandLink >Payment</h:commandLink>
-            <ul>
-            	<li><h:commandLink action="#{paymentController. getPaymentForm()}">Online Payment Form</h:commandLink></li>
-            	<li><h:commandLink action="#{paymentController.getPaymentListForm()}">Payment Listing</h:commandLink></li>
-            </ul>
-          </li>
-          <li class="drop-down"><h:commandLink >Policy</h:commandLink>
-            <ul>
-            	<li><h:commandLink action="#{policyController.getPolicyListForm()}">Policy List</h:commandLink></li>
-            </ul>
-          </li>
-              <li><h:commandLink action="#{userController.getProfile()}" >Profile</h:commandLink></li>
-          	 <li class="get-started"><h:commandLink action="#{userController.logout()}" onclick="if (!(confirm('Are you sure you want to logout your account?'))) return false">Logout</h:commandLink></li>
-        </ul>
-      </div><!-- .nav-menu -->
-      </h:form> 
+			<h:form>
+				<!-- .nav-menu -->
+				<div class="nav-menu d-none d-lg-block">
+					<ul>
+						<li class="active"><h:commandLink action="home.xhtml">Home</h:commandLink>
+						</li>
+						<li class="drop-down"><h:commandLink>Proposal</h:commandLink>
+							<ul>
+								<li><h:commandLink
+										action="#{proposalController.getProposalForm()}">Online Proposal Form</h:commandLink></li>
+								<li><h:commandLink
+										action="#{proposalController.getProposalListForm()}">Proposal Status Checking</h:commandLink></li>
+							</ul></li>
+						<li class="drop-down"><h:commandLink>Payment</h:commandLink>
+							<ul>
+								<li><h:commandLink
+										action="#{paymentController. getPaymentForm()}">Online Payment Form</h:commandLink></li>
+								<li><h:commandLink
+										action="#{paymentController.getPaymentListForm()}">Payment Listing</h:commandLink></li>
+							</ul></li>
+						
+						<li class="drop-down"><h:commandLink>Policy</h:commandLink>
+							<ul>
+								<li><h:commandLink action="#{policyController.getPolicyListForm()}">Policy List</h:commandLink></li>
+							</ul>
+						</li>
+						<li class="drop-down"><h:commandLink>Claim</h:commandLink>
+							<ul>
+								<li><h:commandLink
+										action="#{cliamController.getClaimForm()}">Online Claim Form</h:commandLink></li>
+								<li><h:commandLink action="#{cliamController.getClaimStatusCheckingForm()}">Claim Status Checking</h:commandLink></li>
+							</ul>
+						</li>
+						<li>
+						<h:commandLink action="#{userController.getProfile()}">Profile</h:commandLink>
+						</li>
+						<li class="get-started"><h:commandLink
+								action="#{userController.logout()}"
+								onclick="if (!(confirm('Are you sure you want to logout your account?'))) return false">Logout</h:commandLink></li>
+					</ul>
+				</div>
+				<!-- .nav-menu -->
+			</h:form>
 
+		</div>
 	</div>
-  </div><!-- End Header -->
-  
+	<!-- End Header -->
+
 
 	<!-- Start Main Body -->
 	<div class="page-wrapper bg-gra-02 p-t-130 p-b-100 font-poppins">
 		<div class="wrapper wrapper--w680">
 			<div class="card card-4">
 				<div class="card-body">
-					<h2 class="title"><b>Vehicle Claim Forms</b></h2>
+					<h2 class="title">
+						<b>Vehicle Claim Forms</b>
+					</h2>
 					<h:form>
-						<p:growl id="growl" showDetail="true"  showSummary="true"     sticky="true" />  
-					
+						<p:messages id="msgs" severity="info" />
 						<div class="search">
-						<h:selectOneMenu 
-							value="#{cliamController.claimModel.proposal.proposalId}"  required="true" requiredMessage="Proposal Id is required"
-							id="pid" style="height:33px; width:150px;">
-							<f:selectItem itemLabel="Select Proposal ID" itemValue=""
-								noSelectionOption="true" />
-							<f:selectItems value="#{proposalController.proposalIdList}" />
-							
-						</h:selectOneMenu>
-					
-						 </div>
-						 
-						<!--  <div class="row row-space">
-							<div class="col-6">
-								<div class="input-group">
-									 <p:fileUpload listener="#{fileUploadView.handleFileUpload}" mode="advanced" dragDropSupport="false"
-                         update="growl" fileLimit="1" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
- 
-								</div>
-							</div>
-						 </div> -->
+							<h:selectOneMenu
+								value="#{cliamController.claimModel.proposal.proposalId}"
+								required="true" requiredMessage="Proposal Id is required"
+								id="pid" style="height:33px; width:150px;">
+								<f:selectItem itemLabel="Select Policy ID" itemValue=""
+									noSelectionOption="true" />
+								<f:selectItems value="#{proposalController.proposalIdList}" />
+
+							</h:selectOneMenu>
+
+						</div>
 						<br></br>
 						<br></br>
 						<div class="row row-space">
 							<div class="col-6">
 								<div class="input-group">
 									<h:outputLabel for="name">Other Party Name   :</h:outputLabel>
-									<p:inputText id="name" label="Other Party Name "  value="#{cliamController.claimModel.otherPartyName}" />
+									<span class="text-danger">*</span><span
+										class="text-muted small"></span>
+									<!-- <p:inputText id="name" label="Other Party Name "  value="#{cliamController.claimModel.otherPartyName}" /> -->
+									<p:inputText id="name" label="Other Party Name "
+										value="#{cliamController.claimModel.otherPartyName}"
+										required="true" requiredMessage="Name is Required!"
+										validatorMessage="Name length must be characters and numbers, length 5~50!">
+										<f:validateRegex pattern="^([a-zA-Z0-9]{4,50}+\s?)*$" />
+									</p:inputText>
+									&nbsp;
+									<h:message for="name" style="color: red;"></h:message>
+									<br></br>
 								</div>
 							</div>
 							<div class="col-6">
 								<div class="input-group">
 									<h:outputLabel for="ph"> Other Party  Phno   :</h:outputLabel>
-									<p:inputText id="ph"    label="Other Party  Phno " value="#{cliamController.claimModel.otherPartyPhone}"
-										/>
+									<span class="text-danger">*</span><span
+										class="text-muted small"></span>
+
+									<p:inputText id="ph" label="Other Party  Ph no. "
+										value="#{cliamController.claimModel.otherPartyPhone}"
+										data-validation="required" required="true"
+										requiredMessage="Phone number is Required!"
+										placeholder="+959760398678"
+										validatorMessage="Phone number must start with +959 followed by 9 digit">
+										<f:validateRegex
+											pattern="^\+?(\+[0-9]{3})\)?[-. ]?([0-9]{4})[-. ]?([0-9]{5})$" />
+									</p:inputText>
+									&nbsp;
+									<h:message for="ph" style="color: red;"></h:message>
+									<br></br>
 								</div>
 							</div>
 						</div>
 
-<!-- 						<div class="row row-space"> -->
-<!-- 							<div class="col-6"> -->
-<!-- 								<div class="input-group"> -->
-<!-- 								<input type="hidden" name="ProposalId" value=""  /> -->
-
-<!-- 									<h:outputLabel for="sumInsurance">Sum Insurance  :</h:outputLabel> -->
-<!-- 									<p:inputText id="sumInsurance"  label="Sum Insurance " -->
-<!-- 										 /> -->
-<!-- 								</div> -->
-<!-- 							</div> -->
-<!-- 							<div class="col-6"> -->
-<!-- 								<div class="input-group"> -->
-<!-- 									<h:outputLabel for="coverage">CoverageType  :</h:outputLabel> -->
-<!-- 									<p:inputText id="coverage"  readonly="true"  label="Premium" -->
-<!-- 										/> -->
-<!-- 								</div> -->
-<!-- 							</div> -->
-<!-- 						</div> -->
-                          
-                          
 						<div class="row row-space">
 							<div class="col-6">
 								<div class="input-group">
 									<h:outputLabel for="lossOfDate">Loss Of Date   :</h:outputLabel>
 									<p:calendar id="lossOfDate" style="width:100%;"
 										value="#{cliamController.claimModel.claimLossOfDate}"
-										data-validation="required" requiredMessage="Date is Required!" maxdate="today"
-										validatorMessage="Invalid Date" required="true" />
-										<script>
-												today = Date();
-												</script>  	
+										data-validation="required" requiredMessage="Date is Required!"
+										maxdate="today" validatorMessage="Invalid Date"
+										required="true" />
+									<script>
+										today = Date();
+									</script>
 								</div>
 							</div>
 							<div class="col-6">
 								<div class="input-group">
 									<h:outputLabel for="accidentLocation">Accident Location   :</h:outputLabel>
-									<p:inputText id="accidentLocation"
-										value="#{cliamController.claimModel.claimAccidentLocation}"
-										label="Accident Location"  required="true"
-										requiredMessage="Accident Location is Required!" />
+									<span class="text-danger">*</span><span
+										class="text-muted small"></span>
+
+
+									<p:inputText id="accidentLocation" label="Accident Location "
+										value="#{proposalController.proposal.pholderAddress}"
+										required="true"
+										requiredMessage="Accident Location is Required!"
+										validatorMessage="Accident Location must be characters and numbers(- . , _ ()), length 2~10000!">
+										<f:validateRegex
+											pattern="^([a-zA-Z()0-9\-\.\_\,\/]{2,1000}+\s?)*$" />
+									</p:inputText>
+									&nbsp;
+									<h:message for="name" style="color: red;"></h:message>
+									<br></br>
 								</div>
 							</div>
 						</div>
 
 						<div class="row row-space">
-							<h:outputLabel for="accidentDetails" style="margin-left: 15px;">Accident Details  :</h:outputLabel>	
 							<div class="col-12">
 								<div class="input-group">
-									<p:inputTextarea id="accidentDetails" style="width:100%;"
+									<h:outputLabel for="accidentDetails">Accident Details  :</h:outputLabel>
+									<span class="text-danger">*</span><span
+										class="text-muted small"></span>
+									<p:inputTextarea style="width:100%;" id="accidentDetails"
+										label="Accident Details"
 										value="#{cliamController.claimModel.claimAccidentDetail}"
-										label="Accident Detail"  required="true"
-										requiredMessage="Accident Detail is Required!" />
+										required="true"
+										requiredMessage="Accident Details is Required!"
+										validatorMessage="Accident Details must be characters and numbers(- . , _ ()), length 2~10000!">
+										<f:validateRegex
+											pattern="^([a-zA-Z()0-9\-\.\_\,\/]{2,1000}+\s?)*$" />
+									</p:inputTextarea>
+									&nbsp;
+									<h:message for="accidentDetails" style="color: red;"></h:message>
 								</div>
 							</div>
 						</div>
 
 
 						<div class="p-t-15">
-							<p:commandButton value="Claim" 
-								action="#{cliamController.save()}"  update="@form" onclick="if (!(confirm('Are you sure to Claim?'))) return false" />
+							<p:commandButton value="Claim" action="#{cliamController.save()}"
+								update="@form"
+								onclick="if (!(confirm('Are you sure to Claim?'))) return false" />
 							&nbsp;
-							<p:commandButton value="Cancel" 
-								action="#{cliamController.clear()}" />
+							<p:commandButton value="Cancel"
+								action="#{cliamController.clear()}" ajax="false"  update="@form" />
 						</div>
 					</h:form>
 				</div>

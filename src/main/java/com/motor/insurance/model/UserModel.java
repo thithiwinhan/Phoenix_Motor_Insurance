@@ -34,13 +34,14 @@ public class UserModel {
 	public void setUserConfirmPassword(String userConfirmPassword) {
 		this.userConfirmPassword = userConfirmPassword;
 	}
-
 	public int getUserId() {
 		return UserId;
 	}
 	public void setUserId(int userId) {
 		UserId = userId;
 	}
+
+	
 
 	
 

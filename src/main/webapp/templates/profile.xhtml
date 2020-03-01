@@ -76,12 +76,7 @@ integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfs
              	 <li><h:commandLink action="#{proposalController.getProposalListForm()}">Proposal Status Checking</h:commandLink></li>
             </ul>
           </li>
-           <li class="drop-down"><h:commandLink >Claim</h:commandLink>
-            <ul>
-            	<li><h:commandLink action="#{cliamController.getClaimForm()}">Online Claim Form</h:commandLink></li>
-             	<li><h:commandLink action="#{cliamController.getClaimStatusCheckingForm()}">Claim Status Checking</h:commandLink></li>
-            </ul>
-          </li>
+           
            <li class="drop-down"><h:commandLink >Payment</h:commandLink>
             <ul>
             	<li><h:commandLink action="#{paymentController. getPaymentForm()}">Online Payment Form</h:commandLink></li>
@@ -93,16 +88,20 @@ integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfs
             	<li><h:commandLink action="#{policyController.getPolicyListForm()}">Policy List</h:commandLink></li>
             </ul>
           </li>
+          <li class="drop-down"><h:commandLink >Claim</h:commandLink>
+            <ul>
+            	<li><h:commandLink action="#{cliamController.getClaimForm()}">Online Claim Form</h:commandLink></li>
+             	<li><h:commandLink action="#{cliamController.getClaimStatusCheckingForm()}">Claim Status Checking</h:commandLink></li>
+            </ul>
+          </li>
               <li><h:commandLink action="#{userController.getProfile()}" >Profile</h:commandLink></li>
           	 <li class="get-started"><h:commandLink action="#{userController.logout()}" onclick="if (!(confirm('Are you sure you want to logout your account?'))) return false">Logout</h:commandLink></li>
         </ul>
       </div><!-- .nav-menu -->
-     
-
+        </h:form>
       
 	</div>
   </div><!-- End Header -->
-  </h:form>
    <div class="container">
     <div class="row">
       <div class="offset-lg-4 col-lg-4 col-sm-6 col-12 main-section text-center" style="margin-top:110px;">
@@ -116,20 +115,20 @@ integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfs
                   <h5>#{user}</h5>
                   <p><i class="fa fa-map-marker" aria-hidden="true"></i> New Jersey, USA.</p>
                   <hr></hr>
-                 
+                 <h:inputHidden value="#{userController.userModel.userId}"></h:inputHidden>
           <p:messages id="msgs" severity="warn" />
           <div class="gi" style="text-align: left;">
-            <!-- <div class="form-group">
+            <div class="form-group">
               <p:outputLabel for="name" value="Name" />  
 			 <p:inputText id="name" class="form-control" required="true" value="#{userController.userModel.userName}" validatorMessage ="Name must be characters only and no spaces." > 
 			 	<f:validateRegex pattern="^[a-zA-Z_]+( [a-zA-Z_]+)*$" />  
 			  </p:inputText>
 			  <h:message for="name" style="color: red;" ></h:message> 
-            </div> -->
+            </div>
             
             <div class="form-group">
             <p:outputLabel for="email" value="Email" />  
-              <p:inputText id="email" class="form-control"  required="true" value="#{email}"  validatorMessage ="InvaildEmail must be characters only and no spaces."  > 
+              <p:inputText id="email" class="form-control"  required="true" value="#{userController.userModel.userEmail}"  validatorMessage ="InvaildEmail must be characters only and no spaces."  > 
 			 	<f:validateRegex pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" />  
 			  </p:inputText>
 		    <h:message for="email" style="color: red;" ></h:message> 
@@ -145,8 +144,7 @@ integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfs
              -->
             <div class="form-group">
               <p:outputLabel for="password" value="Password" />  
-			 <p:password id="password" class="form-control" required="true" match=" " value="#{password}"  validatorMessage ="Password must have minimum eight characters, at least and no spaces." > 
-<!-- 			 	<f:validateRegex pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$" />   -->
+			 <p:password id="password" class="form-control" required="true" match=" " value="#{userController.userModel.userPassword}"  validatorMessage ="Password must have minimum eight characters, at least and no spaces." > 
 			  </p:password>
 		    <h:message for="password" style="color: red;" ></h:message> 
             </div>
@@ -155,7 +153,6 @@ integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfs
               <div class="form-group">
              	<p:outputLabel for="comfirmedPassword" value="Comfirmed Password" />  
 			 <p:password id="comfirmedPassword" class="form-control" required="true" match=" " value="#{userController.userModel.userConfirmPassword}"   validatorMessage ="Password must have minimum eight characters, at least and no spaces." > 
-<!-- 			 	<f:validateRegex pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$" />   -->
 			  </p:password>
 			<h:message for="comfirmedPassword" style="color: red;" ></h:message> 
             </div>
@@ -169,7 +166,7 @@ integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfs
             </div> -->
             <br></br>
   			     
-		 	<p:commandButton  value="Edit"  action="profile.xhtml?faces-direct=true" />&nbsp;
+		 	<p:commandButton  value="Edit"   action="#{userController.userProfileUpdate()}" update="@form"/>&nbsp;
 			<p:commandButton  value="Cancel" />
             
             </div>

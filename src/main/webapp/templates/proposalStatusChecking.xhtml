@@ -115,12 +115,7 @@ th {
              	 <li><h:commandLink action="#{proposalController.getProposalListForm()}">Proposal Status Checking</h:commandLink></li>
             </ul>
           </li>
-           <li class="drop-down"><h:commandLink >Claim</h:commandLink>
-            <ul>
-            	<li><h:commandLink action="#{cliamController.getClaimForm()}">Online Claim Form</h:commandLink></li>
-             	<li><h:commandLink action="#{cliamController.getClaimStatusCheckingForm()}">Claim Status Checking</h:commandLink></li>
-            </ul>
-          </li>
+          
            <li class="drop-down"><h:commandLink >Payment</h:commandLink>
             <ul>
             	<li><h:commandLink action="#{paymentController. getPaymentForm()}">Online Payment Form</h:commandLink></li>
@@ -130,6 +125,12 @@ th {
           <li class="drop-down"><h:commandLink >Policy</h:commandLink>
             <ul>
             	<li><h:commandLink action="#{policyController.getPolicyListForm()}">Policy List</h:commandLink></li>
+            </ul>
+          </li>
+           <li class="drop-down"><h:commandLink >Claim</h:commandLink>
+            <ul>
+            	<li><h:commandLink action="#{cliamController.getClaimForm()}">Online Claim Form</h:commandLink></li>
+             	<li><h:commandLink action="#{cliamController.getClaimStatusCheckingForm()}">Claim Status Checking</h:commandLink></li>
             </ul>
           </li>
               <li><h:commandLink action="#{userController.getProfile()}" >Profile</h:commandLink></li>
@@ -195,11 +196,13 @@ th {
 				</p:column>
 				
 				<p:column  headerText="Options" style="width:70px;">
-					<p:commandButton id="btn" icon="pi pi-pencil"  disabled="#{plist.status != 'pending'}" action="#{proposalController.edit(plist)}" style="width:30px;background-color:#00a651;" update="@form" process="@this" >
-				        <p:confirm header="Confirmation" message="Are you sure?" icon="pi pi-exclamation-triangle" /></p:commandButton>
+					<p:commandButton id="btn" icon="pi pi-pencil"  disabled="#{plist.status != 'pending'}" action="#{proposalController.edit(plist)}" style="width:30px;background-color:#00a651;" update="@form" process="@this"
+					onclick="if (!(confirm('Are you sure to Edit?'))) return false" />
+<!-- 				        <p:confirm header="Confirmation" message="Are you sure?" icon="pi pi-exclamation-triangle" /></p:commandButton> -->
 				
-					<p:commandButton icon="pi pi-trash"  disabled="#{plist.status != 'pending'}"  action="#{proposalController.proposalDelete(plist)}"  style="width:30px;background-color:#ec1e1e;" update="@form" process="@this">		
-							        <p:confirm header="Confirmation" message="Are you sure?" icon="pi pi-exclamation-triangle" /></p:commandButton>
+					<p:commandButton icon="pi pi-trash"  disabled="#{plist.status != 'pending'}"  action="#{proposalController.proposalDelete(plist)}"  style="width:30px;background-color:#ec1e1e;" update="@form" process="@this"
+					onclick="if (!(confirm('Are you sure to Delete?'))) return false"/>		
+<!-- 							        <p:confirm header="Confirmation" message="Are you sure?" icon="pi pi-exclamation-triangle" /></p:commandButton> -->
 			
      
 				</p:column>
@@ -209,7 +212,7 @@ th {
 			</h:form>
 
 
-			<h:form>
+			<!-- <h:form>
 				<p:growl id="message" showDetail="true" />
 
 				<p:confirmDialog global="true" showEffect="fade" hideEffect="fade"
@@ -219,7 +222,7 @@ th {
 					<p:commandButton value="No" type="button"
 						styleClass="ui-confirmdialog-no" icon="pi pi-times" />
 				</p:confirmDialog>
-			</h:form>
+			</h:form> -->
 		</div>
 	</div>
 	

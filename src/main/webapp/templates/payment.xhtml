@@ -63,6 +63,17 @@ body {
 .credit-card-box .panel-heading img {
 	min-width: 180px;
 }
+.navbar-brand {
+    font-weight: 750;
+    font-size: 20px;
+    font-family: "Poppins", Arial, sans-serif;
+    line-height: 1;
+    text-transform: uppercase;
+    color:#fff;
+    padding-left: 1px;
+        padding-top: 2px;
+	}
+	
 </style>
 
 </h:head>
@@ -87,12 +98,7 @@ body {
              	 <li><h:commandLink action="#{proposalController.getProposalListForm()}">Proposal Status Checking</h:commandLink></li>
             </ul>
           </li>
-           <li class="drop-down"><h:commandLink >Claim</h:commandLink>
-            <ul>
-            	<li><h:commandLink action="#{cliamController.getClaimForm()}">Online Claim Form</h:commandLink></li>
-             	<li><h:commandLink action="#{cliamController.getClaimStatusCheckingForm()}">Claim Status Checking</h:commandLink></li>
-            </ul>
-          </li>
+         
            <li class="drop-down"><h:commandLink >Payment</h:commandLink>
             <ul>
             	<li><h:commandLink action="#{paymentController. getPaymentForm()}">Online Payment Form</h:commandLink></li>
@@ -102,6 +108,12 @@ body {
           <li class="drop-down"><h:commandLink >Policy</h:commandLink>
             <ul>
             	<li><h:commandLink action="#{policyController.getPolicyListForm()}">Policy List</h:commandLink></li>
+            </ul>
+          </li>
+            <li class="drop-down"><h:commandLink >Claim</h:commandLink>
+            <ul>
+            	<li><h:commandLink action="#{cliamController.getClaimForm()}">Online Claim Form</h:commandLink></li>
+             	<li><h:commandLink action="#{cliamController.getClaimStatusCheckingForm()}">Claim Status Checking</h:commandLink></li>
             </ul>
           </li>
               <li><h:commandLink action="#{userController.getProfile()}" >Profile</h:commandLink></li>
@@ -118,8 +130,7 @@ body {
 	<div class="container">
 		<h:form id="form">
 		
-			<p:growl id="growl" showDetail="true" showSummary="true"
-				sticky="true" />
+		  <p:messages id="msgs" severity="info" />  
 			<div class="row">
 				<div class="col-xs-4"></div>
 				<div class="col-xs-12 col-md-4">
@@ -191,11 +202,10 @@ body {
 
 							<div class="row">
 								<div class="col-xs-12">
-									
 									<div class="form-group">
 										<h:outputLabel for="amount">AMOUNT</h:outputLabel>
 										<p:inputText
-											value="#{paymentController.paymentList.get(0).amount}"
+											value="#{paymentController.amount}"
 											class="form-control" readonly="true" id="in" />
 
 									</div>
@@ -220,21 +230,14 @@ body {
 							</div>
 							<br></br>
 
-
-
-
-
-
-
-
 							<div class="row">
 								<div class="col-xs-12">
 									<div class="form-group">
 										<p:commandButton
-											class="subscribe btn btn-info btn-lg btn-block"
-											icon="pi pi-fresh" type="button"
-											style="height: 42px; font-size: 15px;" id="total"
-											value="Total=  #{paymentController.paymentList.get(0).amount}">
+											class="subscribe  btn-lg btn-block"
+											icon="pi pi-fresh" type="button" 
+											style="height: 42px; font-size: 15px; background-color:#17A2B8;" id="total"
+											value="Total=  #{paymentController.amount}">
 											<span class="amount"></span>
 										</p:commandButton>
 									</div>
@@ -244,9 +247,7 @@ body {
 							<div class="row">
 								<div class="col-xs-12">
 									<div class="form-group">
-										<!-- 									<h:commandButton class="subscribe btn btn-primary btn-lg btn-block"  update="@form" value="Pay>>" action="#{paymentController.save()}" -->
-										<!-- 										type="button" style="height: 42px; font-size: 15px;"> -->
-										<!-- 										 </h:commandButton> -->
+										
 										<p:commandButton value="Pay"
 											class="subscribe btn btn-primary btn-lg btn-block"
 											action="#{paymentController.save()}"
