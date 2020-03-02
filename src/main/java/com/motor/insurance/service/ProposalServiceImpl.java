@@ -269,9 +269,10 @@ public class ProposalServiceImpl implements ProposalService {
 				benificial.setPhno(proposal.getbPhone());
 				benificial.setAddress(proposal.getbAddress());
 				benificial.setProposal(p);
-		        benificialList.add(benificial);
-		        updateProposal.setBenificials(benificialList);
-		        benificailDao.save(benificial)	;	
+				benificialList.add(benificial);
+			    updateProposal.setBenificials(benificialList);
+		        benificailDao.save(benificial)	;
+		       
 				System.out.println("-------------Driver-----------");
 
 		       // System.out.println("-------------Driver-----------"+updateProposal.getDrivers().get(0).getId()+"db>>>>>>>>>.ui"+proposal.getdID());
@@ -284,10 +285,11 @@ public class ProposalServiceImpl implements ProposalService {
 		        driver.setPhno(proposal.getdPhno());
 		        driver.setLiceneExpiredDate(proposal.getdLiceneExpiredDate());
 		        driver.setProposal(p);
-		        driverDao.save(driver);
 		        driverList.add(driver);
 		        updateProposal.setDrivers(driverList);
 
+		        driverDao.save(driver);
+		       
 		        
 		         
 			
@@ -307,16 +309,18 @@ public class ProposalServiceImpl implements ProposalService {
 	public boolean findStatusbyProposalId(int propodalID) {
 		CriteriaBuilder cb=entityManager.getCriteriaBuilder();
 		CriteriaQuery<Proposal> cq=cb.createQuery(Proposal.class);
-		System.out.println("---------payment Repo-------------"+propodalID);
+		System.out.println("---------proposal status Repo-------------"+propodalID);
 		Root<Proposal> proposal=cq.from(Proposal.class);
 		
 		
 			Predicate p=cb.equal(proposal.get("proposalId"), propodalID);
 			//Predicate p2=cb.nequal(proposal.get("status"), "pending");
 			Predicate p2=cb.notEqual(proposal.get("status"), "pending");
-			Predicate p3=cb.equal(proposal.get("active"), 1);
+			Predicate p3=cb.notEqual(proposal.get("status"), "reject");
+			
+			Predicate p4=cb.equal(proposal.get("active"), 1);
  
-			cq.where(cb.and(p,p2,p3)).distinct(true);
+			cq.where(cb.and(p,p2,p3,p4)).distinct(true);
 		
 			TypedQuery<Proposal> typedQuery =entityManager.createQuery(cq);
 			List<Proposal> resultList = typedQuery.getResultList();

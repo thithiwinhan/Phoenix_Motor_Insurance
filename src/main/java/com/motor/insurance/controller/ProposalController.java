@@ -220,17 +220,10 @@ public class ProposalController {
 	// After *update* button ;when they finished changes in ui ,update data
 	public void updateProposal() {
 
-		System.out.println("-------update------" + proposal.getpID());
-		/*
-		 * List<Vehicle> flag =
-		 * vehicleService.serachVehicleByChassicNoAndRegNum(proposal); if
-		 * (!flag.isEmpty()||flag.size()>=0) { FacesContext context =
-		 * FacesContext.getCurrentInstance();
-		 * 
-		 * context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
-		 * "Sorry" + "Your Car is already insurance", "")); } else {
-		 */
+		System.out.println("-------update------======================" + proposal.getpID());
+		System.out.println("-------premium------======================" + premium);
 			proposal.setPremium(premium);
+
 			proposalService.updateProduct(proposal);
 			proposal = new ProposalModel();// to clear form data
 			FacesContext.getCurrentInstance().addMessage(null,
