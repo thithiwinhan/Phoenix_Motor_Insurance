@@ -46,9 +46,10 @@ public class PaymentController {
 
 	@Autowired
 	ProposalListingService listingService;
+	
 	@Autowired
-	ProposalController p;
-
+	ProposalController proposalController;
+	
 	HashMap<Integer, Integer> proposalIdList = new HashMap<Integer, Integer>(); // for show proposal list in combobox
 	
 	Double amount ;
@@ -137,35 +138,14 @@ public class PaymentController {
 	
 
 	public String  getPaymentForm() {
-		 p.proposalList();//add for get proposal id list
-    	System.out.println("*******getPaymentForm()********");
+		//add for get proposal id list
+         proposalController.proposalList();
 		 paymentList();
 		 return "payment.xhtml?faces-redirect=true";
 		
 	}
 	
 	
-	/*
-	 * public void search() {
-	 * System.out.println("====Proposal Search Controller======" +
-	 * paymentModel.getProposal().getProposalId()); paymentList = new
-	 * ArrayList<PaymentModel>(); if (paymentModel.getProposal().getProposalId() !=
-	 * 0) { paymentList = paymentListingService
-	 * .findPaymentAmountByProposalId(paymentModel.getProposal().getProposalId());
-	 * //paymentList=proposalService.findProposalById(paymentModel.getProposal().
-	 * getProposalId()) try { if (!paymentList.isEmpty()) {
-	 * amount=paymentList.get(0).getProposal().getPremium(); } else {
-	 * System.out.println("empty payment list"); } } catch
-	 * (IndexOutOfBoundsException e) {
-	 * System.out.println("cannot find!.index out od bound!!!!!");
-	 * e.printStackTrace(); } }
-	 * 
-	 * }
-	 * 
-	 * 
-	 */
-	
-
 	public void search() {
 		System.out.println("**********serach arrive in payment Controller**********");
 		
@@ -185,7 +165,8 @@ public class PaymentController {
 			}
 		}
 		else {
-			this.amount=new Double(0.0);
+			this.amount=0.0;
+
 		}
 				
 	}

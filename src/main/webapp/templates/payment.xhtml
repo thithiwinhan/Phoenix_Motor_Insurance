@@ -173,7 +173,7 @@ body {
 											<f:selectItem itemLabel="Select Proposal ID" itemValue=""
 												noSelectionOption="true" />
 											<f:selectItems value="#{proposalController.proposalIdList}" />
-											<p:ajax event="click" update="in total"
+											<p:ajax event="click" update="in total" resetValues="true"
 												listener="#{paymentController.search()}" />
 										</h:selectOneMenu>
 									</div>
@@ -184,8 +184,11 @@ body {
 								<div class="col-xs-12">
 									<div class="form-group">
 										<h:outputLabel for="amount">AMOUNT</h:outputLabel>
-										<p:inputText value="#{paymentController.amount}"
-											class="form-control" readonly="true" id="in" />
+										<p:inputText value="#{paymentController.amount}" 
+											class="form-control" readonly="true" id="in" >
+											<f:convertNumber pattern="###,###.00" /></p:inputText>
+											
+											
 									</div>
 								</div>
 							</div>
@@ -207,15 +210,14 @@ body {
 									</div>
 								</div>
 							</div>
-							<br></br>
-
+							
 							<div class="row">
 								<div class="col-xs-12">
 									<div class="form-group">
 										<p:commandButton class="subscribe  btn-lg btn-block"
 											icon="pi pi-fresh" type="button"
 											style="height: 42px; font-size: 15px; background-color:#17A2B8;"
-											id="total" value="Total=  #{paymentController.amount}">
+											id="total" value="Total=  #{paymentController.amount}" >
 											<span class="amount"></span>
 										</p:commandButton>
 									</div>

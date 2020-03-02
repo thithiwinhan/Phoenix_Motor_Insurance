@@ -39,7 +39,7 @@ public class Driver {
 	
 	
 
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
 	@JoinColumn(name="proposal_id")
 	private Proposal proposal;
 	

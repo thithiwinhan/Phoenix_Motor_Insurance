@@ -198,8 +198,8 @@
 											</div>
 											<p:inputText id="sumInsurance" label="Sum Insurance" class="form-control" value="#{proposalController.proposal.sumInsure}"  requiredMessage="Sum Inssure is Required"
 												validatorMessage="Sum Insured must be between 10,000,000 kyats and 100,000,000 kyats." required="true" >
-												<f:convertNumber pattern="#0.00" />
-												<p:ajax event="keyup" update="premium" listener="#{proposalController.ajaxEvent()}" />  
+												<f:convertNumber pattern="###,###.00" />
+												<p:ajax event="keyup"  execute="premium" update="premium" listener="#{proposalController.ajaxEvent()}" />  
                                                <f:validateDoubleRange minimum="10000000.00" maximum="100000000.00" /></p:inputText>
 											&nbsp;
 											<h:message for="sumInsurance" style="color: red;"></h:message>
@@ -211,7 +211,7 @@
 											</div>
 											<p:inputText id="premium" label="Premium" class="form-control"  readonly="true"    data-validation="required" requiredMessage="Premium is Required"
 												validatorMessage="Premium must only numbers and no space." required="true" value="#{proposalController.premium}" >
-											  <f:convertNumber pattern="#0.00" />
+											  <f:convertNumber pattern="###,###.00" />
 												<f:validateLength minimum="3" maximum="20" />
 											</p:inputText>
 											&nbsp;

@@ -36,9 +36,8 @@ import com.motor.insurance.entity.User;
 import com.motor.insurance.entity.Vehicle;
 import com.motor.insurance.exception.ResourceNotFoundException;
 import com.motor.insurance.model.ProposalModel;
-
-@Service
 @Transactional
+@Service
 public class ProposalServiceImpl implements ProposalService {
 
 	@Autowired
@@ -253,6 +252,7 @@ public class ProposalServiceImpl implements ProposalService {
 				p.setStatus("pending");
 				p.setPremium(proposal.getPremium());
 				p.setSumInsure(proposal.getSumInsure());
+				p.setActive(1);
 				p.setVehicle(vehicle);
 				p.setPolicyHolder(policyHolder);
 				p.setUser(user);

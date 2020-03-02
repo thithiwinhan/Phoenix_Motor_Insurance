@@ -53,31 +53,17 @@ public class ProposalController {
 	public void ajaxEvent() {
 		double sI = proposal.getSumInsure();
 		premium = (sI / 100) * 1;
+		
 
 	}
 	 
-	
-	
-	/*
-	 * public void ajaxEvent() { List<Vehicle> flag =
-	 * vehicleService.serachVehicleByChassicNoAndRegNum(proposal); if
-	 * (!flag.isEmpty()) { int count =
-	 * claimService.countClaimNumber(flag.get(0).getId()); if(count>=2) { double sI
-	 * = proposal.getSumInsure(); premium = (sI / 100) * 1; }
-	 * 
-	 * else if (count==0){ double sI = proposal.getSumInsure(); premium = (sI / 100)
-	 * * 1; } }
-	
 
-	} */
 
-	// save propsal form according to user id,current set fixed user id 1
 	public void proposalSave() {
 		/*
 		 * to check same car is not to allow insurance >>>unique key of car is chassic
 		 * no and reg number
 		 */
-		System.out.println("p9999999999999999999999999999roposal Save *************************************8888");
 		List<Vehicle> flag = vehicleService.serachVehicleByChassicNoAndRegNum(proposal);
 		if (!flag.isEmpty()||flag.size()>=1) {
 			System.out.println("stage 1=======================");
@@ -85,7 +71,6 @@ public class ProposalController {
 			context.addMessage(null,
 					new FacesMessage(FacesMessage.SEVERITY_INFO, "Sorry" + "Your Car is already insurance", ""));
 		} else {
-			System.out.println("stage 1=======================");
 			System.out.println("premium" + premium);
 			System.out.println("pid" + proposal.getpID());
 			System.out.println("arrive");
@@ -108,7 +93,6 @@ public class ProposalController {
 			int id = (int) session.getAttribute("id");
 			user.setId(id);
 			try {
-				System.out.println("9999999999999999999999999 ID"+user.getId());
 				proposalList = listingService.proposalListing(user);
 				   if (!proposalList.isEmpty()||proposalIdList.size()==0) {
 					    proposalIdList = new HashMap<Integer, Integer>();
@@ -157,7 +141,7 @@ public class ProposalController {
 
 		// before allow user to edit proposal , check status is pending
 		boolean status = proposalService.findStatusbyProposalId(model.getpID());
-		System.out.println("-----------edit Proposal ------------");
+		System.out.println("-----------edit Proposal ------------"+model.getpID()+model.getPremium());
 		System.out.println("-----------status Proposal is accept ?------------" + status);
 
 		if (status == false) {
@@ -175,7 +159,7 @@ public class ProposalController {
 			System.out.println("---- for ownerID check-----" + proposal.getpHolderID());
 
 			System.out.println("---- for proposal main info reloading-----");
-			proposal.setPremium(premium);
+			premium=model.getPremium();
 			proposal.setCoverageType(model.getCoverageType());
 			proposal.setSumInsure(model.getSumInsure());
 			proposal.setStartDate(model.getStartDate());
@@ -223,7 +207,6 @@ public class ProposalController {
 		System.out.println("-------update------======================" + proposal.getpID());
 		System.out.println("-------premium------======================" + premium);
 			proposal.setPremium(premium);
-
 			proposalService.updateProduct(proposal);
 			proposal = new ProposalModel();// to clear form data
 			FacesContext.getCurrentInstance().addMessage(null,
