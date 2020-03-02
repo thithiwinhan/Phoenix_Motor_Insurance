@@ -30,6 +30,8 @@ public interface ProposalService {
 
 	List<PolicyHolder> findAllProposaLOwnerActive();
 
+	String findId();
+
 	
 
 

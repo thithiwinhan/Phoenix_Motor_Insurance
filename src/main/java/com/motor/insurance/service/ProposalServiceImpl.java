@@ -8,6 +8,7 @@ import java.util.Optional;
 
 import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -405,25 +406,36 @@ public class ProposalServiceImpl implements ProposalService {
 
 
 
+	@Override
+	public String findId() {
+		
+			StringBuilder sb = new StringBuilder();
+			System.out.println("1");
+			
+			System.out.println("2");
+			// TypedQuery<String> qe=em.createNamedQuery(sb);
+			
+			System.out.println("3");
+			String id = null;
+			try {
+				sb.append("SELECT MAX(p.id) FROM proposal p ");
+				TypedQuery<String> q = entityManager.createQuery(sb.toString(), String.class);
+				id = q.getSingleResult();
+				
+			} catch (NoResultException nre) {
+				id="p";
+				System.out.println("---ERROR1----");
+				
+			} catch(Exception e) {
+				id="p";
+				System.out.println("----ERROR1----");
+			}
+			
+			return id;
 
-
-
-
-
-
-	
-
-
-
-
-
-
-
-
-
-
-
+		}
 	}
+
 
 
 

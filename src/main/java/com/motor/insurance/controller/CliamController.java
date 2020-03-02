@@ -55,7 +55,6 @@ public class CliamController {
 				FacesContext context = FacesContext.getCurrentInstance();
 				context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
 				"Claim  is failed! " + "Your policy is expired ", ""));
-
 			} else {
 				claimModel.setProposal(proposal);
 				claimService.save(claimModel);

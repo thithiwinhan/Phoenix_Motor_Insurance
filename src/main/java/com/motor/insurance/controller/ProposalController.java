@@ -50,15 +50,6 @@ public class ProposalController {
 
 	double premium;
 
-	public double getPremium() {
-		return premium;
-	}
-
-	public void setPremium(double premium) {
-		this.premium = premium;
-	}
-
-	
 	public void ajaxEvent() {
 		double sI = proposal.getSumInsure();
 		premium = (sI / 100) * 1;
@@ -334,8 +325,18 @@ public class ProposalController {
 
 	
 	
+
 	
 	
+
+	public double getPremium() {
+		return premium;
+	}
+
+	public void setPremium(double premium) {
+		this.premium = premium;
+	}
+
 	public ProposalModel getProposal() {
 		return proposal;
 	}
@@ -359,4 +360,87 @@ public class ProposalController {
 	public void setProposalIdList(HashMap<Integer, Integer> proposalIdList) {
 		this.proposalIdList = proposalIdList;
 	}
+	
+	
+	
+	
+	
+	
+
+	String proposalId;
+
+	
+	@PostConstruct
+	public void init() {
+		System.out.println("Init..................................................................");
+		proposalId = proposalService.findId();
+		System.out.println("id= " + proposalId);
+
+		try {
+			if (!proposalId.isEmpty()) {
+
+				
+				proposalId = idGenerate();
+				testModel = new TestModel();
+
+			}
+
+		} catch (NullPointerException e) {
+
+			proposalId = "P000" + 1;
+			System.out.println("Empty Id");
+
+		} catch (IndexOutOfBoundsException e) {
+
+			proposalId = "P000" + 1;
+			System.out.println("Empty Id" + proposalId);
+
+		}
+	}
+
+	
+	 public void save() {
+		 testModel.setTestId(testid);
+		 testService.save(testModel);
+		   testid =testService.findId();
+		   testid=idGenerate();
+	}
+		
+	
+	public String idGenerate() {
+
+		String st_id = proposalId.substring(3, 7);
+		System.out.println("splitID= " + st_id);
+
+		int id = Integer.parseInt(st_id);
+		id++;
+		System.out.println("count= " + id);
+		if (id < 10) {
+
+			st_id = "STU000" + id;
+		} else if (id < 100) {
+
+			st_id = "STU00" + id;
+		} else if (id < 1000) {
+
+			st_id = "STU0" + id;
+		} else if (id < 10000) {
+
+			st_id = "STU" + id;
+		}
+
+		return st_id;
+	}
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
