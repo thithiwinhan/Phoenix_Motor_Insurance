@@ -238,7 +238,7 @@
 												<span class="text-danger">*</span><span class="text-muted small"></span>
 											</div>
 											<p:calendar id="startDate" label="Start Date"   mindate="today"   value="#{proposalController.proposal.startDate}"  requiredMessage="Date is Required!"
-												validatorMessage="Invalid Date"  navigator="true" pattern="dd-MMM-yyyy"  required="true" />
+												validatorMessage="Invalid Date"  navigator="true" pattern="dd-MMM-yyyy" required="true" placeholder="DD-MM-YYY" />
 												<script>
 												today = Date();
 												</script>  											 
@@ -266,7 +266,7 @@
 											</div>
 											<p:calendar id="dob" value="#{proposalController.proposal.pHolderDob}" label="Date Of Birth"  data-validation="required" requiredMessage="Date is Required!"
 											yearRange="1955:2002" navigator="true" pattern="dd-MMM-yyyy"
-												validatorMessage="Invalid Date" required="true" />
+												validatorMessage="Invalid Date" required="true" placeholder="DD-MM-YYY" />
 												&nbsp;
 											<h:message for="dob" style="color: red;"></h:message>
 											<br></br>	
@@ -348,7 +348,7 @@
 												<span class="text-danger">*</span><span class="text-muted small"></span>
 											</div>
 											<p:inputText id="chassisNo" label="Chassis Number" class="form-control" data-validation="required"  required="true" value="#{proposalController.proposal.chassisNo}" 
-												requiredMessage="color is Required!"
+												requiredMessage="Chassis Number is Required!"
 												validatorMessage="Chassis Number must be upper charator and number, length 17~20 and no space." placeholder="7SAARFCDEEDD344FD">
 												<f:validateRegex pattern="^$|^[A-Z0-9]{17,20}$"/>
 											</p:inputText>
@@ -360,19 +360,19 @@
 												<span class="text-danger">*</span><span class="text-muted small"></span>
 											</div>
 											<p:inputText id="vehicleRegistrationNumber" label="Vehicle Registration Number" class="form-control"  required="true" value="#{proposalController.proposal.vehicleRegNo}"
-												requiredMessage="vehicleRegistrationNumber is Required!" placeholder="YGN 7F-5643" 
+												requiredMessage="Vehicle Registration No is Required!" placeholder="YGN 7F-5643" 
 												validatorMessage="Vehicle Registration Number format must like'MDY 6L-9876'." >
 												<!-- <f:validateRegex pattern="^([A-Z{3}0-9{1}\-A-Z{1}\-\A-Z{4}]+\s?)*$"/> -->
 											</p:inputText>
 											&nbsp;
-											<h:message for="dname" style="color: red;"></h:message>
+											<h:message for="vehicleRegistrationNumber" style="color: red;"></h:message>
 											<br></br>
 											<div style="overflow: auto; width: 100%; margin-top: 10px;">
 												<h:outputLabel for="vehicleExpiredDate">Vehicle Expired Date</h:outputLabel>
 												<span class="text-danger">*</span><span class="text-muted small"></span>
 											</div>
 											<p:calendar id="vehicleExpiredDate" label="Vehicle Expired Date"  mindate="today" data-validation="required" required="true" value="#{proposalController.proposal.vehicleExpiredDate}"
-												requiredMessage="vehicleRegistrationNumber is Required!">
+												requiredMessage="Vehicle Registration Date is Required!" pattern="dd-MMM-yyyy" placeholder="DD-MM-YYY" >
 											</p:calendar>
 											    <script>
 												today = Date();
@@ -400,7 +400,7 @@
 												<span class="text-danger">*</span><span class="text-muted small"></span>
 											</div>
 											<p:inputText id="engineNo" label="Engine No" class="form-control" required="true"  value="#{proposalController.proposal.engineNo}" 
-												requiredMessage="engineNo is Required!" 
+												requiredMessage="Engine No is Required!" 
 												validatorMessage="Engine Number must be upper charator and number, length 10~20 and no space." placeholder="52WVC10338" >		
 												<f:validateRegex pattern="^$|^[A-Z0-9]{10,20}$"/>
 											</p:inputText>
@@ -411,7 +411,7 @@
 												<h:outputLabel for="manufactureYear">Manufacture Year</h:outputLabel>
 												<span class="text-danger">*</span><span class="text-muted small"></span>
 											</div>
-											<p:inputText id="manufactureYear" label="Manufacture Year" class="form-control" data-validation="required" 
+											<p:inputText id="manufactureYear" label="Manufacture Year" class="form-control" 
 											 required="true" value="#{proposalController.proposal.manufactureYear}"
 												requiredMessage="Manufacture Year is Required!" placeholder="2015" validatorMessage="Manufacture Year must only between 1980 and 2020" >
 												 <f:validateLongRange maximum="2020" minimum="1980" />
@@ -480,6 +480,18 @@
 											</p:inputText>
 											&nbsp;
 											<h:message for="dname" style="color: red;"></h:message>
+											<br></br>
+											<div style="overflow: auto; width: 100%; margin-top: 10px;">
+												<h:outputLabel for="lienceExpiredDate">Lience Expired Date</h:outputLabel>
+												<span class="text-danger">*</span><span class="text-muted small"></span>
+											</div>
+											<p:calendar id="lienceExpiredDate" label="Lience Expired Date"  data-validation="required" requiredMessage="Date is Required!" placeholder="DD-MM-YYY"
+												validatorMessage="Invalid Date" mindate="today"  required="true"  value="#{proposalController.proposal.dLiceneExpiredDate}" pattern="dd-MMM-yyyy" />
+												<script>
+												today = Date();
+												</script> 
+												&nbsp;
+											<h:message for="lienceExpiredDate" style="color: red;"></h:message>
 										</div>
 
 										<div class="col-sm-3">
@@ -523,18 +535,7 @@
 											&nbsp;
 											<h:message for="dphoneNo" style="color: red;"></h:message>
 										</div>
-
-										<div class="col-sm-3">
-											<div style="overflow: auto; width: 100%; margin-top: 10px;">
-												<h:outputLabel for="lienceExpiredDate">Lience Expired Date</h:outputLabel>
-												<span class="text-danger">*</span><span class="text-muted small"></span>
-											</div>
-											<p:calendar id="lienceExpiredDate" label="Lience Expired Date"  data-validation="required" requiredMessage="Date is Required!"
-												validatorMessage="Invalid Date" mindate="today"  required="true"  value="#{proposalController.proposal.dLiceneExpiredDate}"  />
-												<script>
-												today = Date();
-												</script> 
-										</div>			
+		
 							<!--  		End of Driver Detail -->	 
 					
 					
@@ -621,8 +622,9 @@
 											<h:message for="baddress" style="color: red;"></h:message>
 										</div>
 						<!--  		End of Beneficial Detail -->	
-										<br />
-										<br />
+										
+										<br></br>
+										<br></br>
 
 										<div class="col-sm-12">
 											<div class="form-group">
