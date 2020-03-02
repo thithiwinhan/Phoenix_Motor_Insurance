@@ -127,7 +127,7 @@
 												<span class="text-danger">*</span><span
 													class="text-muted small"></span>
 											</div>
-											<p:inputText id="name" label="Name" class="form-control" value="#{proposalController.proposal.pHolderName}" required="true" requiredMessage="Name is Required!" 
+											<p:inputText id="name" label="Name" class="form-control"   value="#{proposalController.proposal.pHolderName}" required="true" requiredMessage="Name is Required!" 
 											validatorMessage="Name length must be characters and numbers, length 2~50!">
 												<f:validateRegex pattern="^([a-zA-Z0-9]{2,50}+\s?)*$" />
 											</p:inputText>
@@ -165,7 +165,7 @@
 												<span class="text-danger">*</span><span
 													class="text-muted small"></span>
 											</div>
-											<p:inputText id="nrc" label="nrc" class="form-control"
+											<p:inputText id="nrc" label="nrc" class="form-control"  
 												required="true" value="#{proposalController.proposal.pHolderNrc}"  requiredMessage="NRC is Required!" 
 												validatorMessage="NRC format must like '1/MAKATA(N)134989' and no space." placeholder="1/MAKATA(N)013978">
 												<f:validateRegex pattern="^([\d]{1,2})\/([\w]{3}|[\w]{6})\(N\)([\d]{6})"/>
@@ -177,7 +177,7 @@
 												<h:outputLabel for="sumInsurance">Sum Insured</h:outputLabel>
 												<span class="text-danger">*</span><span class="text-muted small"></span>
 											</div>
-											<p:inputText id="sumInsurance" label="Sum Insurance" class="form-control" value="#{proposalController.proposal.sumInsure}"  requiredMessage="Sum Inssure is Required!"
+											<p:inputText id="sumInsurance" label="Sum Insurance" class="form-control" readonly="true" value="#{proposalController.proposal.sumInsure}"  requiredMessage="Sum Inssure is Required!"
 												validatorMessage="Sum Insured must be between 100000 kyats and 10000000 kyats." required="true" >
 												<f:convertNumber pattern="#0.00" />
 												<p:ajax event="keyup" update="premium" listener="#{proposalController.ajaxEvent()}" />  
@@ -230,7 +230,7 @@
 												<h:outputLabel for="gender">Gender</h:outputLabel>
 												<span class="text-danger">*</span><span	class="text-muted small"></span>
 											</div>
-											<p:selectOneRadio id="gender"  selectable="true" value="#{proposalController.proposal.pHolderOccupation}" >
+											<p:selectOneRadio id="gender"  selectable="true" value="#{proposalController.proposal.pHolderGender}" >
 												<f:selectItem itemLabel="Male" itemValue="Male" />
 												<f:selectItem itemLabel="Female" itemValue="Female" />
 											</p:selectOneRadio>
@@ -327,7 +327,7 @@
 												<h:outputLabel for="chassisNo">Chassis Number</h:outputLabel>
 												<span class="text-danger">*</span><span class="text-muted small"></span>
 											</div>
-											<p:inputText id="chassisNo" label="Chassis Number" class="form-control" data-validation="required"  required="true" value="#{proposalController.proposal.chassisNo}" 
+											<p:inputText id="chassisNo" label="Chassis Number"  readonly="true" class="form-control" data-validation="required"  required="true" value="#{proposalController.proposal.chassisNo}" 
 												requiredMessage="color is Required!"
 												validatorMessage="Chassis Number must be upper charator and number, length 17~20 and no space." placeholder="7SAARFCDEEDD344FD">
 												<f:validateRegex pattern="^$|^[A-Z0-9]{17,20}$"/>
@@ -339,7 +339,7 @@
 												<h:outputLabel for="vehicleRegistrationNumber">Vehicle Registration Number</h:outputLabel>
 												<span class="text-danger">*</span><span class="text-muted small"></span>
 											</div>
-											<p:inputText id="vehicleRegistrationNumber" label="Vehicle Registration Number" class="form-control"  required="true" value="#{proposalController.proposal.vehicleRegNo}"
+											<p:inputText id="vehicleRegistrationNumber"  readonly="true" label="Vehicle Registration Number" class="form-control"  required="true" value="#{proposalController.proposal.vehicleRegNo}"
 												requiredMessage="vehicleRegistrationNumber is Required!" placeholder="YGN 7F-5643" 
 												validatorMessage="Vehicle Registration Number format must like'MDY 6L-9876'." >
 												<!-- <f:validateRegex pattern="^([A-Z{3}0-9{1}\-A-Z{1}\-\A-Z{4}]+\s?)*$"/> -->
