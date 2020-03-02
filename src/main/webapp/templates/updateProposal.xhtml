@@ -327,7 +327,7 @@
 												<h:outputLabel for="chassisNo">Chassis Number</h:outputLabel>
 												<span class="text-danger">*</span><span class="text-muted small"></span>
 											</div>
-											<p:inputText id="chassisNo" label="Chassis Number"  readonly="true" class="form-control" data-validation="required"  required="true" value="#{proposalController.proposal.chassisNo}" 
+											<p:inputText id="chassisNo" label="Chassis Number" class="form-control" data-validation="required"  required="true" value="#{proposalController.proposal.chassisNo}" 
 												requiredMessage="color is Required!"
 												validatorMessage="Chassis Number must be upper charator and number, length 17~20 and no space." placeholder="7SAARFCDEEDD344FD">
 												<f:validateRegex pattern="^$|^[A-Z0-9]{17,20}$"/>
@@ -339,7 +339,7 @@
 												<h:outputLabel for="vehicleRegistrationNumber">Vehicle Registration Number</h:outputLabel>
 												<span class="text-danger">*</span><span class="text-muted small"></span>
 											</div>
-											<p:inputText id="vehicleRegistrationNumber"  readonly="true" label="Vehicle Registration Number" class="form-control"  required="true" value="#{proposalController.proposal.vehicleRegNo}"
+											<p:inputText id="vehicleRegistrationNumber" label="Vehicle Registration Number" class="form-control"  required="true" value="#{proposalController.proposal.vehicleRegNo}"
 												requiredMessage="vehicleRegistrationNumber is Required!" placeholder="YGN 7F-5643" 
 												validatorMessage="Vehicle Registration Number format must like'MDY 6L-9876'." >
 												<!-- <f:validateRegex pattern="^([A-Z{3}0-9{1}\-A-Z{1}\-\A-Z{4}]+\s?)*$"/> -->
@@ -606,6 +606,7 @@
 
 										<div class="col-sm-12">
 											<div class="form-group">
+												<p:commandButton value="Update" name="submit"  action="#{proposalController.updateProposal()}"  process="@form" 
 													 update="@form" onclick="if (!(confirm('Are you sure to Update?'))) return false" />
 														<p:commandButton value="Cancel" action="#{proposalController.cancelUpdate()}"  update="@form" />
 													 
