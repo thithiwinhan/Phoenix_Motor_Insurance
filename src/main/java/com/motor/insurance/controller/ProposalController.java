@@ -231,7 +231,7 @@ public class ProposalController {
 		 * "Sorry" + "Your Car is already insurance", "")); } else {
 		 */
 			proposal.setPremium(premium);
-			proposalService.updateProposal(proposal);
+			proposalService.updateProduct(proposal);
 			proposal = new ProposalModel();// to clear form data
 			FacesContext.getCurrentInstance().addMessage(null,
 			new FacesMessage(FacesMessage.SEVERITY_INFO, "Successfully Update!", "info Messages"));
@@ -281,7 +281,10 @@ public class ProposalController {
 	}
 
 	
-	
+	public String cancelUpdate() {
+		 return "proposalStatusChecking.xhtml?faces-redirect=true";
+		
+	}
 	public String cancel() {
       proposal= new ProposalModel();
 		 return "proposal.xhtml?faces-redirect=true";
