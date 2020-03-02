@@ -75,11 +75,13 @@ public class ClaimListingServiceImpl implements ClaimListingService {
 			System.out.println("------------------Enity Return  Claim List>>-----------");
 			System.out.println("-----" + "-------------1>>-----------" + entity.getStatus());
 			System.out.println("------------------2>>-----------" + entity.getCreateClaimDate());
-			System.out.println("------------------3>>-----------" + entity.getProposal().getCoverageType());
-			System.out.println("------------------4>>-----------" + entity.getProposal().getBenificials());
+			System.out.println("------------------3>>-----------" +entity.getOtherPartyName());
+			System.out.println("------------------4>>-----------" + entity.getOtherPartyPhone());
 			System.out.println("------------------5>>-----------" + entity.getProposal().getPolicyHolder().getName());
 			model.setClaimcreateDate(entity.getCreateClaimDate());
 			model.setClaimStatus(entity.getStatus());
+			model.setOtherPartyName(entity.getOtherPartyName());
+			model.setOtherPartyPhone(entity.getOtherPartyPhone());
 			model.setProposal(entity.getProposal());
 			claimModelList.add(model);
 
@@ -148,8 +150,11 @@ public class ClaimListingServiceImpl implements ClaimListingService {
 			System.out.println("------------------3>>-----------" + entity.getProposal().getCoverageType());
 			System.out.println("------------------4>>-----------" + entity.getProposal().getBenificials());
 			System.out.println("------------------5>>-----------" + entity.getProposal().getPolicyHolder().getName());
+			
 			model.setClaimcreateDate(entity.getCreateClaimDate());
 			model.setClaimStatus(entity.getStatus());
+			model.setOtherPartyName(entity.getOtherPartyName());
+			model.setOtherPartyPhone(entity.getOtherPartyPhone());
 			model.setProposal(entity.getProposal());
 			claimModelList.add(model);
 

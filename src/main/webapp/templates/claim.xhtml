@@ -128,8 +128,8 @@
 									<p:inputText id="name" label="Other Party Name "
 										value="#{cliamController.claimModel.otherPartyName}"
 										required="true" requiredMessage="Name is Required!"
-										validatorMessage="Name length must be characters and numbers, length 5~50!">
-										<f:validateRegex pattern="^([a-zA-Z0-9]{4,50}+\s?)*$" />
+										validatorMessage="Name length must be characters and numbers, length 2~50!">
+										<f:validateRegex pattern="^([a-zA-Z0-9]{2,50}+\s?)*$" />
 									</p:inputText>
 									&nbsp;
 									<h:message for="name" style="color: red;"></h:message>
@@ -138,7 +138,7 @@
 							</div>
 							<div class="col-6">
 								<div class="input-group">
-									<h:outputLabel for="ph"> Other Party  Phno   :</h:outputLabel>
+									<h:outputLabel for="ph"> Other Party  Phone No. :</h:outputLabel>
 									<span class="text-danger">*</span><span
 										class="text-muted small"></span>
 
@@ -167,6 +167,9 @@
 										data-validation="required" requiredMessage="Date is Required!"
 										maxdate="today" validatorMessage="Invalid Date"
 										required="true" />
+										&nbsp;
+									<h:message for="lossOfDate" style="color: red;"></h:message>
+									<br></br>
 									<script>
 										today = Date();
 									</script>
@@ -180,7 +183,7 @@
 
 
 									<p:inputText id="accidentLocation" label="Accident Location "
-										value="#{proposalController.proposal.pholderAddress}"
+										value="#{cliamController.claimModel.claimAccidentLocation}"
 										required="true"
 										requiredMessage="Accident Location is Required!"
 										validatorMessage="Accident Location must be characters and numbers(- . , _ ()), length 2~10000!">

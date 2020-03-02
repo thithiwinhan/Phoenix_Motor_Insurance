@@ -35,7 +35,10 @@ public class CliamController {
 
 	@Autowired
 	ClaimService claimService;
-
+    
+	@Autowired
+	ProposalController proposalController;
+	
 	@Autowired
 	ProposalService proposalService;
 
@@ -59,6 +62,7 @@ public class CliamController {
 				claimModel.setProposal(proposal);
 				claimService.save(claimModel);
 				claimModel = new ClaimModel();
+				
 				FacesContext context = FacesContext.getCurrentInstance();
 				context.addMessage(null,
 				new FacesMessage(FacesMessage.SEVERITY_INFO, "Your Claim is  " + "Successfully Save", ""));
@@ -75,6 +79,7 @@ public class CliamController {
 	}
 	    public String getClaimForm() {
 	    	System.out.println("*******getClaimForm()********");
+	    	proposalController.proposalList();
 	    	claimList();
 			return "claim.xhtml?faces-redirect=true";
 
