@@ -231,20 +231,21 @@ public class ProposalController {
 	public void updateProposal() {
 
 		System.out.println("-------update------" + proposal.getpID());
-		List<Vehicle> flag = vehicleService.serachVehicleByChassicNoAndRegNum(proposal);
-		if (!flag.isEmpty()||flag.size()<=0) {
-			FacesContext context = FacesContext.getCurrentInstance();
-
-			context.addMessage(null,
-					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Sorry" + "Your Car is already insurance", ""));
-		} else {
+		/*
+		 * List<Vehicle> flag =
+		 * vehicleService.serachVehicleByChassicNoAndRegNum(proposal); if
+		 * (!flag.isEmpty()||flag.size()>=0) { FacesContext context =
+		 * FacesContext.getCurrentInstance();
+		 * 
+		 * context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
+		 * "Sorry" + "Your Car is already insurance", "")); } else {
+		 */
 			proposal.setPremium(premium);
 			proposalService.updateProduct(proposal);
-
+			proposal = new ProposalModel();// to clear form data
 			FacesContext.getCurrentInstance().addMessage(null,
-					new FacesMessage(FacesMessage.SEVERITY_INFO, "Successfully Update!", "info Messages"));
-		}
-		proposal = new ProposalModel();// to clear form data
+			new FacesMessage(FacesMessage.SEVERITY_INFO, "Successfully Update!", "info Messages"));
+		
 	}
 
 	/*
