@@ -15,4 +15,6 @@ public interface ClaimService {
 
 	List<ClaimModel> findClaimbyProposalId(int proposalId);
 
+	int countClaimNumber(int id);
+
 }

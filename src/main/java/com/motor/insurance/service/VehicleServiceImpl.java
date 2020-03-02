@@ -41,62 +41,83 @@ public class VehicleServiceImpl implements VehicleService {
 
 	@Autowired
 	VehicleDao vehicleDao;
-@Autowired
-EntityManager em;
-	
-	
+	@Autowired
+	EntityManager em;
+
+	/*
+	 * @Override public boolean serachVehicleByChassicNoAndRegNum(ProposalModel
+	 * proposal) {
+	 * 
+	 * boolean flag = false;
+	 * 
+	 * CriteriaBuilder cb=em.getCriteriaBuilder(); CriteriaQuery<Vehicle>
+	 * cq=cb.createQuery(Vehicle.class); Root<Vehicle> root=cq.from(Vehicle.class);
+	 * 
+	 * 
+	 * Predicate p; //Predicate p2=cb.nequal(proposal.get("status"), "pending");
+	 * Predicate p2; Predicate p3; try { p =
+	 * cb.equal(root.get("chassisNo"),proposal.getChassisNo()); p2 =
+	 * cb.equal(root.get("vehicleRegNo"),proposal.getVehicleRegNo());
+	 * 
+	 * 
+	 * we need to check status ,if deleted car is found , allow to insurace p3 =
+	 * cb.equal(root.get("status"), 1);
+	 * 
+	 * 
+	 * cq.where(cb.or(p,p2)).distinct(true);
+	 * 
+	 * TypedQuery<Vehicle> typedQuery =em.createQuery(cq); List<Vehicle> resultList
+	 * = typedQuery.getResultList();
+	 * 
+	 * if (resultList.isEmpty()||resultList.size()==0) { flag=false; // given
+	 * chassic number and reg no is not found in db ;no duplicate vehicle } else {
+	 * flag= true; //given chassic number and reg is not found in db :duplicate }
+	 * 
+	 * } catch (IllegalArgumentException e) {
+	 * System.out.println("stop Illegal!!!!!!!!!!!!!!!!"); e.printStackTrace(); }
+	 * 
+	 * return flag;
+	 * 
+	 * 
+	 * }
+	 */
+
 	@Override
-	public boolean serachVehicleByChassicNoAndRegNum(ProposalModel proposal) {
-
-			boolean flag = false;
-			
-			CriteriaBuilder cb=em.getCriteriaBuilder();
-			CriteriaQuery<Vehicle> cq=cb.createQuery(Vehicle.class);
-			Root<Vehicle> root=cq.from(Vehicle.class);
-			
-			
-				Predicate p;
-				//Predicate p2=cb.nequal(proposal.get("status"), "pending");
-				Predicate p2;
-				Predicate p3;
-				try {
-					p = cb.equal(root.get("chassisNo"),proposal.getChassisNo());
-					p2 = cb.equal(root.get("vehicleRegNo"),proposal.getVehicleRegNo());
-					
-			/*
-			 * we need to check status ,if deleted car is found , allow to insurace p3 =
-			 * cb.equal(root.get("status"), 1);
-			 */
-				
-				cq.where(cb.or(p,p2)).distinct(true);
-			
+	public List<Vehicle> serachVehicleByChassicNoAndRegNum(ProposalModel proposal) {
+		
+		CriteriaBuilder cb=em.getCriteriaBuilder();
+		CriteriaQuery<Vehicle> cq=cb.createQuery(Vehicle.class);
+		Root<Vehicle> root=cq.from(Vehicle.class);
+		List<Vehicle> resultList = new ArrayList<Vehicle>();
+		
+			Predicate p;
+			//Predicate p2=cb.nequal(proposal.get("status"), "pending");
+			Predicate p2;
+			Predicate p3;
+			try {
+				p = cb.equal(root.get("chassisNo"),proposal.getChassisNo());
+				p2 = cb.equal(root.get("vehicleRegNo"),proposal.getVehicleRegNo());
+			    cq.where(cb.or(p,p2)).distinct(true);
 				TypedQuery<Vehicle> typedQuery =em.createQuery(cq);
-				List<Vehicle> resultList = typedQuery.getResultList();
+				 try {
+					resultList = typedQuery.getResultList();
+				} catch (IndexOutOfBoundsException e) {
+					e.printStackTrace();
+				}
 				
-		        if (resultList.isEmpty()||resultList.size()==0) {
-					 flag=false;  // given chassic number and reg no is not found in db ;no duplicate vehicle
-				}
-		        else {
-					flag= true; //given chassic number and reg  is not found in db :duplicate
-				}
-          
+	        if (resultList.isEmpty()||resultList.size()<=0) {
+	        	System.out.println("there is no same vehicle");
+			}
+	        else {
+	        	System.out.println("there is  same vehicle");
+			}
+      
+              }
+			catch (IllegalArgumentException e) {
+				System.out.println("stop Illegal!!!!!!!!!!!!!!!!");
+				e.printStackTrace();
+			}
+
+		return resultList;
 	}
-	catch (IllegalArgumentException e) {
-		System.out.println("stop Illegal!!!!!!!!!!!!!!!!");				
-		e.printStackTrace();
-						}
-				
-				return flag;
-	
-
 }
-}
-
-
-	
-
-
-
-
-	
-

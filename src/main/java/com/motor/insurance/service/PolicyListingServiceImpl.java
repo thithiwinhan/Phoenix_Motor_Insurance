@@ -46,7 +46,7 @@ public class PolicyListingServiceImpl implements PolicyListingService {
 			
 			Predicate p = cb.equal(root.get("user"), user);
 			Predicate p2=cb.equal(root.get("active"), 1);
-			Predicate p3=cb.notEqual(root.get("status"), "pending");
+			Predicate p3=cb.equal(root.get("status"), "paid");
 
 			
 			cr.select(root).where(cb.and(p,p2,p3));

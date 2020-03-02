@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import com.motor.insurance.entity.PolicyHolder;
 import com.motor.insurance.entity.Proposal;
 import com.motor.insurance.model.ProposalModel;
 
@@ -25,6 +26,11 @@ public interface ProposalService {
 	Proposal findProposalById(int proposalId);
 
 	boolean delete(ProposalModel proposal);
+
+
+	List<PolicyHolder> findAllProposaLOwnerActive();
+
+	
 
 
 }

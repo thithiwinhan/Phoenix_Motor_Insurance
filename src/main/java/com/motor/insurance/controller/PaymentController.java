@@ -88,10 +88,10 @@ public class PaymentController {
 					"Your Payment is successfully Save: " + "success", ""));
 			}
 		} 
-		else {
+		else  {
 			FacesContext context = FacesContext.getCurrentInstance();
 			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN,
-			"Your Payment is failed to save: " + "Your proposal is not still accpet yet", ""));
+			"Your Payment is failed to save: " + "", ""));
 		}
 		 paymentModel = new PaymentModel();
 

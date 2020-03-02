@@ -12,6 +12,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Join;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import javax.servlet.http.HttpSession;
@@ -26,6 +27,7 @@ import com.motor.insurance.dao.ProposalDao;
 import com.motor.insurance.dao.UserDao;
 import com.motor.insurance.dao.VehicleDao;
 import com.motor.insurance.entity.Benificial;
+import com.motor.insurance.entity.Claim;
 import com.motor.insurance.entity.Driver;
 import com.motor.insurance.entity.PolicyHolder;
 import com.motor.insurance.entity.Proposal;
@@ -374,6 +376,42 @@ public class ProposalServiceImpl implements ProposalService {
 	}
 
 
+
+
+
+
+//email service for notification for propoal accepting for active user
+	@Override
+	public List<PolicyHolder> findAllProposaLOwnerActive() {
+
+		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+		CriteriaQuery<PolicyHolder> cq = cb.createQuery(PolicyHolder.class);
+		Root<Proposal> proposal = cq.from(Proposal.class);
+		Join<Proposal, PolicyHolder> policyHolder = proposal.join("policyHolder");
+
+		Predicate p1=cb.equal(proposal.get("active"), 1);
+		Predicate p2=cb.equal(proposal.get("status"), "accept");
+
+		cq.select(policyHolder).where(cb.and(p1,p2));
+		TypedQuery<PolicyHolder> tq = entityManager.createQuery(cq);
+		List<PolicyHolder> pHolderList = new ArrayList<PolicyHolder>();
+		
+		return pHolderList;
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
 
 
 

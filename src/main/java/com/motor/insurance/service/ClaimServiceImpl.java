@@ -6,6 +6,13 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Join;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +30,9 @@ public class ClaimServiceImpl implements ClaimService{
 	@Autowired
 	ClaimDao claimDao;
 	
-
+	@Autowired
+	EntityManager em;
+	
 	@Override
 	public void save(ClaimModel claimModel) {
 		Claim claim = new Claim();
@@ -83,9 +92,48 @@ public class ClaimServiceImpl implements ClaimService{
 		}
 		return calimList.isEmpty() ? null :calimList ;
 	}
+
+
+	@Override
+	public int countClaimNumber(int id) {
+		  int count=0;
+
+		CriteriaBuilder cb = em.getCriteriaBuilder();
+		CriteriaQuery<Claim> cq = cb.createQuery(Claim.class);
+		Root<Proposal> proposal = cq.from(Proposal.class);
+		Join<Proposal, Claim> claims = proposal.join("claims");
+		//cq.select(claims).where(cb.equal(proposal.get("user"), user.getId()));
+
+		Predicate p = cb.equal(proposal.get("vehicle"),id);
+		Predicate p2=cb.equal(proposal.get("active"), 1);
+		Predicate p3=cb.equal(proposal.get("status"), "paid");
+        
+		cq.select(claims).where(cb.and(p,p2,p3));
+		
+		
+		TypedQuery<Claim> tq = em.createQuery(cq);
+		List<Claim> calimList = new ArrayList<Claim>();	
+		try {
+			calimList = tq.getResultList();
+		}
+		catch (IndexOutOfBoundsException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		for (Claim entity : calimList) {
+			
+		      Date today = new Date();
+			if (today.after(entity.getProposal().getEndDate())) {
+				  count++;
+			}
+			else {System.out.println("policy is not expired");	
+			}
+	}
+		return count;
 	
 	
 	
-	
+	}
 
 }

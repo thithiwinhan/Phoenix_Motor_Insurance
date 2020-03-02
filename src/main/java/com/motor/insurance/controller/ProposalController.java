@@ -15,9 +15,12 @@ import javax.websocket.Session;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.motor.insurance.entity.PolicyHolder;
 import com.motor.insurance.entity.Proposal;
 import com.motor.insurance.entity.User;
+import com.motor.insurance.entity.Vehicle;
 import com.motor.insurance.model.ProposalModel;
+import com.motor.insurance.service.ClaimService;
 import com.motor.insurance.service.ProposalListingService;
 import com.motor.insurance.service.ProposalService;
 import com.motor.insurance.service.VehicleService;
@@ -33,6 +36,9 @@ public class ProposalController {
 	@Autowired
 	VehicleService vehicleService;
 
+	
+	@Autowired
+	ClaimService claimService;
 	@Autowired
 	ProposalService proposalService;
 	
@@ -52,11 +58,27 @@ public class ProposalController {
 		this.premium = premium;
 	}
 
+	
 	public void ajaxEvent() {
 		double sI = proposal.getSumInsure();
-		premium = (sI / 100) * 10;
+		premium = (sI / 100) * 1;
 
 	}
+	 
+	
+	
+	/*
+	 * public void ajaxEvent() { List<Vehicle> flag =
+	 * vehicleService.serachVehicleByChassicNoAndRegNum(proposal); if
+	 * (!flag.isEmpty()) { int count =
+	 * claimService.countClaimNumber(flag.get(0).getId()); if(count>=2) { double sI
+	 * = proposal.getSumInsure(); premium = (sI / 100) * 1; }
+	 * 
+	 * else if (count==0){ double sI = proposal.getSumInsure(); premium = (sI / 100)
+	 * * 1; } }
+	
+
+	} */
 
 	// save propsal form according to user id,current set fixed user id 1
 	public void proposalSave() {
@@ -64,13 +86,16 @@ public class ProposalController {
 		 * to check same car is not to allow insurance >>>unique key of car is chassic
 		 * no and reg number
 		 */
-		boolean flag = vehicleService.serachVehicleByChassicNoAndRegNum(proposal);
-		if (flag) {
+		System.out.println("p9999999999999999999999999999roposal Save *************************************8888");
+		List<Vehicle> flag = vehicleService.serachVehicleByChassicNoAndRegNum(proposal);
+		if (!flag.isEmpty()||flag.size()>=1) {
+			System.out.println("stage 1=======================");
 			FacesContext context = FacesContext.getCurrentInstance();
 
 			context.addMessage(null,
 					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Sorry" + "Your Car is already insurance", ""));
 		} else {
+			System.out.println("stage 1=======================");
 			System.out.println("premium" + premium);
 			System.out.println("pid" + proposal.getpID());
 			System.out.println("arrive");
@@ -80,7 +105,7 @@ public class ProposalController {
 			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
 					"Congradulation" + "Your proposal is successfully Saved", ""));
 		}
-		proposal = new ProposalModel();// to clear form data
+		//proposal = new ProposalModel();// to clear form data
 	}
 
 	public void proposalList() {
@@ -206,8 +231,8 @@ public class ProposalController {
 	public void updateProposal() {
 
 		System.out.println("-------update------" + proposal.getpID());
-		boolean flag = vehicleService.serachVehicleByChassicNoAndRegNum(proposal);
-		if (flag) {
+		List<Vehicle> flag = vehicleService.serachVehicleByChassicNoAndRegNum(proposal);
+		if (!flag.isEmpty()||flag.size()<=0) {
 			FacesContext context = FacesContext.getCurrentInstance();
 
 			context.addMessage(null,
@@ -306,6 +331,10 @@ public class ProposalController {
 		
 	}
 
+	
+	
+	
+	
 	public ProposalModel getProposal() {
 		return proposal;
 	}
