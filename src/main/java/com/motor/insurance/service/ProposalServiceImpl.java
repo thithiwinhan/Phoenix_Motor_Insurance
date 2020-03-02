@@ -172,7 +172,7 @@ public class ProposalServiceImpl implements ProposalService {
 
 
 	@Override
-	public ProposalModel updateProduct(ProposalModel proposal) {
+	public ProposalModel updateProposal(ProposalModel proposal) {
         Optional<Proposal> updateDB=this.proposalDao.findById(proposal.getpID());
 		
 		if(updateDB.isPresent()) {

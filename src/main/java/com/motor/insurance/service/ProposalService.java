@@ -16,7 +16,7 @@ public interface ProposalService {
 
 	//Proposal findProposalById(int i);
 
-	ProposalModel updateProduct(ProposalModel proposal);
+	ProposalModel updateProposal(ProposalModel proposal);
 
 	boolean findStatusbyProposalId(int getpID);
 	//Proposal findProposalById(ProposalModel proposal);
