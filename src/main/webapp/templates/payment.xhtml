@@ -63,17 +63,17 @@ body {
 .credit-card-box .panel-heading img {
 	min-width: 180px;
 }
+
 .navbar-brand {
-    font-weight: 750;
-    font-size: 20px;
-    font-family: "Poppins", Arial, sans-serif;
-    line-height: 1;
-    text-transform: uppercase;
-    color:#fff;
-    padding-left: 1px;
-        padding-top: 2px;
-	}
-	
+	font-weight: 750;
+	font-size: 20px;
+	font-family: "Poppins", Arial, sans-serif;
+	line-height: 1;
+	text-transform: uppercase;
+	color: #fff;
+	padding-left: 1px;
+	padding-top: 2px;
+}
 </style>
 
 </h:head>
@@ -87,40 +87,47 @@ body {
 					style="display: block; font-size: 11px; font-weight: 750;">Motor
 						Insurance</span></a>
 			</div>
-			       <h:form>
-  <!-- .nav-menu -->
-     <div class="nav-menu d-none d-lg-block">
-        <ul>
-          <li class="active"><h:commandLink action="home.xhtml" >Home</h:commandLink> </li>
-          <li class="drop-down"><h:commandLink >Proposal</h:commandLink>
-            <ul>
-           		 <li><h:commandLink action="#{proposalController.getProposalForm()}" >Online Proposal Form</h:commandLink></li>
-             	 <li><h:commandLink action="#{proposalController.getProposalListForm()}">Proposal Status Checking</h:commandLink></li>
-            </ul>
-          </li>
-         
-           <li class="drop-down"><h:commandLink >Payment</h:commandLink>
-            <ul>
-            	<li><h:commandLink action="#{paymentController. getPaymentForm()}">Online Payment Form</h:commandLink></li>
-            	<li><h:commandLink action="#{paymentController.getPaymentListForm()}">Payment Listing</h:commandLink></li>
-            </ul>
-          </li>
-          <li class="drop-down"><h:commandLink >Policy</h:commandLink>
-            <ul>
-            	<li><h:commandLink action="#{policyController.getPolicyListForm()}">Policy List</h:commandLink></li>
-            </ul>
-          </li>
-            <li class="drop-down"><h:commandLink >Claim</h:commandLink>
-            <ul>
-            	<li><h:commandLink action="#{cliamController.getClaimForm()}">Online Claim Form</h:commandLink></li>
-             	<li><h:commandLink action="#{cliamController.getClaimStatusCheckingForm()}">Claim Status Checking</h:commandLink></li>
-            </ul>
-          </li>
-              <li><h:commandLink action="#{userController.getProfile()}" >Profile</h:commandLink></li>
-          	 <li class="get-started"><h:commandLink action="#{userController.logout()}" onclick="if (!(confirm('Are you sure you want to logout your account?'))) return false">Logout</h:commandLink></li>
-        </ul>
-      </div><!-- .nav-menu -->
-      </h:form> 
+			<h:form>
+				<!-- .nav-menu -->
+				<div class="nav-menu d-none d-lg-block">
+					<ul>
+						<li class="active"><h:commandLink action="home.xhtml">Home</h:commandLink>
+						</li>
+						<li class="drop-down"><h:commandLink>Proposal</h:commandLink>
+							<ul>
+								<li><h:commandLink
+										action="#{proposalController.getProposalForm()}">Online Proposal Form</h:commandLink></li>
+								<li><h:commandLink
+										action="#{proposalController.getProposalListForm()}">Proposal Status Checking</h:commandLink></li>
+							</ul></li>
+
+						<li class="drop-down"><h:commandLink>Payment</h:commandLink>
+							<ul>
+								<li><h:commandLink
+										action="#{paymentController. getPaymentForm()}">Online Payment Form</h:commandLink></li>
+								<li><h:commandLink
+										action="#{paymentController.getPaymentListForm()}">Payment Listing</h:commandLink></li>
+							</ul></li>
+						<li class="drop-down"><h:commandLink>Policy</h:commandLink>
+							<ul>
+								<li><h:commandLink
+										action="#{policyController.getPolicyListForm()}">Policy List</h:commandLink></li>
+							</ul></li>
+						<li class="drop-down"><h:commandLink>Claim</h:commandLink>
+							<ul>
+								<li><h:commandLink
+										action="#{cliamController.getClaimForm()}">Online Claim Form</h:commandLink></li>
+								<li><h:commandLink
+										action="#{cliamController.getClaimStatusCheckingForm()}">Claim Status Checking</h:commandLink></li>
+							</ul></li>
+						<li><h:commandLink action="#{userController.getProfile()}">Profile</h:commandLink></li>
+						<li class="get-started"><h:commandLink
+								action="#{userController.logout()}"
+								onclick="if (!(confirm('Are you sure you want to logout your account?'))) return false">Logout</h:commandLink></li>
+					</ul>
+				</div>
+				<!-- .nav-menu -->
+			</h:form>
 
 		</div>
 	</div>
@@ -129,8 +136,7 @@ body {
 	<!-- Start Main Body -->
 	<div class="container">
 		<h:form id="form">
-		
-		  <p:messages id="msgs" severity="info" />  
+
 			<div class="row">
 				<div class="col-xs-4"></div>
 				<div class="col-xs-12 col-md-4">
@@ -148,13 +154,18 @@ body {
 							</div>
 						</div>
 						<div class="panel-body">
-
+	
 							<div class="row">
 								<div class="col-xs-12">
 									<div class="form-group">
-										<!-- 									<p:inputText id="policyNo" -->
-										<!-- 										value="#{paymentController.paymentModel.proposal.proposalId}" -->
-										<!-- 										class="form-control" /> -->
+										<p:messages id="msgs" severity="info" />
+									</div>
+								</div>
+							</div>
+							
+							<div class="row">
+								<div class="col-xs-12">
+									<div class="form-group">
 										<h:selectOneMenu required="true"
 											requiredMessage="Proposal Id is required"
 											value="#{paymentController.paymentModel.proposal.proposalId}"
@@ -164,52 +175,18 @@ body {
 											<f:selectItems value="#{proposalController.proposalIdList}" />
 											<p:ajax event="click" update="in total"
 												listener="#{paymentController.search()}" />
-
 										</h:selectOneMenu>
-
-
 									</div>
 								</div>
 							</div>
-
-							<!-- <div class="row">
-							<div class="col-xs-12">
-								<div class="form-group">
-									<h:outputLabel for="cardNumber">CARD NUMBER</h:outputLabel>
-									<div class="input-group">
-										<p:inputText class="form-control" name="cardNumber"
-											placeholder="Valid Card Number" />
-
-										<span class="input-group-addon"><i
-											class="fa fa-credit-card" style="margin-left: -6px;"></i></span>
-									</div>
-								</div>
-							</div>
-						</div>
-						
-						<div class="row">
-							<div class="col-xs-12">
-								<div class="form-group">
-									<h:outputLabel for="cardExpired">CARD EXPIRED </h:outputLabel>
-									<p:calendar id="cardExpired" style="width:100%;"
-										value=""
-										data-validation="required" requiredMessage="Date is Required!"
-										validatorMessage="Invalid Date" required="true" />
-								
-								</div>
-							</div>
-						</div> -->
-
+							
 							<div class="row">
 								<div class="col-xs-12">
 									<div class="form-group">
 										<h:outputLabel for="amount">AMOUNT</h:outputLabel>
-										<p:inputText
-											value="#{paymentController.amount}"
+										<p:inputText value="#{paymentController.amount}"
 											class="form-control" readonly="true" id="in" />
-
 									</div>
-									
 								</div>
 							</div>
 
@@ -218,12 +195,14 @@ body {
 									<div class="form-group">
 										<p:selectOneRadio id="payMethod"
 											requiredMessage="Please Choose Bank to transfer "
-											required="true"
+											required="true" selectable="true"
 											value="#{paymentController.paymentModel.bank}">
-											<f:selectItem itemLabel="KBZ BANK" itemValue="KBZ" />
-											<f:selectItem itemLabel="AYA BANK" itemValue="AYA" />
-											<f:selectItem itemLabel="WAVE MONEY" itemValue="WAVE MONEY" />
+											<f:selectItem itemLabel="KBZ" itemValue="KBZ" />&nbsp;
+											<f:selectItem itemLabel="AYA" itemValue="AYA" />&nbsp;
+											<f:selectItem itemLabel="WAVE " itemValue="WAVE MONEY" />
 										</p:selectOneRadio>
+										&nbsp;
+										<p:message for="payMethod" style="color: red;"></p:message>
 
 									</div>
 								</div>
@@ -233,11 +212,10 @@ body {
 							<div class="row">
 								<div class="col-xs-12">
 									<div class="form-group">
-										<p:commandButton
-											class="subscribe  btn-lg btn-block"
-											icon="pi pi-fresh" type="button" 
-											style="height: 42px; font-size: 15px; background-color:#17A2B8;" id="total"
-											value="Total=  #{paymentController.amount}">
+										<p:commandButton class="subscribe  btn-lg btn-block"
+											icon="pi pi-fresh" type="button"
+											style="height: 42px; font-size: 15px; background-color:#17A2B8;"
+											id="total" value="Total=  #{paymentController.amount}">
 											<span class="amount"></span>
 										</p:commandButton>
 									</div>
@@ -247,7 +225,7 @@ body {
 							<div class="row">
 								<div class="col-xs-12">
 									<div class="form-group">
-										
+
 										<p:commandButton value="Pay"
 											class="subscribe btn btn-primary btn-lg btn-block"
 											action="#{paymentController.save()}"
@@ -263,9 +241,9 @@ body {
 					<!-- CREDIT CARD FORM ENDS HERE -->
 				</div>
 			</div>
-			
+
 		</h:form>
-							
+
 	</div>
 	<!-- End Main Body -->
 

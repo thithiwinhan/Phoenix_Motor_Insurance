@@ -112,7 +112,6 @@
 							<div class="row">
 								<div class="col-xs-12">
 								<h:form>
-									<p:messages id="msgs"  severity="info"/>  
 					<!-- 		Begin of Owner Details -->
 									<div class="col-sm-12">
 										<div style="overflow: auto; width: 100%; ">
@@ -147,8 +146,8 @@
 												<span class="text-danger">*</span><span
 													class="text-muted small"></span>
 											</div>
-											<p:inputText id="name" label="Name" class="form-control" value="#{proposalController.proposal.pHolderName}" required="true" requiredMessage="Name is Required!" 
-											validatorMessage="Name length must be characters and numbers, length 2~50!">
+											<p:inputText id="name" label="Name" class="form-control" value="#{proposalController.proposal.pHolderName}" required="true" requiredMessage="Name is Required" 
+											validatorMessage="Name length must be characters and numbers, length 2~50">
 												<f:validateRegex pattern="^([a-zA-Z0-9]{2,50}+\s?)*$" />
 											</p:inputText>
 											&nbsp;
@@ -159,7 +158,7 @@
 												<span class="text-danger">*</span><span	class="text-muted small"></span>
 											</div>
 											<p:inputText id="phoneNo" label="Phone No" value="#{proposalController.proposal.pHolderPh}" class="form-control" data-validation="required" required="true" 
-											requiredMessage="Phone number is Required!" placeholder="+959760398573"
+											requiredMessage="Phone number is Required" placeholder="+959760398573"
 												validatorMessage="Phone number must start with +959 followed by 9 digit">
 												<f:validateRegex pattern="^\+?(\+[0-9]{3})\)?[-. ]?([0-9]{4})[-. ]?([0-9]{5})$"/>
 											</p:inputText>
@@ -171,7 +170,7 @@
 												<span class="text-danger">*</span><span class="text-muted small"></span>
 											</div>
 											<p:inputText id="address" label="Address" class="form-control"  value="#{proposalController.proposal.pholderAddress}"  
-											required="true"  requiredMessage="Address is Required!" validatorMessage="Address must be characters and numbers(- . , _ ()), length 2~50!" >
+											required="true"  requiredMessage="Address is Required" validatorMessage="Address must be characters and numbers(- . , _ ()), length 2~50" >
 												<f:validateRegex pattern="^([a-zA-Z()0-9\-\.\_\,\/]{2,50}+\s?)*$" />
 											</p:inputText>
 											&nbsp;
@@ -186,7 +185,7 @@
 													class="text-muted small"></span>
 											</div>
 											<p:inputText id="nrc" label="nrc" class="form-control"
-												required="true" value="#{proposalController.proposal.pHolderNrc}"  requiredMessage="NRC is Required!" 
+												required="true" value="#{proposalController.proposal.pHolderNrc}"  requiredMessage="NRC is Required" 
 												validatorMessage="NRC format must like '1/MAKATA(N)134989' and no space." placeholder="1/MAKATA(N)013978">
 												<f:validateRegex pattern="^([\d]{1,2})\/([\w]{3}|[\w]{6})\(N\)([\d]{6})"/>
 											</p:inputText>
@@ -197,8 +196,8 @@
 												<h:outputLabel for="sumInsurance">Sum Insured</h:outputLabel>
 												<span class="text-danger">*</span><span class="text-muted small"></span>
 											</div>
-											<p:inputText id="sumInsurance" label="Sum Insurance" class="form-control" value="#{proposalController.proposal.sumInsure}"  requiredMessage="Sum Inssure is Required!"
-												validatorMessage="Sum Insured must be between 100000 kyats and 10000000 kyats." required="true" >
+											<p:inputText id="sumInsurance" label="Sum Insurance" class="form-control" value="#{proposalController.proposal.sumInsure}"  requiredMessage="Sum Inssure is Required"
+												validatorMessage="Sum Insured must be between 10,000,000 kyats and 100,000,000 kyats." required="true" >
 												<f:convertNumber pattern="#0.00" />
 												<p:ajax event="keyup" update="premium" listener="#{proposalController.ajaxEvent()}" />  
                                                <f:validateDoubleRange minimum="10000000.00" maximum="100000000.00" /></p:inputText>
@@ -210,7 +209,7 @@
 												<h:outputLabel for="premium">Premium</h:outputLabel>
 												<span class="text-danger">*</span><span class="text-muted small"></span>
 											</div>
-											<p:inputText id="premium" label="Premium" class="form-control"  readonly="true"    data-validation="required" requiredMessage="Premium is Required!"
+											<p:inputText id="premium" label="Premium" class="form-control"  readonly="true"    data-validation="required" requiredMessage="Premium is Required"
 												validatorMessage="Premium must only numbers and no space." required="true" value="#{proposalController.premium}" >
 											  <f:convertNumber pattern="#0.00" />
 												<f:validateLength minimum="3" maximum="20" />
@@ -226,7 +225,7 @@
 												<span class="text-danger">*</span><span class="text-muted small"></span>
 											</div>
 											<p:inputText id="occupation"  value="#{proposalController.proposal.pHolderOccupation}" label="Occupation" class="form-control" data-validation="required" required="true" 
-											 requiredMessage="Occupation is Required!" validatorMessage="Occupation must be character and number(-,.,/,_,() ), lenght 2~50 and no space " placeholder="Programmer(Android) / .Net">
+											 requiredMessage="Occupation is Required" validatorMessage="Occupation must be character and number(-,.,/,_,() ), lenght 2~50 and no space " placeholder="Programmer(Android) / .Net">
 												<f:validateRegex pattern="^([a-zA-Z()0-9\-\.\_\/]{2,50}+\s?)*$" />
 											</p:inputText>
 											&nbsp;
@@ -336,7 +335,7 @@
 												<h:outputLabel for="color">Color</h:outputLabel>
 												<span class="text-danger">*</span><span class="text-muted small"></span>
 											</div>
-											<p:inputText id="color" label="Color" class="form-control" data-validation="required" required="true" value="#{proposalController.proposal.color}" requiredMessage="color is Required!"
+											<p:inputText id="color" label="Color" class="form-control" data-validation="required" required="true" value="#{proposalController.proposal.color}" requiredMessage="color is Required"
 												validatorMessage="Color must only characters and length 3~15.">
 												<f:validateRegex pattern="^([a-zA-Z\-\_]{3,15}+\s?)*$" />
 											</p:inputText>
@@ -351,7 +350,7 @@
 												<span class="text-danger">*</span><span class="text-muted small"></span>
 											</div>
 											<p:inputText id="chassisNo" label="Chassis Number" class="form-control" data-validation="required"  required="true" value="#{proposalController.proposal.chassisNo}" 
-												requiredMessage="Chassis Number is Required!"
+												requiredMessage="Chassis Number is Required"
 												validatorMessage="Chassis Number must be upper charator and number, length 17~20 and no space." placeholder="7SAARFCDEEDD344FD">
 												<f:validateRegex pattern="^$|^[A-Z0-9]{17,20}$"/>
 											</p:inputText>
@@ -363,7 +362,7 @@
 												<span class="text-danger">*</span><span class="text-muted small"></span>
 											</div>
 											<p:inputText id="vehicleRegistrationNumber" label="Vehicle Registration Number" class="form-control"  required="true" value="#{proposalController.proposal.vehicleRegNo}"
-												requiredMessage="Vehicle Registration No is Required!" placeholder="YGN 7F-5643" 
+												requiredMessage="Vehicle Registration No is Required" placeholder="YGN 7F-5643" 
 												validatorMessage="Vehicle Registration Number format must like'MDY 6L-9876'." >
 												<!-- <f:validateRegex pattern="^([A-Z{3}0-9{1}\-A-Z{1}\-\A-Z{4}]+\s?)*$"/> -->
 											</p:inputText>
@@ -375,7 +374,7 @@
 												<span class="text-danger">*</span><span class="text-muted small"></span>
 											</div>
 											<p:calendar id="vehicleExpiredDate" label="Vehicle Expired Date"  mindate="today" data-validation="required" required="true" value="#{proposalController.proposal.vehicleExpiredDate}"
-												requiredMessage="Vehicle Registration Date is Required!" pattern="dd-MMM-yyyy" placeholder="DD-MM-YYY" >
+												requiredMessage="Vehicle Registration Date is Required" pattern="dd-MMM-yyyy" placeholder="DD-MM-YYY" >
 											</p:calendar>
 											    <script>
 												today = Date();
@@ -403,7 +402,7 @@
 												<span class="text-danger">*</span><span class="text-muted small"></span>
 											</div>
 											<p:inputText id="engineNo" label="Engine No" class="form-control" required="true"  value="#{proposalController.proposal.engineNo}" 
-												requiredMessage="Engine No is Required!" 
+												requiredMessage="Engine No is Required" 
 												validatorMessage="Engine Number must be upper charator and number, length 10~20 and no space." placeholder="52WVC10338" >		
 												<f:validateRegex pattern="^$|^[A-Z0-9]{10,20}$"/>
 											</p:inputText>
@@ -416,7 +415,7 @@
 											</div>
 											<p:inputText id="manufactureYear" label="Manufacture Year" class="form-control" 
 											 required="true" value="#{proposalController.proposal.manufactureYear}"
-												requiredMessage="Manufacture Year is Required!" placeholder="2015" validatorMessage="Manufacture Year must only between 1980 and 2020" >
+												requiredMessage="Manufacture Year is Required" placeholder="2015" validatorMessage="Manufacture Year must only between 1980 and 2020" >
 												 <f:validateLongRange maximum="2020" minimum="1980" />
 											</p:inputText>
 											&nbsp;
@@ -478,7 +477,7 @@
 												<span class="text-danger">*</span><span class="text-muted small"></span>
 											</div>
 											<p:inputText id="dname" label="Name" class="form-control" data-validation="required" required="true" value="#{proposalController.proposal.dName}"
-												requiredMessage="Name is Required!" validatorMessage="Name length must be characters and numbers, length 2~50!" >
+												requiredMessage="Name is Required" validatorMessage="Name length must be characters and numbers, length 2~50" >
 												<f:validateRegex pattern="^([a-zA-Z0-9]{2,50}+\s?)*$" />
 											</p:inputText>
 											&nbsp;
@@ -488,7 +487,7 @@
 												<h:outputLabel for="lienceExpiredDate">Lience Expired Date</h:outputLabel>
 												<span class="text-danger">*</span><span class="text-muted small"></span>
 											</div>
-											<p:calendar id="lienceExpiredDate" label="Lience Expired Date"  data-validation="required" requiredMessage="Date is Required!" placeholder="DD-MM-YYY"
+											<p:calendar id="lienceExpiredDate" label="Lience Expired Date"  data-validation="required" requiredMessage="Date is Required" placeholder="DD-MM-YYY"
 												validatorMessage="Invalid Date" mindate="today"  required="true"  value="#{proposalController.proposal.dLiceneExpiredDate}" pattern="dd-MMM-yyyy" />
 												<script>
 												today = Date();
@@ -503,8 +502,8 @@
 												<span class="text-danger">*</span><span class="text-muted small"></span>
 											</div>
 											<p:inputText id="daddress" label="Address" class="form-control" 
-												required="true" value="#{proposalController.proposal.dAddress}" requiredMessage="Address is Required!"
-												validatorMessage="Address must be characters and numbers(- . , _ ()), length 2~50!" >
+												required="true" value="#{proposalController.proposal.dAddress}" requiredMessage="Address is Required"
+												validatorMessage="Address must be characters and numbers(- . , _ ()), length 2~50" >
 												<f:validateRegex pattern="^([a-zA-Z()0-9\-\.\_\,\/]{2,50}+\s?)*$" />
 											</p:inputText>
 											&nbsp;
@@ -519,7 +518,7 @@
 													class="text-muted small"></span>
 											</div>
 											<p:inputText id="drivingLicence" label="Driving Lience" class="form-control" data-validation="required"
-												required="true" value="#{proposalController.proposal.dDrivingLicene}"  requiredMessage="Driving Licence is Required!"	validatorMessage="Driving Licence format like 'C/00001/18' and no space." placeholder="C/00001/18">
+												required="true" value="#{proposalController.proposal.dDrivingLicene}"  requiredMessage="Driving Licence is Required"	validatorMessage="Driving Licence format like 'C/00001/18' and no space." placeholder="C/00001/18">
 												<f:validateRegex pattern="^([A-Z{1}\/0-9{5}\/0-9{2}])*$" />
 											</p:inputText>
 											&nbsp;
@@ -531,7 +530,7 @@
 												<h:outputLabel for="dphoneNo">Phone Number</h:outputLabel>
 												<span class="text-danger">*</span><span class="text-muted small"></span>
 											</div>
-											<p:inputText id="dphoneNo" label="Phone No" class="form-control" required="true" value="#{proposalController.proposal.dPhno}" requiredMessage="Phone No is Required!" 
+											<p:inputText id="dphoneNo" label="Phone No" class="form-control" required="true" value="#{proposalController.proposal.dPhno}" requiredMessage="Phone No is Required" 
 											placeholder="+959760398573" validatorMessage="Phone number must start with +959 followed by 9 digit" > 
 											<f:validateRegex pattern="^\+?(\+[0-9]{3})\)?[-. ]?([0-9]{4})[-. ]?([0-9]{5})$"/>
 											</p:inputText>
@@ -556,7 +555,7 @@
 												<span class="text-danger">*</span><span class="text-muted small"></span>
 											</div>
 											<p:inputText id="bname" label="Name" class="form-control" data-validation="required" required="true"  value="#{proposalController.proposal.bName}" 
-												requiredMessage="Name is Required!" validatorMessage="Name length must be characters and numbers, length 2~50!" >
+												requiredMessage="Name is Required" validatorMessage="Name length must be characters and numbers, length 2~50" >
 												<f:validateRegex pattern="^([a-zA-Z0-9]{2,50}+\s?)*$" />
 											</p:inputText>
 											&nbsp;
@@ -571,7 +570,7 @@
 											<p:inputText id="bnrc" label="nrc" class="form-control" 
 											data-validation="required" required="true" 
 											value="#{proposalController.proposal.bNrc}"
-												requiredMessage="NRC is Required!" validatorMessage="Invalid  NRC">
+												requiredMessage="NRC is Required" validatorMessage="Invalid  NRC">
 												<f:validateLength minimum="3" maximum="20" />
 											</p:inputText>
 											&nbsp;
@@ -588,7 +587,7 @@
 											</div>
 											<p:inputText id="bnrc" label="nrc" class="form-control"
 												required="true" value="#{proposalController.proposal.bNrc}" 
-												 requiredMessage="NRC is Required!" 
+												 requiredMessage="NRC is Required" 
 												validatorMessage="NRC format must like '1/MAKATA(N)134989'" 
 												placeholder="1/MAKATA(N)013978">
 												<f:validateRegex pattern="^([\d]{1,2})\/([\w]{3}|[\w]{6})\(N\)([\d]{6})"/>
@@ -602,7 +601,7 @@
 												<h:outputLabel for="bphoneNo">Phone Number</h:outputLabel>
 												<span class="text-danger">*</span><span class="text-muted small"></span>
 											</div>
-											<p:inputText id="bphoneNo" label="Phone No" class="form-control" required="true" value="#{proposalController.proposal.bPhone}" requiredMessage="Phone No is required!"
+											<p:inputText id="bphoneNo" label="Phone No" class="form-control" required="true" value="#{proposalController.proposal.bPhone}" requiredMessage="Phone No is required"
 											placeholder="+959760398573" validatorMessage="Phone number must start with +959 followed by 9 digit" >
 												<f:validateRegex pattern="^\+?(\+[0-9]{3})\)?[-. ]?([0-9]{4})[-. ]?([0-9]{5})$"/>
 											</p:inputText>
@@ -617,8 +616,8 @@
 												<span class="text-danger">*</span><span class="text-muted small"></span>
 											</div>
 											<p:inputText id="baddress" label="Address" class="form-control"
-												required="true" value="#{proposalController.proposal.bAddress}"  requiredMessage="Address is Required!" 
-												validatorMessage="Address must be characters and numbers(- . , _ ()), length 2~50!" >
+												required="true" value="#{proposalController.proposal.bAddress}"  requiredMessage="Address is Required" 
+												validatorMessage="Address must be characters and numbers(- . , _ ()), length 2~50" >
 												<f:validateRegex pattern="^([a-zA-Z()0-9\-\.\_\,\/]{2,50}+\s?)*$" />
 											</p:inputText>
 											&nbsp;
@@ -631,6 +630,9 @@
 											<div class="form-group">
 												<p:commandButton value="Submit" action="#{proposalController.proposalSave()}"  update="@form" onclick="if (!(confirm('Are you sure to Save Proposal?'))) return false" />&nbsp;
 												<p:commandButton value="Cancel" action="#{proposalController.cancel()}"  update="@form" />
+											</div>
+											<div class="form-group">
+												<p:messages id="msgs"  severity="info"/>  
 											</div>
 										</div>
 
