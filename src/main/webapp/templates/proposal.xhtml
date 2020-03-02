@@ -112,7 +112,7 @@
 							<div class="row">
 								<div class="col-xs-12">
 								<h:form>
-									<p:growl id="msgs"  severity="info"/>  
+									<p:messages id="msgs"  severity="info"/>  
 					<!-- 		Begin of Owner Details -->
 									<div class="col-sm-12">
 										<div style="overflow: auto; width: 100%; ">
@@ -237,7 +237,7 @@
 												<h:outputLabel for="startDate">Start Date</h:outputLabel>
 												<span class="text-danger">*</span><span class="text-muted small"></span>
 											</div>
-											<p:calendar id="startDate" label="Start Date"   mindate="today"   value="#{proposalController.proposal.startDate}"  requiredMessage="Date is Required!"
+											<p:calendar id="startDate" label="Start Date"   mindate="today"   value="#{proposalController.proposal.startDate}"  requiredMessage="Date is Required"
 												validatorMessage="Invalid Date"  navigator="true" pattern="dd-MMM-yyyy" required="true" placeholder="DD-MM-YYY" />
 												<script>
 												today = Date();
@@ -250,10 +250,13 @@
 												<h:outputLabel for="gender">Gender</h:outputLabel>
 												<span class="text-danger">*</span><span	class="text-muted small"></span>
 											</div>
-											<p:selectOneRadio id="gender"  selectable="true" value="#{proposalController.proposal.pHolderOccupation}" >
+											<p:selectOneRadio id="gender" value="#{proposalController.proposal.pHolderGender}" required="true"
+											selectable="true" requiredMessage="Gender is required" >
 												<f:selectItem itemLabel="Male" itemValue="Male" />
 												<f:selectItem itemLabel="Female" itemValue="Female" />
 											</p:selectOneRadio>
+											&nbsp;
+											<h:message for="gender" style="color: red;"></h:message>
 											
 										</div>
 										
@@ -264,7 +267,7 @@
 												<h:outputLabel for="dob">Date of Birth</h:outputLabel>
 												<span class="text-danger">*</span><span class="text-muted small"></span>
 											</div>
-											<p:calendar id="dob" value="#{proposalController.proposal.pHolderDob}" label="Date Of Birth"  data-validation="required" requiredMessage="Date is Required!"
+											<p:calendar id="dob" value="#{proposalController.proposal.pHolderDob}" label="Date Of Birth"  data-validation="required" requiredMessage="Date is Required"
 											yearRange="1955:2002" navigator="true" pattern="dd-MMM-yyyy"
 												validatorMessage="Invalid Date" required="true" placeholder="DD-MM-YYY" />
 												&nbsp;
@@ -275,12 +278,12 @@
 												<h:outputLabel for="coverageType">Coverage Type</h:outputLabel>
 												<span class="text-danger">*</span><span class="text-muted small"></span>
 											</div>
-											<p:selectOneMenu id="coverageType"   value="#{proposalController.proposal.coverageType}"
+											<p:selectOneMenu id="coverageType"   value="#{proposalController.proposal.coverageType}" required="true" requiredMessage="Coverage Type is required"
 												style="width: 100%;">
-												<f:selectItem itemValue=" " itemLabel="Select One" noSelectionOption="true" />
+												<f:selectItem itemValue="" itemLabel="Select One" noSelectionOption="true" />
 												<f:selectItem itemValue="Third Party" itemLabel="Thrid Party" />
 												<f:selectItem itemValue="Comprehensive" itemLabel="Comprehensive" />
-											</p:selectOneMenu><h:message for="coverageType" style="color: red;"></h:message>
+											</p:selectOneMenu>
 											&nbsp;
 											<h:message for="coverageType" style="color: red;"></h:message>																			
 											
@@ -302,7 +305,7 @@
 												<h:outputLabel for="model">Model</h:outputLabel>
 												<span class="text-danger">*</span><span class="text-muted small"></span>
 											</div>
-											<p:inputText id="model" label="Model" class="form-control"  required="true" value="#{proposalController.proposal.model}" requiredMessage="Model is Required!"
+											<p:inputText id="model" label="Model" class="form-control"  required="true" value="#{proposalController.proposal.model}" requiredMessage="Model is Required"
 												validatorMessage="Model must be character and numbers, length 3~50." placeholder="Camry">
 												<f:validateRegex pattern="^([a-zA-Z0-9\-]{1,50}+\s?)*$" />
 											</p:inputText>
@@ -313,8 +316,8 @@
 												<h:outputLabel for="bodyType">Body Type</h:outputLabel>
 												<span class="text-danger">*</span><span class="text-muted small"></span>
 											</div>
-											<p:selectOneMenu id="bodyType" style="width: 100%;"   value="#{proposalController.proposal.bodyType}" >
-												<f:selectItem itemLabel="Select One" itemValue=" " />
+											<p:selectOneMenu id="bodyType" style="width: 100%;"  value="#{proposalController.proposal.bodyType}" required="true" requiredMessage="Body Type is required" >
+												<f:selectItem itemLabel="Select One" itemValue=""  noSelectionOption="true" />
 												<f:selectItem itemLabel="Hatchback" itemValue="Hatchback" />
 												<f:selectItem itemLabel="Sedon" itemValue="Sedon" />
 												<f:selectItem itemLabel="MUV/SUV" itemValue="MUV/SUV" />
@@ -388,7 +391,7 @@
 											</div>
 											<p:inputText id="engineCC" label="Engine CC" class="form-control" data-validation="required"
 												required="true" value="#{proposalController.proposal.engineCC}" 
-												requiredMessage="engineCC is Required!"
+												requiredMessage="Engine CC is Required"
 												validatorMessage="EngineCC must be only number,length between 3~20 and no space.">
 												<f:validateRegex pattern="^$|^[0-9]{3,20}$" />
 											</p:inputText>
@@ -428,8 +431,8 @@
 												<span class="text-danger">*</span><span class="text-muted small"></span>
 											</div>
 											<p:selectOneMenu id="make"  style="width: 100%;"   
-												 value="#{proposalController.proposal.vehicleMake}" >
-												<f:selectItem itemLabel=" Select One" itemValue="" />
+												 value="#{proposalController.proposal.vehicleMake}" required="true" requiredMessage="Make is required">
+												<f:selectItem itemLabel=" Select One" itemValue="" noSelectionOption="true" />
 												<f:selectItem itemLabel="Toyota" itemValue="Toyota" />
 												<f:selectItem itemLabel="BMW" itemValue="BMW" />
 												<f:selectItem itemLabel="Honda" itemValue="Honda" />
@@ -446,9 +449,9 @@
 												<h:outputLabel for="engineType">Engine Type </h:outputLabel>
 												<span class="text-danger">*</span><span class="text-muted small"></span>
 											</div>
-											<p:selectOneMenu id="engineType" value="#{proposalController.proposal.engineType}"
-												style="width: 100%;" >
-												<f:selectItem itemLabel="Select One" itemValue="" />
+											<p:selectOneMenu id="engineType" value="#{proposalController.proposal.engineType}" requiredMessage="Engine Type is required"
+												style="width: 100%;" required="true" >
+												<f:selectItem itemLabel="Select One" itemValue="" noSelectionOption="true"/>
 												<f:selectItem itemLabel="VEE" itemValue="VEE" />
 												<f:selectItem itemLabel="INLINE" itemValue="INLINE" />
 												<f:selectItem itemLabel="STRAIGHT" itemValue="STRAIGHT" />

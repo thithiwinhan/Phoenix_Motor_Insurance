@@ -305,7 +305,10 @@ public class ProposalController {
 
 				boolean deleteflag = proposalService.delete(model);
 				if (deleteflag == true) {
+					System.out.println("====Proposal Detete99999999 Controller======" + proposal.getpID());
+					proposalList();
 					this.proposalList = listingService.proposalListing(user);
+					
 					FacesContext context = FacesContext.getCurrentInstance();
 					context.addMessage(null,
 					new FacesMessage(FacesMessage.SEVERITY_INFO, "Successfully Delete!!" + "", ""));
