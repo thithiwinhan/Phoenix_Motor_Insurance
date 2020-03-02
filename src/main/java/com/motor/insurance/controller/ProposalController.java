@@ -82,9 +82,8 @@ public class ProposalController {
 		if (!flag.isEmpty()||flag.size()>=1) {
 			System.out.println("stage 1=======================");
 			FacesContext context = FacesContext.getCurrentInstance();
-
 			context.addMessage(null,
-					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Sorry" + "Your Car is already insurance", ""));
+					new FacesMessage(FacesMessage.SEVERITY_INFO, "Sorry" + "Your Car is already insurance", ""));
 		} else {
 			System.out.println("stage 1=======================");
 			System.out.println("premium" + premium);
@@ -187,7 +186,7 @@ public class ProposalController {
 			proposal.setVehicleMake(model.getVehicleMake());
 			proposal.setVehicleRegNo(model.getVehicleRegNo());
 			proposal.setChassisNo(model.getChassisNo());
-			proposal.setColor(model.getChassisNo());
+			proposal.setColor(model.getColor());
 			proposal.setCurrentValue(model.getCurrentValue());
 			proposal.setBodyType(model.getBodyType());
 			proposal.setEngineCC(model.getEngineCC());
