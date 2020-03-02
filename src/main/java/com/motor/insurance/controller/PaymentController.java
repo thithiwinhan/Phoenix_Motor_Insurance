@@ -74,8 +74,8 @@ public class PaymentController {
 			    proposal = proposalService.findProposalById(paymentModel.getProposal().getProposalId());
 			if (proposal.getStatus().equalsIgnoreCase("paid")) {
 					FacesContext context = FacesContext.getCurrentInstance();
-					context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN,
-					"You already paid \n" + "Currently You dont have to pay", ""));
+					context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
+					"You Already paid \n" + "", ""));
 
 			}
 			else if (proposal.getStatus().equalsIgnoreCase("accept")) {
@@ -84,14 +84,14 @@ public class PaymentController {
 					paymentservice.save(paymentModel);
 					paymentModel = new PaymentModel();
 					FacesContext context = FacesContext.getCurrentInstance();
-					context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN,
-					"Your Payment is successfully Save: " + "success", ""));
+					context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
+					"Your Payment is Successfully  " + "", ""));
 			}
 		} 
 		else  {
 			FacesContext context = FacesContext.getCurrentInstance();
-			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN,
-			"Your Payment is failed to save: " + "", ""));
+			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
+			"Sorry! Your Payment is Failed " + "", ""));
 		}
 		 paymentModel = new PaymentModel();
 
@@ -138,7 +138,6 @@ public class PaymentController {
 
 	public String  getPaymentForm() {
 		 p.proposalList();//add for get proposal id list
-
     	System.out.println("*******getPaymentForm()********");
 		 paymentList();
 		 return "payment.xhtml?faces-redirect=true";
@@ -184,6 +183,9 @@ public class PaymentController {
 				this.amount=0.0;
 					e.printStackTrace();
 			}
+		}
+		else {
+			this.amount=new Double(0.0);
 		}
 				
 	}
