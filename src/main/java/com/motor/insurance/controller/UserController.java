@@ -90,7 +90,6 @@ public class UserController{
 
 		} 
 		
-	
 	}
 	public String logout() {
 		try {
@@ -138,26 +137,19 @@ public class UserController{
 	}
 
 	public String userProfileUpdate() {
-		System.out.println("===============Save=====================");
+		System.out.println("===============User Profile Update=====================");
 		userList = new ArrayList<UserModel>();
-		boolean flag = userservice.searchByUserEmail(userModel);
-		if (flag) {
-			FacesContext.getCurrentInstance().addMessage(null,
-					new FacesMessage(FacesMessage.SEVERITY_INFO, "Email is already Exit ", "Failed to register"));
-			return "";
-
-		} else {
+		  
 			if (userModel.getUserPassword().trim().equals(userModel.getUserConfirmPassword().trim())) {
 				userservice.updateProfile(userModel);
-				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN,
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
 						" Profile Update is successful ", ""));
 				return "login.xhtml?faces-redirect=true";
 			} else {
 				FacesContext.getCurrentInstance().addMessage(null,
-						new FacesMessage(FacesMessage.SEVERITY_ERROR, "Password did not match ", "Try Again!"));
+						new FacesMessage(FacesMessage.SEVERITY_INFO, "Password did not match ", "Try Again!"));
 				return "";
 			}
-		}
 	}
 
 	public List<UserModel> getUserList() {

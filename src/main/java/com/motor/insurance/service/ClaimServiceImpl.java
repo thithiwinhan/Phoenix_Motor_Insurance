@@ -141,18 +141,14 @@ public class ClaimServiceImpl implements ClaimService{
 			cliamList = tq.getResultList();
 			System.out.println("claim accept for email >>>>>>>>>>>"+cliamList.size());
 		} catch (IndexOutOfBoundsException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		 catch (NullPointerException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-
 		if (cliamList.isEmpty() || cliamList.size() <= 0) {
 			System.out.println("empty of claim that is accept");
 		}
-
 		else {
 			return cliamList;
 		}

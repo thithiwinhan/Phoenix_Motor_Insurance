@@ -44,12 +44,14 @@ public class EmailSender {
 			e.printStackTrace();
 		}
 	}
+	
+	
+	
 	private void emailServiceForClaim(List<Claim> pClaimList) {
 		 Session session = extractedAuthentication();
 		 try {
 			 System.out.println("Claim Mail service>>");
 		       Message message = new MimeMessage(session);
-	           ArrayList <String>email= new ArrayList<String>();
 	        	InternetAddress[] address = new InternetAddress[pClaimList.size()];
 	  	        for (int j = 0; j < pClaimList.size(); j++) {
 	      	    address[j] = new InternetAddress(pClaimList.get(j).getProposal().getPolicyHolder().getEmail());
@@ -74,7 +76,6 @@ public class EmailSender {
 
 	 try {
 	       Message message = new MimeMessage(session);
-           ArrayList <String>email= new ArrayList<String>();
         	InternetAddress[] address = new InternetAddress[pOwnerList.size()];
   	        for (int j = 0; j < pOwnerList.size(); j++) {
       	    address[j] = new InternetAddress(pOwnerList.get(j).getEmail());
@@ -93,17 +94,17 @@ public class EmailSender {
          e.printStackTrace();
      }
 	 }
+
 	private Session extractedAuthentication() {
 		final String username = "yellowkiki120@gmail.com";
-	     final String password = "1998kiki";
-	     Properties prop = extracted();
-	     Session session = Session.getInstance(prop,
-	         new javax.mail.Authenticator() {
-             protected PasswordAuthentication getPasswordAuthentication() {
-             return new PasswordAuthentication(username, password);
-             }
-	         });
-		 return session;
+		final String password = "1998kiki";
+		Properties prop = extracted();
+		Session session = Session.getInstance(prop, new javax.mail.Authenticator() {
+		protected PasswordAuthentication getPasswordAuthentication() {
+		return new PasswordAuthentication(username, password);
+			}
+		});
+		return session;
 	}
 		private Properties extracted() {
 		Properties prop = new Properties();

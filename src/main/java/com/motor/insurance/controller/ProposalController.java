@@ -79,6 +79,7 @@ public class ProposalController {
 			proposal.setPremium(premium);// calcuated premuim based on Sum Issure
 			proposalService.save(proposal);
 			proposal = new ProposalModel();
+			proposalList();
 			FacesContext context = FacesContext.getCurrentInstance();
 			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
 					"Congradulation" + "Your proposal is successfully Saved", ""));
