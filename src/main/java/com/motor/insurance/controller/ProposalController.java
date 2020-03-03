@@ -160,6 +160,7 @@ public class ProposalController {
 			proposal.setpHolderOccupation(model.getpHolderOccupation());
 			proposal.setpHolderPh(model.getpHolderPh());
 			proposal.setpHolderDob(model.getpHolderDob());
+			proposal.setpHolderEmail(model.getpHolderEmail());//new add email
 			System.out.println("---- for ownerID check-----" + proposal.getpHolderID());
 
 			System.out.println("---- for proposal main info reloading-----");
@@ -266,7 +267,8 @@ public class ProposalController {
 		
 	}
 	public String cancel() {
-      proposal= new ProposalModel();
+		System.out.println("proposal Cancel>>>>>>>>>>>>>>>.");
+         proposal= new ProposalModel();
 		 return "proposal.xhtml?faces-redirect=true";
       
 	}
@@ -285,7 +287,7 @@ public class ProposalController {
 
 				boolean deleteflag = proposalService.delete(model);
 				if (deleteflag == true) {
-					System.out.println("====Proposal Detete99999999 Controller======" + proposal.getpID());
+					System.out.println("====Proposal Detete Controller======" + proposal.getpID());
 					proposalList();
 					this.proposalList = listingService.proposalListing(user);
 					
@@ -296,7 +298,7 @@ public class ProposalController {
 				else {
 					FacesContext context = FacesContext.getCurrentInstance();
 					context.addMessage(null,
-					new FacesMessage(FacesMessage.SEVERITY_ERROR, "Sorry" + "Failed to delete", ""));
+					new FacesMessage(FacesMessage.SEVERITY_INFO, "Sorry" + "Failed to delete", ""));
 				}
 			}
 		} catch (NullPointerException e) {
