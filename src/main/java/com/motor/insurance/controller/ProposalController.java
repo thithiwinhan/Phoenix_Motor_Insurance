@@ -59,7 +59,7 @@ public class ProposalController {
 	 
 
 
-	public void proposalSave() {
+	public String proposalSave() {
 		/*
 		 * to check same car is not to allow insurance >>>unique key of car is chassic
 		 * no and reg number
@@ -69,18 +69,22 @@ public class ProposalController {
 			System.out.println("stage 1=======================");
 			FacesContext context = FacesContext.getCurrentInstance();
 			context.addMessage(null,
-					new FacesMessage(FacesMessage.SEVERITY_INFO, "Sorry" + "Your Car is already insurance", ""));
+			new FacesMessage(FacesMessage.SEVERITY_INFO, "Sorry" + "Your Car is already insurance", ""));
+			 return "proposal.xhtml?faces-redirect=true";
+
 		} else {
 			System.out.println("premium" + premium);
 			System.out.println("pid" + proposal.getpID());
 			System.out.println("arrive");
 			proposal.setPremium(premium);// calcuated premuim based on Sum Issure
 			proposalService.save(proposal);
+			proposal = new ProposalModel();
 			FacesContext context = FacesContext.getCurrentInstance();
 			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
 					"Congradulation" + "Your proposal is successfully Saved", ""));
+			 return "proposalStatusChecking.xhtml?faces-redirect=true";
+
 		}
-		//proposal = new ProposalModel();// to clear form data
 	}
 
 	public void proposalList() {

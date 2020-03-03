@@ -89,6 +89,11 @@ public class PaymentController {
 					"Your Payment is Successfully  " + "", ""));
 			}
 		} 
+		else if (proposal.getStatus().equalsIgnoreCase("reject")){
+			FacesContext context = FacesContext.getCurrentInstance();
+			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
+			"Sorry! Your Payment is Failed " + "Your proposal is reject", ""));
+		}
 		else  {
 			FacesContext context = FacesContext.getCurrentInstance();
 			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,

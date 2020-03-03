@@ -65,7 +65,7 @@
 							match=" " value="#{userController.userModel.userPassword}"
 							feedback="true" weakLabel="Weak" goodLabel="Good"
 							strongLabel="Strong" requiredMessage="Password is Required!"
-							validatorMessage="Password must have minimum eight characters and number, at least and no spaces." placeholder="Password">
+							validatorMessage="Password must have minimum five characters or number, at least and no spaces." placeholder="Password">
 							<f:validateLength minimum="5" maximum="101" />
 						</p:password>
 		    <h:message for="password" style="color: red;" ></h:message> 
@@ -80,7 +80,7 @@
 							match=" " value="#{userController.userModel.userConfirmPassword}"
 							feedback="true" weakLabel="Weak" goodLabel="Good"
 							strongLabel="Strong" requiredMessage="Comfirm password is Required!"
-							validatorMessage="Password must have minimum eight characters and number, at least and no spaces." placeholder="Comfirm password">
+							validatorMessage="Password must have minimum five characters or number, at least and no spaces." placeholder="Comfirm password">
 							<f:validateLength minimum="5" maximum="101" />
 						</p:password>
 			<h:message for="comfirmedPassword" style="color: red;" ></h:message> 
@@ -94,8 +94,8 @@
               </label>
              
             </div>
-		 	<p:commandButton   class="btn-block" value="Register Now" name="register"  style="background-color: #007ad9;"
-                    action="#{userController.save()}" update="@form"></p:commandButton>
+		 	<h:commandButton   class="btn btn-primary btn-block" value="Register Now" name="register"  style="background-color: #007ad9;"
+                    action="#{userController.save()}" update="@form"></h:commandButton>
             <div class="login-footer"  >
         		You already  an account? <a href="/templates/login.xhtml"><b>Sign In</b></a>
       		</div>
