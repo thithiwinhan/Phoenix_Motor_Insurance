@@ -90,27 +90,7 @@ public class ClaimListingServiceImpl implements ClaimListingService {
 		return claimModelList;
 
 	}
-	/*
-	 * @Override public List<ClaimModel> findClaimById(int proposalId) {
-	 * System.out.println("------------Claim Listing  search Dao -----------");
-	 * 
-	 * Optional<Claim> claimList = claimDao.findById(proposalId);
-	 * 
-	 * List<ClaimModel> claimModelList = new ArrayList<ClaimModel>(); if
-	 * (claimList.isPresent()) {
-	 * 
-	 * Claim entity = claimList.get(); ClaimModel model = new ClaimModel();
-	 * model.setClaimcreateDate(entity.getCreateClaimDate());
-	 * model.setClaimStatus(entity.getStatus());
-	 * model.setProposal(entity.getProposal()); claimModelList.add(model); }
-	 * System.out.println("Claim search list size>>>>>>>>>>>>>>>>.."+claimModelList.
-	 * size());
-	 * 
-	 * //else System.out.println("Resource not found id");
-	 * 
-	 * return claimModelList; }
-	 */
-
+	
 	@Override
 	public List<ClaimModel> findClaimById(Proposal proposalModel) {
 

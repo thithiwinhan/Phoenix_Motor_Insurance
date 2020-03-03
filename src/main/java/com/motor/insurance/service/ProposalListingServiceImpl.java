@@ -83,6 +83,7 @@ public class ProposalListingServiceImpl implements ProposalListingService {
 				model.setpHolderDob(entity.getPolicyHolder().getDob());
 				model.setpHolderGender(entity.getPolicyHolder().getGender());
 				model.setpHolderOccupation(entity.getPolicyHolder().getOccupation());
+				model.setpHolderEmail(entity.getPolicyHolder().getEmail());
 				model.setpHolderPh(entity.getPolicyHolder().getPhno());
 				
 				System.out.println("--------------- Vehicle List ------------");
@@ -183,6 +184,7 @@ public class ProposalListingServiceImpl implements ProposalListingService {
 						model.setpHolderDob(entity.getPolicyHolder().getDob());
 						model.setpHolderGender(entity.getPolicyHolder().getGender());
 						model.setpHolderOccupation(entity.getPolicyHolder().getOccupation());
+						model.setpHolderEmail(entity.getPolicyHolder().getEmail());
 						model.setpHolderPh(entity.getPolicyHolder().getPhno());
 						
 						System.out.println("--------------- Vehicle List ------------");
@@ -245,13 +247,6 @@ public class ProposalListingServiceImpl implements ProposalListingService {
 			else {
 				 throw new ResourceNotFoundException(" Resource is not found given id");
 			}
-				      
-				      
-				      
-				
-			
-				
-
 			return pmodelList;
 		}
 

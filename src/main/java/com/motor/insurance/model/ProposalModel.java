@@ -24,7 +24,8 @@ public class ProposalModel {
 	private String pHolderGender;
 	private String pholderAddress;
 	private String pHolderOccupation;
-	
+	private String pHolderEmail;
+
 	//proposal main info
 	private Double sumInsure;
 	private String status;
@@ -141,6 +142,13 @@ public class ProposalModel {
 		this.pHolderOccupation = pHolderOccupation;
 	}
 	
+	public String getpHolderEmail() {
+		return pHolderEmail;
+	}
+	public void setpHolderEmail(String pHolderEmail) {
+		this.pHolderEmail = pHolderEmail;
+	}
+
 	
 	
 	/*

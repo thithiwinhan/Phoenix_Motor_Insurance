@@ -263,7 +263,21 @@
 												<f:selectItem itemValue="Comprehensive" itemLabel="Comprehensive" />
 											</p:selectOneMenu>
 											&nbsp;
-											<h:message for="coverageType" style="color: red;"></h:message>																			
+											<h:message for="coverageType" style="color: red;"></h:message>	
+											<br></br>	
+											
+											<div style="overflow: auto; width: 100%;margin-top: 10px;">
+												<h:outputLabel for="email">Email</h:outputLabel>
+												<span class="text-danger">*</span><span class="text-muted small"></span>
+											</div>
+											<p:inputText id="email" class="form-control" required="true"
+												value="#{proposalController.proposal.pHolderEmail}" requiredMessage="Email is Required!"
+												validatorMessage="Invaild Email format and no spaces." >
+												<f:validateRegex pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" />
+											</p:inputText>
+											&nbsp;
+											<h:message for="email" style="color: red;"></h:message>	
+																													
 											
 										</div>																													
 

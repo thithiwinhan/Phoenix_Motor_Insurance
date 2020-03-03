@@ -38,17 +38,6 @@ public class ClaimServiceImpl implements ClaimService{
 		Claim claim = new Claim();
 		
 		System.out.println("----------------Claim Save----------------- PID"+claimModel.getProposal().getProposalId());
-		//System.out.println("Proposal ID"+claimModel.getProposalId());
-
-		/*
-		 * Proposal p = new Proposal(); p.setProposalId(claimModel.getProposalId());
-		 * claim.setProposal(p.getProposalId());
-		 */
-		
-		/*
-		 * Proposal p = new Proposal();
-		 * p.setProposalId(claimModel.getProposalModel().getpID());
-		 */
 		
 		System.out.println("----------------Claim Save----------------- PID"+claimModel.getProposal().getProposalId()+claimModel.getProposal().getCoverageType());
 		claim.setProposal(claimModel.getProposal());

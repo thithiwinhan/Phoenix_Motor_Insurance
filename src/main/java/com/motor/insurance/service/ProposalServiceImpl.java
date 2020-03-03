@@ -104,6 +104,7 @@ public class ProposalServiceImpl implements ProposalService {
 		policyHolder.setNrc(proposal.getpHolderNrc());
 		policyHolder.setOccupation(proposal.getpHolderOccupation());
 		policyHolder.setPhno(proposal.getpHolderPh());
+		policyHolder.setEmail(proposal.getpHolderEmail());//add new email
 		policyHolderDao.save(policyHolder);
 
 		System.out.println("-------------proposal-----------");
@@ -201,6 +202,7 @@ public class ProposalServiceImpl implements ProposalService {
 			policyHolder.setNrc(proposal.getpHolderNrc());
 			policyHolder.setOccupation(proposal.getpHolderOccupation());
 			policyHolder.setPhno(proposal.getpHolderPh());
+			policyHolder.setEmail(proposal.getpHolderEmail());//add new email
 			updateProposal.setPolicyHolder(policyHolder);
 			policyHolderDao.save(policyHolder);
 
