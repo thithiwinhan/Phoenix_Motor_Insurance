@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-import javax.annotation.ManagedBean;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ViewScoped;
 import javax.inject.Named;
@@ -17,9 +16,9 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.context.annotation.SessionScope;
-
+import com.motor.insurance.entity.Claim;
 import com.motor.insurance.entity.PolicyHolder;
+import com.motor.insurance.service.ClaimService;
 import com.motor.insurance.service.ProposalService;
 
 @Named
@@ -29,15 +28,45 @@ public class EmailSender {
 	@Autowired
 	ProposalService proposalService;
 	
+	@Autowired
+	ClaimService claimService;
+	
 	@PostConstruct
 	public void sendEmail() {
 		List<PolicyHolder> pOwnerList = new ArrayList<PolicyHolder>();
+		List<Claim> pClaimList = new ArrayList<Claim>();
 		try {
 			pOwnerList = proposalService.findAllProposaLOwnerActive();
+			pClaimList=claimService.findAllClaimStatus();
 			emailServiceForProposal(pOwnerList);
+			emailServiceForClaim(pClaimList);
 		}   catch (IndexOutOfBoundsException e) {
 			e.printStackTrace();
 		}
+	}
+	private void emailServiceForClaim(List<Claim> pClaimList) {
+		 Session session = extractedAuthentication();
+		 try {
+			 System.out.println("Claim Mail service>>");
+		       Message message = new MimeMessage(session);
+	           ArrayList <String>email= new ArrayList<String>();
+	        	InternetAddress[] address = new InternetAddress[pClaimList.size()];
+	  	        for (int j = 0; j < pClaimList.size(); j++) {
+	      	    address[j] = new InternetAddress(pClaimList.get(j).getProposal().getPolicyHolder().getEmail());
+				message.setFrom(new InternetAddress("yellowkiki120@gmail.com"));
+	  	        }
+				message.setRecipients(Message.RecipientType.TO, address);
+	            System.out.println("email>>>>>>>>>"+address);
+	            message.setHeader("Phonix Motor Insurance Company", "Announcing");
+				message.setSubject("Accept for your  Claim  for Car coverage from Phoenix Motor Insurance ");
+				message.setText("Dear "+"Customer" + "\n\n Your Claim for Car insurance is accepted!\n"
+						+ "Please Contact to us +95942765171.\n"+"We will pay for your coverage!");
+				Transport.send(message);
+
+	  	       }
+	        catch (MessagingException e) {
+	         e.printStackTrace();
+	     }
 	}
 	//email service for customer whose proposal is accepted by our company
 	public void emailServiceForProposal(List<PolicyHolder>pOwnerList) {

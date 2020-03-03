@@ -54,8 +54,6 @@ public class PaymentController {
 	
 	Double amount ;
 	
-	
-
 	public Double getAmount() {
 		return amount;
 	}
@@ -65,44 +63,27 @@ public class PaymentController {
 		this.amount=amount;
 	}
 
-
 	public void save() {
 
 		System.out.println("--------------Payment Save Controller ---------"+ paymentModel.getProposal().getProposalId());
 		boolean status = paymentservice.findStatusbyProposalId(paymentModel.getProposal().getProposalId());
 		System.out.println("status of payment----->" + status);
-		if (status == true) {
-			    proposal = proposalService.findProposalById(paymentModel.getProposal().getProposalId());
-			if (proposal.getStatus().equalsIgnoreCase("paid")) {
+		if (status == false) {
 					FacesContext context = FacesContext.getCurrentInstance();
 					context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
-					"You Already paid \n" + "", ""));
+					"Your payment is  Failed \n" + "", ""));
 
 			}
-			else if (proposal.getStatus().equalsIgnoreCase("accept")) {
-					paymentModel.setAmount(amount);
-					paymentModel.setProposal(proposal);
-					paymentservice.save(paymentModel);
-					paymentModel = new PaymentModel();
-					FacesContext context = FacesContext.getCurrentInstance();
-					context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
-					"Your Payment is Successfully  " + "", ""));
+			else  {
+				paymentModel.setAmount(amount);
+				paymentModel.setProposal(proposal);
+				paymentservice.save(paymentModel);
+				paymentModel = new PaymentModel();
+				FacesContext context = FacesContext.getCurrentInstance();
+				context.addMessage(null,
+						new FacesMessage(FacesMessage.SEVERITY_INFO, "Your Payment is Successfully  " + "", ""));
 			}
 		} 
-		else if (proposal.getStatus().equalsIgnoreCase("reject")){
-			FacesContext context = FacesContext.getCurrentInstance();
-			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
-			"Sorry! Your Payment is Failed " + "Your proposal is reject", ""));
-		}
-		else  {
-			FacesContext context = FacesContext.getCurrentInstance();
-			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
-			"Sorry! Your Payment is Failed " + "", ""));
-		}
-		 paymentModel = new PaymentModel();
-
-	}
-
 	
 	public void paymentList() {
 		User user = new User();

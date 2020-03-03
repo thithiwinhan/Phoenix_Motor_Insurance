@@ -20,6 +20,7 @@ import org.springframework.stereotype.Service;
 
 import com.motor.insurance.dao.ClaimDao;
 import com.motor.insurance.entity.Claim;
+import com.motor.insurance.entity.PolicyHolder;
 import com.motor.insurance.entity.Proposal;
 import com.motor.insurance.exception.ResourceNotFoundException;
 import com.motor.insurance.model.ClaimModel;
@@ -121,8 +122,41 @@ public class ClaimServiceImpl implements ClaimService{
 	}
 		return count;
 	
-	
-	
+	}
+
+	@Override
+	public List<Claim> findAllClaimStatus() {
+		CriteriaBuilder cb = em.getCriteriaBuilder();
+		CriteriaQuery<Claim> cq = cb.createQuery(Claim.class);
+		Root<Proposal> proposal = cq.from(Proposal.class);
+		Join<Proposal, Claim> claim = proposal.join("claims");
+
+		Predicate p1 = cb.equal(proposal.get("active"), 1);
+		Predicate p2 = cb.equal(claim.get("status"), "accept");
+
+		cq.select(claim).where(cb.and(p1, p2));
+		TypedQuery<Claim> tq = em.createQuery(cq);
+		List<Claim> cliamList = new ArrayList<Claim>();
+		try {
+			cliamList = tq.getResultList();
+			System.out.println("claim accept for email >>>>>>>>>>>"+cliamList.size());
+		} catch (IndexOutOfBoundsException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		 catch (NullPointerException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		if (cliamList.isEmpty() || cliamList.size() <= 0) {
+			System.out.println("empty of claim that is accept");
+		}
+
+		else {
+			return cliamList;
+		}
+		return cliamList;
 	}
 
 }

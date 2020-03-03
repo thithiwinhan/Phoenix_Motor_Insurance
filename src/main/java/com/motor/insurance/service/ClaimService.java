@@ -17,4 +17,6 @@ public interface ClaimService {
 
 	int countClaimNumber(int id);
 
+	List<Claim> findAllClaimStatus();
+
 }

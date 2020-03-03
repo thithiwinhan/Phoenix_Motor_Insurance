@@ -47,7 +47,7 @@ public class UserController{
 			if (userModel.getUserPassword().trim().equals(userModel.getUserConfirmPassword().trim())) {
 				userservice.createUser(userModel);
 				userModel= new UserModel();
-				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN,
+				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
 						"Registration is successful ", "Welcome to Phonex Insurance"));
 				return "login.xhtml?faces-redirect=true";
 			} else {

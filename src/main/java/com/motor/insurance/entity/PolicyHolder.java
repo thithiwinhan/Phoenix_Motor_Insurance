@@ -40,8 +40,6 @@ public class PolicyHolder {
 	@Column(name="occupation")
 	private String occupation;
 	
-	
-
 	@Column(name="email")
 	private String email;
 	

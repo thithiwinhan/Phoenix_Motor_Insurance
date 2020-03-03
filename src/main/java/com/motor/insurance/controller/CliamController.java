@@ -71,7 +71,7 @@ public class CliamController {
 		} else {
 			FacesContext context = FacesContext.getCurrentInstance();
 			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
-			"Sorry You cannot make a claim !  " + "You have not paid Yet!", ""));
+			 "Sorry You cannot make a claim !  " + "", ""));
 
 		}
 		claimModel = new ClaimModel();

@@ -67,30 +67,24 @@ public class PaymentServiceImpl implements Paymentservice {
 		CriteriaQuery<Proposal> cq=cb.createQuery(Proposal.class);
 		System.out.println("---------payment Repo-------------"+proposalId);
 		Root<Proposal> proposal=cq.from(Proposal.class);
-		
-		
 			Predicate p=cb.equal(proposal.get("proposalId"), proposalId);
-			//Predicate p2=cb.equal(proposal.get("status"), "accept");
-			Predicate p2=cb.notEqual(proposal.get("status"), "pending");
+			Predicate p2=cb.equal(proposal.get("status"), "accept");
+			//Predicate p2=cb.notEqual(proposal.get("status"), "pending");
 
 			cq.where(cb.and(p,p2)).distinct(true);
 		
 			TypedQuery<Proposal> typedQuery =em.createQuery(cq);
 			List<Proposal> resultList = typedQuery.getResultList();
 			
-	        if (resultList.isEmpty()||resultList.size()==0) {
-	        	System.out.println("pending is found");
-				 return flag; //proposal staus is pending
+	        if (resultList.isEmpty()||resultList.size()<=0) {
+	        	System.out.println("accpet is not found");
+				 return flag ; //proposal staus is pending
 			}
-
-
-		
 	        else {
 	        	System.out.println("accept is found");
 	        	return flag =true; //propsal status is accept or paid}
 		
 		
 	}
-
 }
 }

@@ -350,7 +350,16 @@ public class ProposalServiceImpl implements ProposalService {
 		cq.select(policyHolder).where(cb.and(p1, p2));
 		TypedQuery<PolicyHolder> tq = entityManager.createQuery(cq);
 		List<PolicyHolder> pHolderList = new ArrayList<PolicyHolder>();
-		pHolderList = tq.getResultList();
+		try {
+			pHolderList = tq.getResultList();
+		} catch (IndexOutOfBoundsException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		 catch (NullPointerException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 
 		if (pHolderList.isEmpty() || pHolderList.size() <= 0) {
 			System.out.println("empty of phoder that is accept");
