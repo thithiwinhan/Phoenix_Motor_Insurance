@@ -27,13 +27,7 @@ public class UserController{
 	@Autowired
 	public UserService userservice;
 
-	/*
-	 * @PostConstruct public void test() { if (userModel!=null) { boolean flag =
-	 * userservice.searchByUserEmail(userModel);
-	 * System.out.println("testing====================="+flag); } else
-	 * System.out.println("null caught"); }
-	 * 
-	 */
+	
 	public String save() {
 		System.out.println("===============Save=====================");
 		userList = new ArrayList<UserModel>();
