@@ -139,7 +139,8 @@ integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfs
 			 <p:password id="password" class="form-control" required="true" match=" " value="#{userController.userModel.userPassword}"  
 			 feedback="true" weakLabel="Weak" goodLabel="Good"
 							strongLabel="Strong" requiredMessage="Password is Required!"
-							validatorMessage="Password must have minimum eight characters and number, at least and no spaces." placeholder="Password"> 
+							validatorMessage="Password must have 6 to 20 characters string with at least one digit, one upper case letter, one lower case letter and one special symbol (“@#$%”)"  placeholder="Password"> 
+			  	 <f:validateRegex pattern="((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,20})" />
 			  </p:password>
 		    <h:message for="password" style="color: red;" ></h:message> 
             </div>
@@ -149,7 +150,8 @@ integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfs
 			   <p:password id="comfirmedPassword" class="form-control" required="true" match=" " value="#{userController.userModel.userConfirmPassword}"   
 			        feedback="true" weakLabel="Weak" goodLabel="Good"
 					strongLabel="Strong" requiredMessage=" Confirm Password is Required!"
-					validatorMessage="Password must have minimum eight characters and number, at least and no spaces." placeholder="ConfirmPassword" > 
+					validatorMessage="Password must have 6 to 20 characters string with at least one digit, one upper case letter, one lower case letter and one special symbol (“@#$%”)" placeholder="Password"> 
+			   <f:validateRegex pattern="((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,20})" />
 			  </p:password>
 			<h:message for="comfirmedPassword" style="color: red;" ></h:message> 
             </div>
