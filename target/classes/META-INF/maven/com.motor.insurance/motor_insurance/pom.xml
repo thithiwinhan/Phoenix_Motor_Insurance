@@ -12,6 +12,7 @@
 	<artifactId>motor_insurance</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>talent_student_registration_assignment</name>
+	
 	<description>Demo project for Spring Boot</description>
 
 	<properties>
@@ -111,7 +112,6 @@
 			</exclusions>
 		</dependency>
 	</dependencies>
-
 	<build>
 		<plugins>
 			<plugin>

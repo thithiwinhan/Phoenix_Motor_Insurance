@@ -36,6 +36,7 @@ public class EmailSender {
 		List<PolicyHolder> pOwnerList = new ArrayList<PolicyHolder>();
 		List<Claim> pClaimList = new ArrayList<Claim>();
 		try {
+			
 			pOwnerList = proposalService.findAllProposaLOwnerActive();
 			pClaimList=claimService.findAllClaimStatus();
 			emailServiceForProposal(pOwnerList);

@@ -70,7 +70,7 @@ public class ProposalController {
 			FacesContext context = FacesContext.getCurrentInstance();
 			context.addMessage(null,
 			new FacesMessage(FacesMessage.SEVERITY_INFO, "Sorry" + "Your Car is already insurance", ""));
-			 return "proposal.xhtml?faces-redirect=true";
+			 return "";
 
 		} else {
 			System.out.println("premium" + premium);
