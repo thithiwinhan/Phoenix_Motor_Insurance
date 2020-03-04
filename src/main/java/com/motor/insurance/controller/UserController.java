@@ -46,7 +46,7 @@ public class UserController{
 				return "login.xhtml?faces-redirect=true";
 			} else {
 				FacesContext.getCurrentInstance().addMessage(null,
-						new FacesMessage(FacesMessage.SEVERITY_ERROR, "Password did not match ", "Try Again!"));
+						new FacesMessage(FacesMessage.SEVERITY_INFO, "Password did not match ", "Try Again!"));
 				return "";
 			}
 

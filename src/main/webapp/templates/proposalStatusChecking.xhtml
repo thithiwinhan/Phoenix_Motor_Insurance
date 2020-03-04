@@ -196,11 +196,11 @@ th {
 				</p:column>
 				
 				<p:column  headerText="Options" style="width:70px;">
-					<p:commandButton id="btn" icon="pi pi-pencil"  disabled="#{plist.status != 'pending'}" action="#{proposalController.edit(plist)}" style="width:30px;background-color:#00a651;" update="@form" process="@this"
+					<p:commandButton id="btn" icon="pi pi-pencil"  disabled="#{plist.status != 'pending'||'reject'}" action="#{proposalController.edit(plist)}" style="width:30px;background-color:#00a651;" update="@form" process="@this"
 					onclick="if (!(confirm('Are you sure to Edit?'))) return false" />
 <!-- 				        <p:confirm header="Confirmation" message="Are you sure?" icon="pi pi-exclamation-triangle" /></p:commandButton> -->
 				
-					<p:commandButton icon="pi pi-trash"  disabled="#{plist.status != 'pending'}"  action="#{proposalController.proposalDelete(plist)}"  style="width:30px;background-color:#ec1e1e;" update="@form" process="@this"
+					<p:commandButton icon="pi pi-trash"  disabled="#{plist.status != 'pending' ||'reject'}"  action="#{proposalController.proposalDelete(plist)}"  style="width:30px;background-color:#ec1e1e;" update="@form" process="@this"
 					onclick="if (!(confirm('Are you sure to Delete?'))) return false"/>		
 <!-- 							        <p:confirm header="Confirmation" message="Are you sure?" icon="pi pi-exclamation-triangle" /></p:commandButton> -->
 			

@@ -69,5 +69,4 @@ public class AuthorizationFilter implements Filter {
 	}
 
 
-    // You need to override init() and destroy() as well, but they can be kept empty.
 }

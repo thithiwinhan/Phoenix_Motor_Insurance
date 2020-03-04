@@ -21,8 +21,6 @@ public interface ProposalService {
 	boolean findStatusbyProposalId(int getpID);
 	//Proposal findProposalById(ProposalModel proposal);
 
-
-
 	Proposal findProposalById(int proposalId);
 
 	boolean delete(ProposalModel proposal);
